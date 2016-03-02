@@ -1,0 +1,29 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:background="@color/background_generic"
+    >
+
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/menu_spinner_club"
+        android:textSize="@dimen/titulo1"
+        android:textStyle="bold"
+        style="@style/CustomSpinnerTheme"
+        android:spinnerMode="dropdown" />
+
+    <ListView
+        android:id="@+id/alumnosListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/ListView"
+        />
+</LinearLayout>

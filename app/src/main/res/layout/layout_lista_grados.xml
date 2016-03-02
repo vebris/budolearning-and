@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:gravity="center"
+    style="@style/item_list"
+    >
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/grado_id"
+            android:layout_alignParentLeft="false"
+            android:layout_marginRight="8dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <TextView
+            android:id="@+id/grado_nombre"
+            android:layout_below="@id/grado_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/titulo3"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_marginTop="1dip"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_nuevo"
+            android:id="@+id/grado_nuevo"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="false"
+            android:contentDescription="nuevo"/>
+    </RelativeLayout>
+</LinearLayout>

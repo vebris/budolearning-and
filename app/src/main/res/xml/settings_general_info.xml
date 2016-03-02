@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="GENERAL">
+        <Preference
+            android:key="preferences_general_version"
+            android:title="Comprobar Actualización de Version"
+            ></Preference>
+        <CheckBoxPreference
+            android:key="preferences_general_recordar_usuario"
+            android:title="@string/pref_general_recordar_usuario"
+            android:defaultValue="true" />
+        <EditTextPreference
+            android:key="preferences_url"
+            android:title="@string/pref_url"
+            android:defaultValue="@string/pref_default_url"
+            android:selectAllOnFocus="true"
+            android:inputType="textCapWords"
+            android:capitalize="words"
+            android:singleLine="true"
+            android:maxLines="1" />
+    </PreferenceCategory>
+</PreferenceScreen>

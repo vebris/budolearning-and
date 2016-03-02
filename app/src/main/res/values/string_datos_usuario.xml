@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="usuario_id">ID</string>
+    <string name="usuario_nombre">Nombre</string>
+    <string name="usuario_apellido1">Apellido 1</string>
+    <string name="usuario_apellido2">Apellido 2</string>
+    <string name="usuario_dni">DNI</string>
+    <string name="usuario_email">Email</string>
+    <string name="usuario_rol">Rol</string>
+    <string name="usuario_direccion">Dirección</string>
+    <string name="usuario_telefono">Teléfono</string>
+    <string name="usuario_localidad">Localidad</string>
+
+    <string name="usuario_login">Login</string>
+    <string name="usuario_password">Contraseña</string>
+
+    <string name="usuario_entrenaEn">Club</string>
+    <string name="usuario_profesor">Profesor</string>
+
+    <string name="usuario_btn_guardar">Guardar</string>
+    <string name="usuario_btn_cambiar_pass">Cambiar Password</string>
+
+</resources>

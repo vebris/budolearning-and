@@ -1,0 +1,140 @@
+<resources>
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:buttonStyle">@style/Button</item>
+        <item name="android:textViewStyle">@style/TextViewTheme</item>
+
+    </style>
+
+    <style name="CustomDialogTheme" parent="@android:style/Theme.Holo">
+    </style>
+
+    <style name="CustomSpinnerTheme" parent="@android:style/Widget.Holo.Light.Spinner">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:dropDownWidth">533dp</item>
+        <item name="android:showDividers">none</item>
+        <item name="android:dividerHeight">0dp</item>
+        <!--<item name="android:popupBackground">@drawable/new_bg</item>-->
+        <item name="android:dropDownHeight">70dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:dropDownSelector">@android:color/white</item>
+    </style>
+
+    <style name="CustomDialogErrorTheme" parent="@android:style/Theme.Holo">
+        <item name="android:windowTitleStyle">@style/DialogWindowTitle_ERROR</item>
+    </style>
+    <style name="DialogWindowTitle_ERROR">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:alwaysDrawnWithCache">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColor">@color/list_item_title</item>
+        <item name="android:background">@color/list_background</item>
+    </style>
+    <style name="TextViewTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColor">@color/color_text_darkgrey</item>
+    </style>
+
+    <style name="ToolbarTitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/ToolbarTitle</item>
+    </style>
+    <style name="ToolbarSubtitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">@dimen/ToolbarSubtitle</item>
+    </style>
+    <style name="ToolbarPoints">
+        <item name="android:textSize">@dimen/ToolbarSubtitle</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
+
+    <!-- Button styles -->
+    <style name="Button" parent="@android:style/Widget.Button">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:shadowColor">#FF000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">-1</item>
+        <item name="android:shadowRadius">0.2</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:textSize">@dimen/titulo1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginLeft">32dp</item>
+        <item name="android:layout_marginRight">32dp</item>
+    </style>
+    <style name="Button2" parent="@android:style/Widget.Button">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:shadowColor">#FF000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">-1</item>
+        <item name="android:shadowRadius">0.2</item>
+        <item name="android:background">@drawable/button_pressed</item>
+        <item name="android:textSize">@dimen/titulo1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginLeft">32dp</item>
+        <item name="android:layout_marginRight">32dp</item>
+    </style>
+    <style name="item_list">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:shadowRadius">0.2</item>
+        <item name="android:background">@drawable/item_list</item>
+        <item name="android:textColor">@color/color_text_darkgrey</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="ListView">
+        <item name="android:padding">3dp</item>
+        <item name="android:dividerHeight">3dp</item>
+        <item name="android:divider">#00000000</item>
+    </style>
+    <style name="GridView_100">
+        <item name="android:padding">3dp</item>
+        <item name="android:numColumns">auto_fit</item>
+        <item name="android:gravity">center</item>
+        <item name="android:columnWidth">100dp</item>
+        <item name="android:horizontalSpacing">3dp</item>
+        <item name="android:verticalSpacing">3dp</item>
+    </style>
+    <style name="GridView_150">
+        <item name="android:padding">3dp</item>
+        <item name="android:numColumns">auto_fit</item>
+        <item name="android:gravity">center</item>
+        <item name="android:columnWidth">150dp</item>
+        <item name="android:horizontalSpacing">3dp</item>
+        <item name="android:verticalSpacing">3dp</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">@style/ButtonBar</item>
+        <item name="metaButtonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+
+    <!-- Backward-compatible version of ?android:attr/buttonBarStyle -->
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+
+    <!-- Backward-compatible version of ?android:attr/buttonBarButtonStyle -->
+    <style name="ButtonBarButton" />
+
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:gravity="center"
+    android:orientation="vertical"
+    style="@style/item_list"
+    >
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/disciplina_id"
+        android:layout_alignParentLeft="false"
+        android:layout_marginRight="8dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+    />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_nuevo"
+        android:id="@+id/disciplina_nuevo"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="false" />
+
+    <TextView
+        android:id="@+id/disciplina_nombre"
+        android:layout_below="@id/disciplina_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/titulo4"
+        android:textStyle="bold"
+        android:textColor="@color/color_text_darkgrey"
+        android:layout_marginTop="1dip"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

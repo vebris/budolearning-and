@@ -1,0 +1,48 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:background="@color/background_generic"
+
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:gravity="top|left">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/puntos_nombre_usuario"
+            android:textSize="@dimen/titulo1"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_weight=".79" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/puntos_total"
+            android:textSize="@dimen/tituloDerecha"
+            android:layout_weight=".20"
+            style="@style/ToolbarPoints"
+            android:textColor="@color/color_text_ligthblack"
+            android:background="@drawable/shape_gold"
+            android:gravity="center_vertical|center_horizontal"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/puntosListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ListView"
+        />
+</LinearLayout>

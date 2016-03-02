@@ -1,0 +1,28 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:background="@color/background_generic"
+    >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/alumnosGrado_nombre"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:textSize="@dimen/titulo1"
+        android:textColor="@color/color_text_darkgrey"
+        />
+
+    <ListView
+        android:id="@+id/alumnosGradoListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/ListView"
+        />
+</LinearLayout>

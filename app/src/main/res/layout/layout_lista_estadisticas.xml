@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    style="@style/item_list"
+    >
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/estadisticas_fichero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/titulo1"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_marginTop="1dip" />
+
+        <TextView
+            android:id="@+id/estadisticas_numero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/titulo1"
+            android:textColor="@color/color_text_darkgrey"
+            />
+        <TextView
+            android:id="@+id/estadisticas_ultima_visualizacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/titulo3"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_below="@id/estadisticas_numero"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

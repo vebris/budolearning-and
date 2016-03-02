@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="bris.es.bl1.activities.Activity_Login"
+    android:weightSum="1"
+    android:background="@color/background_generic"
+    android:id="@+id/main_cc">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:weightSum="1"
+        android:background="@color/background_generic"
+        android:layout_above="@+id/adMobBanner"
+        android:gravity="center_vertical">
+
+    <ScrollView android:id="@+id/login_form"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout android:id="@+id/email_login_form" android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:orientation="vertical"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/imageLogin"
+                android:src="@drawable/ic_login"
+                android:layout_weight="11.75"
+                android:contentDescription="Imagen" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Identificador de Usuario"
+                android:id="@+id/textLogin"
+                android:textColor="@color/color_text_darkgrey"
+                android:textStyle="bold"/>
+
+            <AutoCompleteTextView android:id="@+id/email" android:layout_width="fill_parent"
+                android:layout_height="wrap_content" android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress" android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/color_text_darkgrey"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contraseña Budolearning, para app y web"
+                android:id="@+id/textPassword"
+                android:textColor="@color/color_text_darkgrey"
+                android:textStyle="bold"/>
+
+            <EditText android:id="@+id/password" android:layout_width="fill_parent"
+                android:layout_height="wrap_content" android:hint="@string/prompt_password"
+                android:imeActionId="@+id/btn_login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified" android:inputType="textPassword"
+                android:maxLines="1" android:singleLine="true"
+                android:textColor="@color/color_text_darkgrey"/>
+
+            <Button android:id="@+id/btn_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/action_sign_in"
+                style="@style/Button"
+                />
+
+            <Button android:id="@+id/btn_registrarUsuario"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/action_registrar_usuario"
+                style="@style/Button2"
+                />
+
+            <Button android:id="@+id/btn_olvidoUsuario"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/action_olvido_usuario"
+                style="@style/Button2"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+    </RelativeLayout>
+    <!--<com.google.android.gms.ads.AdView
+        android:id="@+id/adMobBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/admob_banner"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        >
+    </com.google.android.gms.ads.AdView>
+    -->
+</RelativeLayout>

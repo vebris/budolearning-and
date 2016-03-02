@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:background="@color/background_generic"
+    >
+
+    <TableLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:visibility="visible"
+        >
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="invisible"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_id"
+                android:id="@+id/txtId"
+                android:textColor="@color/color_text_darkgrey"
+                android:layout_column="0"/>
+            <TextView
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialId"
+                android:textColor="@color/color_text_darkgrey"
+                android:layout_column="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_club"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey"/>
+            <Spinner
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialClub"
+                android:layout_column="1"
+                style="@style/CustomSpinnerTheme"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/txtUsarUsuario"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey" />
+
+            <CheckBox
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_usarUsuario"
+                android:id="@+id/videoEspecialUsarUsuario"
+                android:layout_column="1"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_alumno"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey"/>
+            <Spinner
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialAlumno"
+                android:layout_column="1"
+                style="@style/CustomSpinnerTheme"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_disciplina"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey"/>
+            <Spinner
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialDisciplina"
+                android:layout_column="1"
+                style="@style/CustomSpinnerTheme"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_grado"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey"/>
+            <Spinner
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialGrado"
+                android:layout_column="1"
+                style="@style/CustomSpinnerTheme"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_recurso"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey"/>
+            <Spinner
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialRecurso"
+                android:layout_column="1"
+                style="@style/CustomSpinnerTheme"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_fichero"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey"/>
+            <Spinner
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialFichero"
+                android:layout_column="1"
+                style="@style/CustomSpinnerTheme"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_inicio"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey"/>
+
+            <EditText
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialInicio"
+                android:textColor="@color/color_text_darkgrey"
+                android:layout_column="1"
+                android:clickable="false"
+                android:editable="false"
+                android:enabled="true" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+            <TextView
+                android:layout_weight=".2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/video_especial_fin"
+                android:id="@+id/txtFecha"
+                android:layout_column="0"
+                android:textColor="@color/color_text_darkgrey"/>
+
+            <EditText
+                android:layout_weight=".75"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoEspecialFin"
+                android:textColor="@color/color_text_darkgrey"
+                android:layout_column="1"
+                android:clickable="false"
+                android:editable="false"
+                android:enabled="true" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

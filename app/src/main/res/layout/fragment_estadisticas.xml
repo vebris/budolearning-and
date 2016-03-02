@@ -1,0 +1,42 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:background="@color/background_generic"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:gravity="top|left">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/estadisticas_nombre_usuario"
+            android:textSize="@dimen/titulo1"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_weight=".75" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/estadisticas_fecha"
+            android:textSize="@dimen/titulo4"
+            android:layout_weight=".24"
+            android:gravity="center_vertical|right"
+            android:text="alsdfj" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/estadisticasListView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        style="@style/ListView"
+        />
+</LinearLayout>

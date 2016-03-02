@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_especial_publi_banner" >
+        <CheckBoxPreference
+            android:key="pref_PublicidadBannerAdMob"
+            android:title="@string/pref_especial_publi_banner_adMob"
+            android:defaultValue="false"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_especial_publi_intert" >
+        <CheckBoxPreference
+            android:key="pref_PublicidadInterstialAdMob"
+            android:title="@string/pref_especial_publi_intert_adMob"
+            android:defaultValue="false"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_especial_opciones" >
+        <CheckBoxPreference
+            android:key="preferences_general_ver_ultima_descarga"
+            android:title="@string/pref_especial_ver_ultima_descarga"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+</PreferenceScreen>

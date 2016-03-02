@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    style="@style/item_list"
+    android:weightSum="1"
+    android:id="@+id/linearlayout_idFichero"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight=".17"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        >
+        <ImageView
+            android:id="@+id/fichero_especial_id"
+            android:layout_marginRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/fichero_especial_tamano"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/tituloDerecha"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_below="@+id/fichero_especial_id"
+            android:gravity="center"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight=".83"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:id="@+id/linearlayout_video_especial"
+        >
+        <TextView
+            android:id="@+id/fichero_especial_fichero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/titulo1"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_marginTop="1dip" />
+
+        <TextView
+            android:id="@+id/fichero_especial_club"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/titulo2"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_marginTop="1dip" />
+
+        <TextView
+            android:id="@+id/fichero_especial_usuario"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/titulo2"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_marginTop="1dip"
+            android:layout_height="wrap_content" />
+        <TableLayout
+            android:gravity="left"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:weightSum="1"
+            style="@style/item_list"
+            >
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/fichero_especial_inicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/titulo3"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_darkgrey"
+                    android:layout_column="0"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/fichero_especial_fin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/titulo3"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_text_darkgrey"
+                    android:layout_column="1"
+                    android:gravity="center"/>
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+</LinearLayout>

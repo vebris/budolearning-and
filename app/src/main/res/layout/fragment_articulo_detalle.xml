@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:background="@color/background_generic"
+    >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <TableLayout
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:visibility="visible"
+            >
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:visibility="invisible"
+                >
+                <TextView
+                    android:layout_weight=".2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/articulo_id"
+                    android:id="@+id/txtId"
+                    android:textColor="@color/color_text_darkgrey"
+                    android:layout_column="0"/>
+                <TextView
+                    android:layout_weight=".75"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/articuloId"
+                    android:textColor="@color/color_text_darkgrey"
+                    android:layout_column="1" />
+            </TableRow>
+
+            <TableRow
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_weight=".2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/articulo_titulo"
+                    android:id="@+id/txtTitulo"
+                    android:layout_column="0"
+                    android:textColor="@color/color_text_darkgrey"
+                    />
+                <EditText
+                    android:layout_weight=".75"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/articuloTitulo"
+                    android:layout_column="1"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/color_text_darkgrey"
+                    android:lines="2" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <TextView
+                    android:layout_weight=".2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/articulo_autor"
+                    android:id="@+id/txtAutor"
+                    android:layout_column="0"
+                    android:textColor="@color/color_text_darkgrey"/>
+
+                <EditText
+                    android:layout_weight=".75"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/articuloAutor"
+                    android:layout_column="1"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/color_text_darkgrey"
+                    android:lines="2" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <TextView
+                    android:layout_weight=".2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/articulo_fecha"
+                    android:id="@+id/txtFecha"
+                    android:layout_column="0"
+                    android:textColor="@color/color_text_darkgrey"/>
+
+                <EditText
+                    android:layout_weight=".75"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/articuloFecha"
+                    android:textColor="@color/color_text_darkgrey"
+                    android:layout_column="1"
+                    android:clickable="false"
+                    android:editable="false"
+                    android:enabled="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:layout_weight=".2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/txtActivo"
+                    android:layout_column="0"
+                    android:textColor="@color/color_text_darkgrey" />
+
+                <CheckBox
+                    android:layout_weight=".75"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/articulo_activo"
+                    android:id="@+id/articuloActivo"
+                    android:layout_column="7" />
+            </TableRow>
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TextView
+                    android:layout_weight=".2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:id="@+id/txtVisibleUsuarios"
+                    android:layout_column="0"
+                    android:textColor="@color/color_text_darkgrey" />
+
+                <CheckBox
+                    android:layout_weight=".75"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/articulo_visibleUsuarios"
+                    android:id="@+id/articuloVisibleUsuarios"
+                    android:layout_column="7" />
+            </TableRow>
+            articuloVisibleUsuarios
+        </TableLayout>
+    </ScrollView>
+
+</LinearLayout>

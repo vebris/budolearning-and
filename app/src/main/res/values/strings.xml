@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="admob_banner">ca-app-pub-4352873042851104/3441602278</string>
+    <string name="admob_interstitial">ca-app-pub-4352873042851104/9503312278</string>
+    <string name="mopub_banner">1d3c9eff80d64ab59537884c7323bb37</string>
+    <string name="mopub_interstitial">5cc2113d8b4e4902815c28384397e421</string>
+    <string name="mmedia_banner">211071</string>
+    <string name="mmedia_interstitial">211073</string>
+
+    <string name="app_name">BudoLearning</string>
+    <string name="menu_disciplinas">Disciplinas</string>
+    <string name="menu_usuario">Usuario</string>
+    <string name="drawer_open">Menú Abierto</string>
+    <string name="drawer_close">Menú Cerrado</string>
+
+    <!-- Login -->
+    <string name="prompt_email">Login</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="prompt_password_new">Nueva Contraseña</string>
+    <string name="prompt_password_new_2">Repetir nueva Contraseña</string>
+    <string name="action_cambiar_password">Cambiar Contraseña</string>
+    <string name="action_sign_in">Entrar</string>
+    <string name="action_sign_in_short">Entrar</string>
+    <string name="action_registrar_usuario">Registrar Usuario</string>
+    <string name="action_olvido_usuario">Regenerar Contraseña</string>
+    <string name="error_invalid_password">Password demasiado corto</string>
+    <string name="error_incorrect_password">Usuario y/o Password incorrectos</string>
+    <string name="contrasenas_deben_ser_iguales">Las contraseñas nuevas no son iguales</string>
+    <string name="error_field_required">Campo requerido</string>
+    <string name="desconectado">Desconectado</string>
+    <string name="conectado">Conectado</string>
+
+    <!-- Menu -->
+    <!-- Nombres de los items -->
+
+    <string-array name="menu_items_left">
+        <item>Especial</item>
+        <item>Disciplinas</item>
+        <item>Articulos</item>
+        <item>Cursos</item>
+        <item>Club</item>
+        <item>Alumnos</item>
+        <item>Descargas</item>
+        <item>Mis Datos</item>
+        <item>Configuración</item>
+        <item>Salir</item>
+    </string-array>
+    <!-- Iconos de los items -->
+    <array name="menu_icons_left">
+        <item>@android:drawable/btn_star_big_on</item>              <!--Especial-->
+        <item>@drawable/ic_menu_archive</item>                      <!--Disciplinas-->
+        <item>@drawable/ic_menu_moreoverflow</item>                 <!--Articulos-->
+        <item>@drawable/ic_menu_my_calendar</item>                  <!--Cursos-->
+        <item>@drawable/ic_menu_myplaces</item>                     <!--Clubes-->
+        <item>@drawable/ic_menu_allfriends</item>                   <!--Alumnos-->
+        <item>@drawable/ic_menu_attachment</item>                   <!--Descargas-->
+        <item>@drawable/ic_menu_friendslist</item>                  <!--Mis Datos-->
+        <item>@android:drawable/ic_menu_preferences</item>          <!--Preferencias-->
+        <item>@android:drawable/ic_menu_close_clear_cancel</item>   <!--Salir-->
+    </array>
+
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <!--  -->
+    <array name="diasSemana">
+        <item>L</item>
+        <item>M</item>
+        <item>X</item>
+        <item>J</item>
+        <item>V</item>
+        <item>S</item>
+        <item>D</item>
+    </array>
+
+    <string name="title_activity_activity_usuario_registrar">Activity_usuario_registrar</string>
+    <string name="title_activity_activity_usuario_olvido">Activity_usuario_olvido</string>
+
+    <string name="action_fichero_anadir">Añadir Fichero</string>
+
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="imagen">Imagen</string>
+
+    <string name="select_video_mp4">Seleccione un archivo</string>
+
+    <string name="pdf_previus">Anterior</string>
+    <string name="pdf_next">Siguiente</string>
+
+    <!-- FRAGMENT DISCIPLINA -->
+    <string name="disciplina_id">ID</string>
+    <string name="disciplina_nombre">Nombre</string>
+    <string name="disciplina_descripcion">Descripción</string>
+
+    <!-- FRAGMENT RECURSO -->
+    <string name="recurso_id">ID</string>
+    <string name="recurso_nombre">Nombre</string>
+    <string name="recurso_tipo">Tipo</string>
+    <string name="recurso_enPrograma">En Programa</string>
+
+    <!-- FRAGMENT ARTICULO-->
+    <string name="articulo_id">ID</string>
+    <string name="articulo_titulo">Titulo</string>
+    <string name="articulo_autor">Autor</string>
+    <string name="articulo_fecha">Fecha</string>
+    <string name="articulo_activo">Activo</string>
+    <string name="articulo_visibleUsuarios">Visible a usuarios</string>
+
+    <!-- FRAGMENT CLUB -->
+    <string name="club_id">ID</string>
+    <string name="club_nombre">Nombre</string>
+    <string name="club_descripcion">Descripción</string>
+    <string name="club_direccion">Dirección</string>
+    <string name="club_localidad">Localidad</string>
+    <string name="club_email">E-mail</string>
+    <string name="club_telefono">Teléfono</string>
+    <string name="club_web">WEG</string>
+
+    <!-- FRAGMENT CURSO -->
+    <string name="curso_id">ID</string>
+    <string name="curso_nombre">Nombre</string>
+    <string name="curso_descripcion">Descripción</string>
+    <string name="curso_direccion">Dirección</string>
+    <string name="curso_profesor">Profesor</string>
+    <string name="curso_precio">Preccio</string>
+    <string name="curso_fecha_inicio">Fecha Fin</string>
+    <string name="curso_fecha_fin">Fecha Inicio</string>
+
+    <!-- FRAGMENT FICHERO -->
+    <string name="fichero_id">ID</string>
+    <string name="fichero_descripcion">Descripción</string>
+    <string name="fichero_fecha">Fecha</string>
+    <string name="fichero_activo">Activo</string>
+    <string name="fichero_puntos">Puntos</string>
+
+    <!-- FRAGMENT FICHERO ESPECIAL DETALLE -->
+    <string name="video_especial_id">ID</string>
+    <string name="video_especial_club">Club</string>
+    <string name="video_especial_usarUsuario">Usar alumno</string>
+    <string name="video_especial_alumno">Alumno</string>
+    <string name="video_especial_disciplina">Disciplina</string>
+    <string name="video_especial_grado">Grado</string>
+    <string name="video_especial_recurso">Recurso</string>
+    <string name="video_especial_fichero">Fichero</string>
+    <string name="video_especial_inicio">Inicio</string>
+    <string name="video_especial_fin">Fin</string>
+
+
+
+</resources>

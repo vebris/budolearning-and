@@ -1,0 +1,60 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:background="@color/background_generic"
+    android:weightSum="1">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        style="@style/item_list"
+        >
+        <TextView
+            android:id="@+id/articulo_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/titulo1"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_marginTop="1dip"
+            />
+        <TextView
+            android:id="@+id/articulo_autor"
+            android:layout_below="@+id/articulo_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/titulo2"
+            android:textStyle="bold"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_marginTop="1dip"
+            />
+
+        <TextView
+            android:id="@+id/articulo_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/tituloDerecha"
+            android:textColor="@color/color_text_darkgrey"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/articulo_texto"
+        android:layout_weight="1"
+        android:background="@color/background_generic"/>
+
+
+</LinearLayout>
