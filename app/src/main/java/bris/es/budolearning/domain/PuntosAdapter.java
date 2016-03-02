@@ -71,7 +71,7 @@ public class PuntosAdapter extends BaseAdapter {
         } else {
             holder.fecha.setText(rowItem!=null?rowItem.getTipo():"");
         }
-        //holder.nombre.setText(rowItem.getFichero()!=null && !rowItem.getFichero().equalsIgnoreCase("null")?rowItem.getFichero():"");
+
         if(rowItem.getPuntos() < 0)
             holder.puntos.setTextColor(Color.RED);
         else
