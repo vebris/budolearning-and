@@ -13,7 +13,6 @@ import java.io.File;
 import java.util.List;
 
 import bris.es.budolearning.R;
-import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
 
 public class FicheroAdapter extends BaseAdapter {
@@ -73,12 +72,6 @@ public class FicheroAdapter extends BaseAdapter {
 
         Fichero rowItem = getItem(position);
 
-
-        if(rowItem.getExtension().equalsIgnoreCase("PDF") && BLSession.getInstance().getUsuario().getRol().equalsIgnoreCase("USER")){
-            convertView.setVisibility(View.INVISIBLE);
-            return convertView;
-        }
-
         holder.descripcion.setText(rowItem.getDescripcion().toUpperCase());
         if (rowItem.getFecha() != null) {
             holder.fecha.setText(Utiles.getDateFormatDMA().format(rowItem.getFecha()));
@@ -86,11 +79,14 @@ public class FicheroAdapter extends BaseAdapter {
             holder.fecha.setText("");
         }
 
+        /*
         if (rowItem.getVisitas() == 0) {
             holder.nuevo.setVisibility(View.VISIBLE);
         } else {
             holder.nuevo.setVisibility(View.INVISIBLE);
         }
+        */
+        holder.nuevo.setVisibility(View.INVISIBLE);
 
         File fichero = new File (Utiles.getDirectorioCacheVideo(), Utiles.md5(String.valueOf(rowItem.getId())));
 
@@ -115,7 +111,7 @@ public class FicheroAdapter extends BaseAdapter {
         }
 
         if(rowItem.getCoste() > 0)
-            holder.coste.setText(rowItem.getCoste() + " Puntos");
+            holder.coste.setText(String.format("%d %s",rowItem.getCoste(),"Puntos"));
         else
             holder.coste.setText("");
 

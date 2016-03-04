@@ -1,10 +1,10 @@
 package bris.es.budolearning.domain;
 
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,7 +15,8 @@ public class Recurso extends GenericObject{
     private String nombre;
     private Tipo tipo;
     private boolean enPrograma;
-    private int numFicheros;
+    private int numVideos;
+    private int numPdf;
     private List<Fichero> ficheros;
 
     public Recurso(){}
@@ -46,7 +47,12 @@ public class Recurso extends GenericObject{
             Log.e(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName());
         }
         try {
-            setNumFicheros(json.getInt("numFicheros"));
+            setNumVideos(json.getInt("numVideos"));
+        } catch (Exception e) {
+            Log.e(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName());
+        }
+        try {
+            setNumPdf(json.getInt("numPdf"));
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName());
         }
@@ -74,11 +80,17 @@ public class Recurso extends GenericObject{
     public void setEnPrograma(boolean enPrograma) {
         this.enPrograma = enPrograma;
     }
-    public int getNumFicheros() {
-        return numFicheros;
+    public int getNumVideos() {
+        return numVideos;
     }
-    public void setNumFicheros(int numFicheros) {
-        this.numFicheros = numFicheros;
+    public void setNumVideos(int numVideos) {
+        this.numVideos = numVideos;
+    }
+    public int getNumPdf() {
+        return numPdf;
+    }
+    public void setNumPdf(int numPdf) {
+        this.numPdf = numPdf;
     }
     public List<Fichero> getFicheros() {
         return ficheros;

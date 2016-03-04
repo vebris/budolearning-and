@@ -17,6 +17,7 @@
 
     <string name="usuario_entrenaEn">Club</string>
     <string name="usuario_profesor">Profesor</string>
+    <string name="usuario_verPDF">Ver PDF</string>
 
     <string name="usuario_btn_guardar">Guardar</string>
     <string name="usuario_btn_cambiar_pass">Cambiar Password</string>

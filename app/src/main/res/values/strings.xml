@@ -101,11 +101,11 @@
 
     <!-- FRAGMENT ARTICULO-->
     <string name="articulo_id">ID</string>
-    <string name="articulo_titulo">Titulo</string>
+    <string name="articulo_titulo">Título</string>
     <string name="articulo_autor">Autor</string>
     <string name="articulo_fecha">Fecha</string>
     <string name="articulo_activo">Activo</string>
-    <string name="articulo_visibleUsuarios">Visible a usuarios</string>
+    <string name="articulo_visibleUsuarios">Visible a alumnos</string>
 
     <!-- FRAGMENT CLUB -->
     <string name="club_id">ID</string>
@@ -115,7 +115,7 @@
     <string name="club_localidad">Localidad</string>
     <string name="club_email">E-mail</string>
     <string name="club_telefono">Teléfono</string>
-    <string name="club_web">WEG</string>
+    <string name="club_web">WEB</string>
 
     <!-- FRAGMENT CURSO -->
     <string name="curso_id">ID</string>

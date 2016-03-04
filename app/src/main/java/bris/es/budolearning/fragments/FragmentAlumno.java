@@ -11,15 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Usuario;
-import bris.es.budolearning.utiles.BLSession;
-import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.task.TaskClub;
 import bris.es.budolearning.task.TaskUsuario;
+import bris.es.budolearning.utiles.BLSession;
+import bris.es.budolearning.utiles.Utiles;
 
 public class FragmentAlumno extends FragmentAbstract {
 
@@ -50,6 +51,8 @@ public class FragmentAlumno extends FragmentAbstract {
         ((TextView) view.findViewById(R.id.usuarioDireccion)).setText(usuario.getDireccion());
         ((TextView) view.findViewById(R.id.usuarioLocalidad)).setText(usuario.getLocalidad());
         ((TextView) view.findViewById(R.id.usuarioTelefono)).setText(usuario.getTelefono());
+
+        ((CheckBox) view.findViewById(R.id.usuario_verPDF)).setChecked(usuario.getVerPDF());
 
         TaskClub taskClub = new TaskClub(getActivity(), this);
         taskClub.setNombreClub(usuario.getEntrena().getNombre());
@@ -96,6 +99,7 @@ public class FragmentAlumno extends FragmentAbstract {
         if (!Utiles.esAdmin()) {
             rol.setVisibility(View.INVISIBLE);
             view.findViewById(R.id.usuarioProfesor).setVisibility(View.INVISIBLE);
+            view.findViewById(R.id.usuario_verPDF).setVisibility(View.INVISIBLE);
         }
 
         setHasOptionsMenu(true);
@@ -117,6 +121,7 @@ public class FragmentAlumno extends FragmentAbstract {
         usuario.setLocalidad(((TextView) view.findViewById(R.id.usuarioLocalidad)).getText().toString());
         usuario.setTelefono(((TextView) view.findViewById(R.id.usuarioTelefono)).getText().toString());
         usuario.setEntrena(BLSession.getInstance().getClubes().get(((Spinner) view.findViewById(R.id.usuarioEntrena)).getSelectedItemPosition()));
+        usuario.setVerPDF(((CheckBox) view.findViewById(R.id.usuario_verPDF)).isChecked());
 
         if(Utiles.esAdmin()) {
             usuario.setProfesor(BLSession.getInstance().getClubes().get(((Spinner) view.findViewById(R.id.usuarioProfesor)).getSelectedItemPosition()));

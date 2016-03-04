@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import bris.es.budolearning.R;
+import bris.es.budolearning.utiles.BLSession;
 
 public class RecursoAdapter extends BaseAdapter {
 
@@ -78,7 +79,14 @@ public class RecursoAdapter extends BaseAdapter {
             holder.id.setTextColor(convertView.getResources().getColor(R.color.list_background_pressed));
         }
         */
-        holder.id.setText(String.valueOf(rowItem.getNumFicheros()));
+
+        int numFicheros;
+        if(BLSession.getInstance().getUsuario().getVerPDF()) {
+            numFicheros = rowItem.getNumVideos() + rowItem.getNumPdf();
+        } else {
+            numFicheros = rowItem.getNumVideos();
+        }
+        holder.id.setText(String.valueOf(numFicheros));
         holder.id.setTextColor(convertView.getResources().getColor(R.color.color_text_darkgrey));
 
 

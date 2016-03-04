@@ -14,7 +14,6 @@ import java.io.File;
 import java.util.List;
 
 import bris.es.budolearning.R;
-import bris.es.budolearning.utiles.Constants;
 import bris.es.budolearning.utiles.Utiles;
 
 public class FicheroEspecialAdapter extends BaseAdapter {

@@ -2,6 +2,7 @@ package bris.es.budolearning.domain;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import bris.es.budolearning.R;
+import bris.es.budolearning.utiles.Utiles;
 
 public class UsuarioAdapter extends BaseAdapter {
 
@@ -45,6 +47,7 @@ public class UsuarioAdapter extends BaseAdapter {
         TextView email;
         TextView telefono;
         TextView activo;
+        TextView version;
         TextView puntos;
     }
 
@@ -64,17 +67,39 @@ public class UsuarioAdapter extends BaseAdapter {
             holder.email = (TextView) convertView.findViewById(R.id.alumno_email);
             holder.activo = (TextView) convertView.findViewById(R.id.alumno_activo);
             holder.puntos = (TextView) convertView.findViewById(R.id.alumno_puntos);
+            holder.version = (TextView) convertView.findViewById(R.id.alumno_version);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         Usuario rowItem = getItem(position);
+        StringBuffer nombreUsuario = new StringBuffer();
+        nombreUsuario.append(rowItem.getNombre());
+        nombreUsuario.append(" ");
+        nombreUsuario.append(rowItem.getApellido1());
+        nombreUsuario.append(" ");
+        nombreUsuario.append(rowItem.getApellido2());
+        
+        holder.nombre.setText(nombreUsuario);
+        
+        if(Utiles.esSoloAdmin()) {
+            if ("USER".equalsIgnoreCase(rowItem.getRol())) {
+                holder.nombre.setTextColor(Color.BLACK);
+            } else{
+                holder.nombre.setTextColor(Color.BLUE);
+                if ("ADMINISTRADOR".equalsIgnoreCase(rowItem.getRol())) {
+                    nombreUsuario.insert(0, "(A) ");
+                    holder.nombre.setText(nombreUsuario);
+                }
+            }
+        }
 
-        holder.nombre.setText(rowItem.getNombre() + " " + rowItem.getApellido1() + " " + rowItem.getApellido2());
         holder.telefono.setText(rowItem.getTelefono());
         holder.email.setText(rowItem.getMail());
         holder.activo.setText(rowItem.getActivo()!=null&&rowItem.getActivo()?"SI":"NO");
+        holder.version.setText(String.format("%s %.1f","V. ",(double)rowItem.getVersion()/10));
+
         holder.puntos.setText(String.valueOf(rowItem.getPuntos()));
         return convertView;
     }

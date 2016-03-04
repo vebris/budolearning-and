@@ -293,6 +293,26 @@
                     style="@style/CustomSpinnerTheme"
                     />
             </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <TextView
+                    android:layout_weight=".2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:textColor="@color/color_text_darkgrey"/>
+                <CheckBox
+                    android:layout_weight=".75"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/usuario_verPDF"
+                    android:id="@+id/usuario_verPDF"
+                    android:layout_column="1" />
+            </TableRow>
+
         </TableLayout>
     </ScrollView>
 

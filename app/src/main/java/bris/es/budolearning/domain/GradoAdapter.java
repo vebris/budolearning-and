@@ -1,24 +1,18 @@
 package bris.es.budolearning.domain;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.List;
+
 import bris.es.budolearning.R;
-import bris.es.budolearning.fragments.FragmentAbstract;
-import bris.es.budolearning.fragments.FragmentGrados;
-import bris.es.budolearning.fragments.FragmentRecursos;
-import bris.es.budolearning.slidingtabs.PagerItem;
 import bris.es.budolearning.task.TaskGrado;
 import bris.es.budolearning.utiles.BLSession;
-import bris.es.budolearning.utiles.UtilesDialog;
 
 public class GradoAdapter extends BaseAdapter {
 

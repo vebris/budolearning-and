@@ -52,8 +52,19 @@
         android:textColor="@color/color_text_darkgrey"
         />
     <TextView
-        android:id="@+id/alumno_puntos"
+        android:id="@+id/alumno_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="false"
         android:layout_below="@+id/alumno_activo"
+        android:textStyle="bold"
+        android:textSize="@dimen/tituloDerecha"
+        android:textColor="@color/color_text_darkgrey"
+        />
+    <TextView
+        android:id="@+id/alumno_puntos"
+        android:layout_below="@+id/alumno_version"
         style="@style/ToolbarPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

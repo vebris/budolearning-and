@@ -1,8 +1,6 @@
 package bris.es.budolearning.fragments;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +17,13 @@ import java.util.List;
 
 import bris.es.budolearning.Activity_Logged;
 import bris.es.budolearning.R;
+import bris.es.budolearning.domain.Articulo;
 import bris.es.budolearning.domain.Fichero;
 import bris.es.budolearning.domain.FicherosDescargadosAdapter;
+import bris.es.budolearning.task.TaskUtiles;
 import bris.es.budolearning.utiles.BLSession;
-import bris.es.budolearning.utiles.Constants;
 import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
-import bris.es.budolearning.task.TaskUtiles;
 
 public class FragmentDescargas extends FragmentAbstract {
 
@@ -54,7 +52,14 @@ public class FragmentDescargas extends FragmentAbstract {
                 BLSession.getInstance().setFichero(f);
                 String title = "";
                 if(f != null) title = f.getDescripcion().toUpperCase();
-                if (f == null) title = ficheros.get(posicion).getName();
+                if (f == null) {
+                    Articulo a = FicherosDescargadosAdapter.buscarArticulo(ficheros.get(posicion).getName());
+                    f = new Fichero();
+                    f.setId(a.getId());
+                    f.setExtension("pdf");
+                    BLSession.getInstance().setFichero(f);
+                    title = a.getTitulo();
+                }
                 UtilesDialog.createListDialog(
                         getActivity(),
                         title,

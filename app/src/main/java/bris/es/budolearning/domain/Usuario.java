@@ -1,8 +1,10 @@
 package bris.es.budolearning.domain;
 
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,9 @@ public class Usuario extends GenericObject {
     private List<Disciplina> disciplinas;
 
     private int puntos;
+    private int version;
+
+    private Boolean verPDF = false;
 
     public Usuario(){}
     public Usuario(JSONObject json, boolean completo) {
@@ -117,6 +122,16 @@ public class Usuario extends GenericObject {
                 Log.e(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName());
             }
         }
+        try{
+            setVersion(json.getInt("version"));
+        } catch(Exception e){
+            Log.e(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName());
+        }
+        try{
+            setVerPDF(json.getBoolean("verPDF"));
+        } catch(Exception e){
+            Log.e(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName());
+        }
         try {
             setPuntos(json.getInt("puntos"));
         } catch (Exception e) {
@@ -140,6 +155,8 @@ public class Usuario extends GenericObject {
         telefono = u.getTelefono();
         profesor = u.getProfesor();
         entrena = u.getEntrena();
+        version = u.getVersion();
+        verPDF = u.getVerPDF();
     }
 
     public String getNombre() {
@@ -234,6 +251,18 @@ public class Usuario extends GenericObject {
     }
     public List<Disciplina> getDisciplinas() { return disciplinas; }
     public void setDisciplinas(List<Disciplina> disciplinas) { this.disciplinas = disciplinas; }
+    public int getVersion() {
+        return version;
+    }
+    public void setVersion(int version) {
+        this.version = version;
+    }
+    public Boolean getVerPDF() {
+        return verPDF;
+    }
+    public void setVerPDF(Boolean verPDF) {
+        this.verPDF = verPDF;
+    }
 
     public void setDisciplinas(JSONArray disciplinas, boolean completo) {
         this.disciplinas= new ArrayList<>();

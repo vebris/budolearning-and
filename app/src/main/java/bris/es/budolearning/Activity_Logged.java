@@ -26,8 +26,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
-import bris.es.budolearning.domain.Disciplina;
-import bris.es.budolearning.domain.Grado;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.fragments.FragmentAlumnos;
 import bris.es.budolearning.fragments.FragmentArticulos;
@@ -35,11 +33,11 @@ import bris.es.budolearning.fragments.FragmentClubes;
 import bris.es.budolearning.fragments.FragmentCursos;
 import bris.es.budolearning.fragments.FragmentDescargas;
 import bris.es.budolearning.fragments.FragmentFicheros;
-import bris.es.budolearning.fragments.FragmentVideosEspeciales;
 import bris.es.budolearning.fragments.FragmentPreferences;
 import bris.es.budolearning.fragments.FragmentPreferencesEspecial;
 import bris.es.budolearning.fragments.FragmentTabsAlumnos;
 import bris.es.budolearning.fragments.FragmentTabsDisciplinas;
+import bris.es.budolearning.fragments.FragmentVideosEspeciales;
 import bris.es.budolearning.menu.lateral.CustomMenuItem;
 import bris.es.budolearning.menu.lateral.CustomMenuListAdapter;
 import bris.es.budolearning.task.TaskArticulo;
@@ -48,11 +46,11 @@ import bris.es.budolearning.task.TaskCurso;
 import bris.es.budolearning.task.TaskDisciplina;
 import bris.es.budolearning.task.TaskFichero;
 import bris.es.budolearning.task.TaskGrado;
+import bris.es.budolearning.task.TaskUtiles;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
 import bris.es.budolearning.utiles.UtilesMediaStore;
-import bris.es.budolearning.task.TaskUtiles;
 
 public class Activity_Logged extends Activity_Publicidad{
 
@@ -405,7 +403,9 @@ public class Activity_Logged extends Activity_Publicidad{
                 Intent i = new Intent(this, Activity_Mp4_View.class);
                 fragmentPublicidad.getActivity().startActivity(i);
             }
-            taskUtiles.visualizaciones(1);
+
+            if(BLSession.getInstance().getFichero().getTamano() != null)
+                taskUtiles.visualizaciones(1);
 
         }
     }
