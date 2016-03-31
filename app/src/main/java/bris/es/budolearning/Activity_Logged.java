@@ -132,9 +132,7 @@ public class Activity_Logged extends Activity_Publicidad{
         // DISCIPLINAS
         navDrawerItems.add(new CustomMenuItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), true));
         // ARTICULOS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1),
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-        ));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP));
         // CURSOS
         navDrawerItems.add(new CustomMenuItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true));
         // CLUBES
