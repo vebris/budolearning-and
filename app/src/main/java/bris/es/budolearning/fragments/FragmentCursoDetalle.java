@@ -20,9 +20,9 @@ import java.util.Date;
 
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Curso;
+import bris.es.budolearning.task.TaskCurso;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
-import bris.es.budolearning.task.TaskCurso;
 
 public class FragmentCursoDetalle extends FragmentAbstract {
 
@@ -65,7 +65,7 @@ public class FragmentCursoDetalle extends FragmentAbstract {
             cursoDescripcion.setText(curso.getDescripcion());
             cursoDireccion.setText(curso.getDireccion());
             cursoProfesor.setText(curso.getProfesor());
-            cursoPrecio.setText(curso.getPrecio());
+            cursoPrecio.setText(curso.getPrecios());
             cursoInicioDia.setText(Utiles.getDateFormatDMA().format(curso.getInicio()));
             cursoInicioHora.setText(Utiles.getDateFormatHM().format(curso.getInicio()));
             cursoFinDia.setText(Utiles.getDateFormatDMA().format(curso.getFin()));
@@ -188,7 +188,7 @@ public class FragmentCursoDetalle extends FragmentAbstract {
                 curso.setDescripcion(cursoDescripcion.getText().toString());
                 curso.setDireccion(cursoDireccion.getText().toString());
                 curso.setProfesor(cursoProfesor.getText().toString());
-                curso.setPrecio(cursoPrecio.getText().toString());
+                curso.setPrecios(cursoPrecio.getText().toString());
                 try {
                     String inicio = cursoInicioDia.getText().toString() + " " + cursoInicioHora.getText().toString();
                     curso.setInicio(Utiles.getDateFormatDMAHM().parse(inicio));

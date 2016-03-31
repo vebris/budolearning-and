@@ -3,6 +3,7 @@ package bris.es.budolearning.domain;
 import android.util.Log;
 
 import org.json.JSONObject;
+
 import java.util.Date;
 
 public class Fichero extends GenericObject{
@@ -46,7 +47,7 @@ public class Fichero extends GenericObject{
             Log.d(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName() + "\n fecha " + json.toString(), e);
         }
         try{
-            if(json.get("fechaModificacion") != null) {
+            if(json.get("fechaModificacion") != null && !json.get("fechaModificacion").toString().equals("null")) {
                 setFechaModificacion(new Date(json.getLong("fechaModificacion")));
             }
         }catch(Exception e){

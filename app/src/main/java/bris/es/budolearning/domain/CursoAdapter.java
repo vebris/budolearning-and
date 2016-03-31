@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.List;
+
 import bris.es.budolearning.R;
 import bris.es.budolearning.utiles.Utiles;
 
@@ -80,7 +82,7 @@ public class CursoAdapter extends BaseAdapter {
         holder.profesor.setText(rowItem.getProfesor());
         holder.fechaInicio.setText(Utiles.getDateFormatDMAHM().format(rowItem.getInicio()));
         holder.fechaFin.setText(Utiles.getDateFormatDMAHM().format(rowItem.getFin()));
-        holder.precio.setText(rowItem.getPrecio());
+        holder.precio.setText(rowItem.getPrecios());
 
 
         return convertView;

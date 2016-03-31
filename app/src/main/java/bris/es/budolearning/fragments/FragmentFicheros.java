@@ -12,16 +12,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import java.io.File;
 
 import bris.es.budolearning.Activity_Logged;
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Fichero;
 import bris.es.budolearning.task.TaskFichero;
+import bris.es.budolearning.task.TaskUtiles;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
-import bris.es.budolearning.task.TaskUtiles;
 
 public class FragmentFicheros extends FragmentAbstract {
 
@@ -130,6 +131,13 @@ public class FragmentFicheros extends FragmentAbstract {
     private void mostrarFichero(final int posicion) {
         final Fichero fichero = BLSession.getInstance().getFicheros().get(posicion);
 
+        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP){
+            UtilesDialog.createErrorMessage(getActivity(),
+                    "VERSION ANDROID",
+                    "Su versión de Android es inferior a LOLLIPOP (5.0) por lo que no puede descargar o visualizar el archivo."
+            ).show();
+            return;
+        }
         BLSession.getInstance().setFichero(fichero);
         File file = new File(Utiles.getDirectorioCacheVideo() + "/" + Utiles.md5(String.valueOf(fichero.getId())));
         if (file.exists()) {

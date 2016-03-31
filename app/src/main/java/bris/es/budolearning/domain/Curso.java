@@ -10,7 +10,7 @@ public class Curso extends GenericObject {
     String descripcion;
     String direccion;
     String profesor;
-    String precio;
+    String precios;
     Date inicio;
     Date fin;
 
@@ -21,7 +21,7 @@ public class Curso extends GenericObject {
         try {            setDescripcion(json.getString("descripcion"));        } catch (Exception e) {        }
         try {            setDireccion(json.getString("direccion"));        } catch (Exception e) {        }
         try {            setProfesor(json.getString("profesor"));        } catch (Exception e) {        }
-        try {            setPrecio(json.getString("precios"));        } catch (Exception e) {        }
+        try {            setPrecios(json.getString("precios"));        } catch (Exception e) {        }
         try {            setInicio(new Date(json.getLong("inicio")));        } catch (Exception e) {        }
         try {            setFin(new Date(json.getLong("fin")));        } catch (Exception e) {        }
     }
@@ -62,6 +62,6 @@ public class Curso extends GenericObject {
     public void setProfesor(String profesor) {
         this.profesor = profesor;
     }
-    public String getPrecio() {        return precio;}
-    public void setPrecio(String precio) { this.precio = precio; }
+    public String getPrecios() {        return precios;}
+    public void setPrecios(String precios) { this.precios = precios; }
 }
