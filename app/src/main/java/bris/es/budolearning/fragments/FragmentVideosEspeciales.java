@@ -130,6 +130,18 @@ public class FragmentVideosEspeciales extends FragmentAbstract {
         final Fichero fichero = BLSession.getInstance().getVideosEspeciales().get(posicion).getFichero();
         BLSession.getInstance().setFichero(fichero);
         File file = new File(Utiles.getDirectorioCacheVideo() + "/" + Utiles.md5(String.valueOf(fichero.getId())));
+
+        if(fichero.getExtension().equalsIgnoreCase("pdf") && android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP){
+            UtilesDialog.createErrorMessage(getActivity(),
+                    "VERSION ANDROID",
+                    "Su versión de Android es inferior a LOLLIPOP (5.0) por lo que no puede descargar o visualizar el archivo."
+            ).show();
+            if (file.exists()) {
+                borrarFichero();
+            }
+            return;
+        }
+
         if (file.exists()) {
             String[] items = {"Ver", "Borrar"};
             UtilesDialog.createListDialog(getActivity(),
