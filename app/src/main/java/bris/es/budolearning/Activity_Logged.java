@@ -126,33 +126,33 @@ public class Activity_Logged extends Activity_Publicidad{
         TypedArray navMenuIcons = getResources().obtainTypedArray(R.array.menu_icons_left);
         ArrayList<CustomMenuItem> navDrawerItems = new ArrayList<>();
         // Agregar opciones de menu
-
+        int pos = 0;
         // ESPECIAL
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1), true));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[0], navMenuIcons.getResourceId(pos++, -1), true));
         // DISCIPLINAS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1), true));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[1], navMenuIcons.getResourceId(pos++, -1), true));
         // ARTICULOS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1), Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[2], navMenuIcons.getResourceId(pos++, -1), Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP));
         // CURSOS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1), true));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[3], navMenuIcons.getResourceId(pos++, -1), true));
         // CLUBES
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1), true));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[4], navMenuIcons.getResourceId(pos++, -1), true));
         // ALUMNOS
         navDrawerItems.add(
-                new CustomMenuItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1),
+                new CustomMenuItem(navMenuTitles[5], navMenuIcons.getResourceId(pos++, -1),
                         Utiles.esAdmin()
                 )
         );
         // DESCARGAS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1),
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[6], navMenuIcons.getResourceId(pos++, -1),
                 Utiles.esSoloAdmin()
         ));
         // MIS DATOS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1), true));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[7], navMenuIcons.getResourceId(pos++, -1), true));
         // CONFIGURACION
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[8], navMenuIcons.getResourceId(8, -1), true));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[8], navMenuIcons.getResourceId(pos++, -1), true));
         // SALIR
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[9], navMenuIcons.getResourceId(9, -1), true));
+        navDrawerItems.add(new CustomMenuItem(navMenuTitles[9], navMenuIcons.getResourceId(pos++, -1), true));
         //navDrawerItems.add(new CustomMenuItem(navMenuTitlesLeft[2], navMenuIcons.getResourceId(2, -1)));//, true, "1"));
 
         // Recycle the typed array

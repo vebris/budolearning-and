@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+
 import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Club;
 import bris.es.budolearning.domain.ClubAdapter;
@@ -69,7 +71,7 @@ public class TaskClub extends TaskAbstract{
 
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
-        if(entry != null){
+        if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
                 // Gestionar datos, como convertir a XML, JSON, bitmap, etc.

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
+
 import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -15,6 +16,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,7 +54,7 @@ public class TaskDisciplina extends TaskAbstract{
     public void list(Usuario usuario, Object filtro, final Object view) {
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
-        if(entry != null){
+        if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
                 mostrarList(new JSONObject(data), view, new Date(entry.serverDate));

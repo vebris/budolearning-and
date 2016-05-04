@@ -6,14 +6,17 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -69,7 +72,7 @@ public class TaskArticulo extends TaskAbstract{
 
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
-        if(entry != null){
+        if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
                 // Gestionar datos, como convertir a XML, JSON, bitmap, etc.

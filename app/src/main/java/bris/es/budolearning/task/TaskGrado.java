@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Grado;
 import bris.es.budolearning.domain.GradoAdapter;
@@ -50,7 +51,7 @@ public class TaskGrado extends TaskAbstract{
     public void list(Usuario usuario, Object filtro, final Object view) {
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
-        if(entry != null){
+        if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
                 mostrarList(new JSONObject(data), view, new Date(entry.serverDate));

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+
 import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -58,7 +59,7 @@ public class TaskRecurso extends TaskAbstract{
     public void list(Usuario usuario, Object filtro, final Object view) {
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
-        if(entry != null){
+        if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
                 mostrarList(new JSONObject(data), view);

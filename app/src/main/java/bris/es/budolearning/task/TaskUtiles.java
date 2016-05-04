@@ -25,15 +25,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import bris.es.budolearning.Activity_Login;
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Estadistica;
@@ -301,7 +304,7 @@ public class TaskUtiles extends TaskAbstract{
 
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + "/estadisticas");
-        if (entry != null) {
+        if (entry != null && !entry.isExpired()) {
             try {
                 String data = new String(entry.data, "UTF-8");
                 JSONArray jsonArray = new JSONObject(data).getJSONArray("data");
@@ -415,7 +418,7 @@ public class TaskUtiles extends TaskAbstract{
         peticion.setData(filtro);
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + "/listadoPuntos");
-        if (entry != null) {
+        if (entry != null && !entry.isExpired()) {
             try {
                 String data = new String(entry.data, "UTF-8");
                 JSONArray jsonArray = new JSONObject(data).getJSONArray("data");

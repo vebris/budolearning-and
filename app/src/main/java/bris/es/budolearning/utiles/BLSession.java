@@ -4,17 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import bris.es.budolearning.domain.Articulo;
 import bris.es.budolearning.domain.Club;
 import bris.es.budolearning.domain.Curso;
 import bris.es.budolearning.domain.Disciplina;
 import bris.es.budolearning.domain.Fichero;
-import bris.es.budolearning.domain.Puntos;
-import bris.es.budolearning.domain.VideoEspecial;
 import bris.es.budolearning.domain.Grado;
+import bris.es.budolearning.domain.Puntos;
 import bris.es.budolearning.domain.Recurso;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.domain.UsuarioDisciplinaGrado;
+import bris.es.budolearning.domain.VideoEspecial;
 import bris.es.budolearning.fragments.FragmentTabsDisciplinas;
 import bris.es.budolearning.slidingtabs.PagerItem;
 
@@ -55,10 +56,6 @@ public class BLSession implements Serializable{
     private List<PagerItem> tabsDisciplinas;
 
     private Date fechaFichero;
-
-
-
-
 
     private int puntos;
 

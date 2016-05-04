@@ -7,8 +7,8 @@ android {
         applicationId "bris.es.budolearning"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 10
-        versionName '1.0'
+        versionCode 11
+        versionName '1.1'
     }
     buildTypes {
         release {
@@ -28,19 +28,24 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:23.+'
-    compile 'com.android.support:appcompat-v7:23.+'
-    compile 'com.google.android.gms:play-services:+'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'com.github.machinarius:preferencefragment:0.1.2'
     compile('org.apache.httpcomponents:httpmime:4.3.6') {
         exclude module: 'httpclient'
     }
+    compile 'com.android.support:support-v4:24.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
+    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.github.machinarius:preferencefragment:0.1.2'
     compile 'org.apache.httpcomponents:httpclient-android:4.3.5'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.jakewharton:disklrucache:2.0.2'
+    compile 'com.google.android.gms:play-services-identity:8.4.0'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
 }
+
+
+
 
 
 

@@ -15,6 +15,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -27,6 +28,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+
 import bris.es.budolearning.Activity_Mp4_View;
 import bris.es.budolearning.Activity_Pdf_View;
 import bris.es.budolearning.R;
@@ -68,7 +70,7 @@ public class TaskFichero extends TaskAbstract{
     public void list(Usuario usuario, Object filtro, final Object view) {
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
-        if(entry != null){
+        if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
                 mostrarList(new JSONObject(data), view, new Date(entry.serverDate));

@@ -13,9 +13,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -106,8 +108,6 @@ public class TaskUsuario extends TaskAbstract{
                                 recargarUsuario(usuario, new Date());
 
                                 BLSession.getInstance().setDisciplinas(usuario.getDisciplinas());
-
-                                BLSession.getInstance().getUsuario().setDisciplinas(null);
 
                                 onResponseFinished();
                                 updateSubtitle(new Date());
@@ -304,7 +304,7 @@ public class TaskUsuario extends TaskAbstract{
         peticion.setClub(filtro);
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
-        if(entry != null){
+        if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
                 mostrarList(new JSONObject(data), view, new Date(entry.serverDate));
