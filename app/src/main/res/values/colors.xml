@@ -29,10 +29,10 @@
 
     <!-- MENU LATERAL -->
     <color name="list_item_title">#BBBBBB</color>
-    <color name="list_background">#FF202020</color>
+    <color name="list_background">#FF404040</color>
     <!--<color name="list_background_pressed">#992416</color>-->
     <color name="list_background_pressed">#FF8b6508</color>
-    <color name="list_background_header">#FF404040</color>
+    <color name="list_background_header">#FF202020</color>
     <color name="list_background_preferences">#FF555555</color>
 
     <color name="list_divider">#272727</color>

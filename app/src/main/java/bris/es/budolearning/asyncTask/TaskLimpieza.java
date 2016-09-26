@@ -33,8 +33,8 @@ public class TaskLimpieza extends TaskAbstract {
             File[] files = directorio.listFiles();
             for (File f : files) {
                 if (f.isFile()) {
-                    Log.d(this.getClass().getName(), "Rename: " + f.getAbsolutePath() + " POR " + Utiles.md5(f.getName().substring(0,f.getName().indexOf("."))));
-                    f.renameTo(new File(Utiles.getDirectorioCacheVideo(), Utiles.md5(f.getName().substring(0,f.getName().indexOf(".")))));
+                    Log.d(this.getClass().getName(), "Rename: " + f.getAbsolutePath() + " POR " + Utiles.md5(f.getName().substring(0, f.getName().indexOf("."))));
+                    f.renameTo(new File(Utiles.getDirectorioCacheVideo(), Utiles.md5(f.getName().substring(0, f.getName().indexOf(".")))));
                 }
             }
         }catch (IOException ioe) {

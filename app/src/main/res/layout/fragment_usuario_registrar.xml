@@ -39,14 +39,14 @@
                     android:visibility="invisible"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_id"
                         android:id="@+id/txtId"
                         android:layout_column="0"/>
                     <TextView
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioId"
@@ -58,22 +58,29 @@
                     android:layout_weight="1"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_login"
-                        android:textColor="@color/color_text_darkgrey"
                         android:id="@+id/txtLogin"
                         android:layout_column="0"
                         />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioLogin"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="text"
+                        />
+
+                    <Spinner
+                        android:layout_weight=".7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/registrar_usuarioEntrena"
+                        android:layout_column="22"
+                        style="@style/CustomSpinnerTheme"
                         />
                 </TableRow>
                 <TableRow
@@ -81,21 +88,19 @@
                     android:layout_weight="1"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_password"
-                        android:textColor="@color/color_text_darkgrey"
                         android:id="@+id/txtPassword"
                         android:layout_column="0"
                         />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioPassword"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="textPassword"
                         />
                 </TableRow>
@@ -104,21 +109,19 @@
                     android:layout_weight="1"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_nombre"
-                        android:textColor="@color/color_text_darkgrey"
                         android:id="@+id/txtNombre"
                         android:layout_column="0"
                         />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioNombre"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="text"
                         />
                 </TableRow>
@@ -128,21 +131,18 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_apellido1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:id="@+id/txtApellido1"
                         android:layout_column="0" />
-
                     <EditText
                         android:layout_weight=".75"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioApellido1"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="text"
                         />
                 </TableRow>
@@ -152,20 +152,18 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_apellido2"
                         android:id="@+id/txtApellido2"
-                        android:textColor="@color/color_text_darkgrey"
                         android:layout_column="0" />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioApellido2"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="text"
                         />
                 </TableRow>
@@ -174,20 +172,18 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_dni"
                         android:id="@+id/txtDNI"
-                        android:textColor="@color/color_text_darkgrey"
                         android:layout_column="0" />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioDNI"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="text"
                         />
                 </TableRow>
@@ -197,20 +193,18 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_email"
                         android:id="@+id/txtEmail"
-                        android:textColor="@color/color_text_darkgrey"
                         android:layout_column="0" />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioEmail"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="textEmailAddress"
                         />
                 </TableRow>
@@ -220,20 +214,18 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_direccion"
                         android:id="@+id/txtDireccion"
-                        android:textColor="@color/color_text_darkgrey"
                         android:layout_column="0" />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioDireccion"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="text"
                         />
                 </TableRow>
@@ -242,20 +234,18 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_localidad"
                         android:id="@+id/txtLocalidad"
-                        android:textColor="@color/color_text_darkgrey"
                         android:layout_column="0" />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioLocalidad"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="text"
                         />
                 </TableRow>
@@ -264,21 +254,20 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_telefono"
                         android:id="@+id/txtTelefono"
-                        android:textColor="@color/color_text_darkgrey"
                         android:layout_column="0" />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioTelefono"
                         android:layout_column="1"
                         android:inputType="text"
-                        android:textColor="@color/color_text_darkgrey"/>
+                        />
                 </TableRow>
 
                 <TableRow
@@ -286,20 +275,12 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_entrenaEn"
                         android:id="@+id/txtEntrena"
                         android:layout_column="0"
-                        android:textColor="@color/color_text_darkgrey"/>
-                    <Spinner
-                        android:layout_weight=".75"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/registrar_usuarioEntrena"
-                        android:layout_column="1"
-                        style="@style/CustomSpinnerTheme"
                         />
                 </TableRow>
 
@@ -309,15 +290,15 @@
                     android:visibility="invisible"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_rol"
                         android:id="@+id/txtRol"
                         android:layout_column="0"
-                        android:textColor="@color/color_text_darkgrey"/>
+                        />
                     <Spinner
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioRol"
@@ -332,20 +313,19 @@
                     android:visibility="invisible"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_profesor"
                         android:id="@+id/txtProfesor"
                         android:layout_column="0"
-                        android:textColor="@color/color_text_darkgrey"/>
+                        />
                     <TextView
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioProfesor"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         />
 
                 </TableRow>

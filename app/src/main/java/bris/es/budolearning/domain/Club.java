@@ -11,6 +11,7 @@ public class Club extends GenericObject {
     String email;
     String telefono;
     String web;
+    String profesor;
 
     public Club(){};
 
@@ -23,6 +24,7 @@ public class Club extends GenericObject {
         try {            setEmail(json.getString("email"));        } catch (Exception e) {        }
         try {            setTelefono(json.getString("telefono"));        } catch (Exception e) {        }
         try {            setWeb(json.getString("web"));        } catch (Exception e) {        }
+        try {            setWeb(json.getString("profesor"));        } catch (Exception e) {        }
     }
 
     public String getNombre() {
@@ -66,5 +68,11 @@ public class Club extends GenericObject {
     }
     public void setWeb(String web) {
         this.web = web;
+    }
+    public String getProfesor() {
+        return profesor;
+    }
+    public void setProfesor(String profesor) {
+        this.profesor = profesor;
     }
 }

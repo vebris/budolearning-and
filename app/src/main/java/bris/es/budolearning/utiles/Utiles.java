@@ -27,17 +27,12 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigInteger;
-import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
 
 import bris.es.budolearning.R;
 import bris.es.budolearning.task.volley.VolleyControler;

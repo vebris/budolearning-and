@@ -2,7 +2,6 @@ package bris.es.budolearning.menu.lateral;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,21 +51,22 @@ public class CustomMenuListAdapter extends BaseAdapter {
 
             ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
             TextView txtTitle = (TextView) convertView.findViewById(R.id.title);
-            TextView txtCount = (TextView) convertView.findViewById(R.id.counter);
+            //TextView txtCount = (TextView) convertView.findViewById(R.id.counter);
 
-            if(imgIcon == null || txtTitle == null || txtCount == null) {
-                return convertView;
-            }
+            //if(imgIcon == null || txtTitle == null || txtCount == null) {
+            //    return convertView;
+            //}
 
             imgIcon.setImageResource(navDrawerItems.get(position).getIcon());
             txtTitle.setText(navDrawerItems.get(position).getTitle());
             // displaying count check whether it set visible or not
-            if (navDrawerItems.get(position).getCounterVisibility()) {
+            /*if (navDrawerItems.get(position).getCounterVisibility()) {
                 txtCount.setText(navDrawerItems.get(position).getCount());
             } else {
                 // hide the counter view
                 txtCount.setVisibility(View.GONE);
             }
+            */
 
         } else {
             if (convertView == null) {

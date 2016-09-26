@@ -26,19 +26,17 @@
                 android:visibility="invisible"
                 >
                 <TextView
-                    android:layout_weight=".2"
+                    android:layout_weight=".25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/club_id"
                     android:id="@+id/txtId"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <TextView
-                    android:layout_weight=".75"
+                    android:layout_weight=".70"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/clubId"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="1" />
             </TableRow>
 
@@ -47,20 +45,19 @@
                 android:layout_height="fill_parent"
                 >
                 <TextView
-                    android:layout_weight=".2"
+                    android:layout_weight=".25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/club_nombre"
                     android:id="@+id/txtNombre"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
-                    android:layout_weight=".75"
+                    android:layout_weight=".7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/clubNombre"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:inputType="text" />
             </TableRow>
 
             <TableRow
@@ -68,100 +65,95 @@
                 android:layout_height="fill_parent"
                 >
                 <TextView
-                    android:layout_weight=".2"
+                    android:layout_weight=".25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/club_descripcion"
                     android:id="@+id/txtDescripcion"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
-                    android:layout_weight=".75"
+                    android:layout_weight=".7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/clubDescripcion"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:inputType="text" />
             </TableRow>
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 >
                 <TextView
-                    android:layout_weight=".2"
+                    android:layout_weight=".25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/club_direccion"
                     android:id="@+id/txtDireccion"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
-                    android:layout_weight=".75"
+                    android:layout_weight=".7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/clubDireccion"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:inputType="text"/>
             </TableRow>
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 >
                 <TextView
-                    android:layout_weight=".2"
+                    android:layout_weight=".25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/club_localidad"
                     android:id="@+id/txtLocalidad"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
-                    android:layout_weight=".75"
+                    android:layout_weight=".7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/clubLocalidad"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:inputType="text"/>
             </TableRow>
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 >
                 <TextView
-                    android:layout_weight=".2"
+                    android:layout_weight=".25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/club_email"
                     android:id="@+id/txtEmail"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
-                    android:layout_weight=".75"
+                    android:layout_weight=".7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/clubEmail"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:inputType="textEmailAddress" />
             </TableRow>
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 >
                 <TextView
-                    android:layout_weight=".2"
+                    android:layout_weight=".25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/club_telefono"
                     android:id="@+id/txtTelefono"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
-                    android:layout_weight=".75"
+                    android:layout_weight=".7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/clubTelefono"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:inputType="phone"/>
             </TableRow>
 
             <TableRow
@@ -169,20 +161,38 @@
                 android:layout_height="fill_parent"
                 >
                 <TextView
-                    android:layout_weight=".2"
+                    android:layout_weight=".25"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/club_web"
                     android:id="@+id/txtWeb"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
-                    android:layout_weight=".75"
+                    android:layout_weight=".7"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/clubWeb"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:inputType="textWebEditText"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <TextView
+                    android:layout_weight=".25"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/club_profesor"
+                    android:id="@+id/txtProfesor"
+                    android:layout_column="0"/>
+                <EditText
+                    android:layout_weight=".7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/clubProfesor"
+                    android:layout_column="1"
+                    android:inputType="text"/>
             </TableRow>
         </TableLayout>
     </ScrollView>

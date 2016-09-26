@@ -31,14 +31,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/disciplina_id"
                     android:id="@+id/txtId"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <TextView
                     android:layout_weight=".75"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/disciplinaId"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="1" />
             </TableRow>
 
@@ -52,15 +50,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/disciplina_nombre"
                     android:id="@+id/txtFecha"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
                     android:layout_weight=".75"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/disciplinaNombre"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:text="asdf" />
             </TableRow>
 
             <TableRow
@@ -73,15 +70,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/disciplina_descripcion"
                     android:id="@+id/txtDescripcion"
-                    android:textColor="@color/color_text_darkgrey"
                     android:layout_column="0"/>
                 <EditText
                     android:layout_weight=".75"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/disciplinaDescripcion"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1" />
+                    android:layout_column="1"
+                    android:text="asdf" />
             </TableRow>
         </TableLayout>
     </ScrollView>

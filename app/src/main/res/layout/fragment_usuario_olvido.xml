@@ -38,20 +38,18 @@
                     android:layout_height="fill_parent"
                     >
                     <TextView
-                        android:layout_weight=".2"
+                        android:layout_weight=".25"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/usuario_email"
                         android:id="@+id/txtEmail"
-                        android:textColor="@color/color_text_darkgrey"
                         android:layout_column="0" />
                     <EditText
-                        android:layout_weight=".75"
+                        android:layout_weight=".7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/registrar_usuarioEmail"
                         android:layout_column="1"
-                        android:textColor="@color/color_text_darkgrey"
                         android:inputType="textEmailAddress"
                         />
                 </TableRow>

@@ -27,7 +27,8 @@
             android:textColor="@color/color_text_darkgrey"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/club_id"
-            android:layout_toEndOf="@+id/club_id" />
+            android:layout_toEndOf="@+id/club_id"
+            android:layout_marginLeft="6dp" />
 
         <TextView
             android:id="@+id/club_descripcion"
@@ -38,7 +39,8 @@
             android:textColor="@color/color_text_darkgrey"
             android:layout_below="@+id/club_nombre"
             android:layout_toRightOf="@+id/club_id"
-            android:layout_toEndOf="@+id/club_id" />
+            android:layout_toEndOf="@+id/club_id"
+            android:layout_marginLeft="6dp" />
         <TextView
             android:id="@+id/club_direccion"
             android:layout_width="match_parent"
@@ -86,6 +88,17 @@
         <TextView
             android:id="@+id/club_web"
             android:layout_below="@+id/club_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textSize="@dimen/titulo2"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_blue_light"
+            android:layout_marginTop="1dip"
+            />
+        <TextView
+            android:id="@+id/club_profesor"
+            android:layout_below="@+id/club_web"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,9 +19,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,6 +44,7 @@ import bris.es.budolearning.fragments.FragmentPreferences;
 import bris.es.budolearning.fragments.FragmentPreferencesEspecial;
 import bris.es.budolearning.fragments.FragmentTabsAlumnos;
 import bris.es.budolearning.fragments.FragmentTabsDisciplinas;
+import bris.es.budolearning.fragments.FragmentTabsPagina;
 import bris.es.budolearning.fragments.FragmentVideosEspeciales;
 import bris.es.budolearning.menu.lateral.CustomMenuItem;
 import bris.es.budolearning.menu.lateral.CustomMenuListAdapter;
@@ -52,7 +60,7 @@ import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
 import bris.es.budolearning.utiles.UtilesMediaStore;
 
-public class Activity_Logged extends Activity_Publicidad{
+public class Activity_Logged extends Activity_Publicidad {
 
     public static Context context;
 
@@ -80,6 +88,11 @@ public class Activity_Logged extends Activity_Publicidad{
     private TaskDisciplina taskDisciplina;
     private TaskGrado taskGrado;
     private TaskUtiles taskUtiles;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +106,7 @@ public class Activity_Logged extends Activity_Publicidad{
         taskArticulo = new TaskArticulo(this, null);
         taskUtiles = new TaskUtiles(this, null);
 
-        taskArticulo.list(BLSession.getInstance().getUsuario(), null, null);
+        //taskArticulo.list(BLSession.getInstance().getUsuario(), null, null);
 
         setContentView(R.layout.activity_main);
 
@@ -112,47 +125,52 @@ public class Activity_Logged extends Activity_Publicidad{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (savedInstanceState == null) {
-            setTitle(navMenuTitles[1]);
-            displayView(1);
+            setTitle(navMenuTitles[2]);
+            displayView(2);
         } else {
             setTitle(savedInstanceState.getCharSequence("title"));
         }
 
         cargarPublicidad();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    private void menuPrincipal(){
+    private void menuPrincipal() {
         navMenuTitles = getResources().getStringArray(R.array.menu_items_left);
         TypedArray navMenuIcons = getResources().obtainTypedArray(R.array.menu_icons_left);
         ArrayList<CustomMenuItem> navDrawerItems = new ArrayList<>();
         // Agregar opciones de menu
         int pos = 0;
+        // HISTORIA
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1), true));
         // ESPECIAL
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[0], navMenuIcons.getResourceId(pos++, -1), true));
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1), true));
         // DISCIPLINAS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[1], navMenuIcons.getResourceId(pos++, -1), true));
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1), true));
         // ARTICULOS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[2], navMenuIcons.getResourceId(pos++, -1), Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP));
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1), Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP));
         // CURSOS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[3], navMenuIcons.getResourceId(pos++, -1), true));
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1), true));
         // CLUBES
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[4], navMenuIcons.getResourceId(pos++, -1), true));
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1), true));
         // ALUMNOS
-        navDrawerItems.add(
-                new CustomMenuItem(navMenuTitles[5], navMenuIcons.getResourceId(pos++, -1),
+        navDrawerItems.add(pos,
+                new CustomMenuItem(navMenuTitles[6], navMenuIcons.getResourceId(pos++, -1),
                         Utiles.esAdmin()
                 )
         );
         // DESCARGAS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[6], navMenuIcons.getResourceId(pos++, -1),
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1),
                 Utiles.esSoloAdmin()
         ));
         // MIS DATOS
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[7], navMenuIcons.getResourceId(pos++, -1), true));
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1), true));
         // CONFIGURACION
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[8], navMenuIcons.getResourceId(pos++, -1), true));
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos++, -1), true));
         // SALIR
-        navDrawerItems.add(new CustomMenuItem(navMenuTitles[9], navMenuIcons.getResourceId(pos++, -1), true));
+        navDrawerItems.add(pos, new CustomMenuItem(navMenuTitles[pos], navMenuIcons.getResourceId(pos, -1), true));
         //navDrawerItems.add(new CustomMenuItem(navMenuTitlesLeft[2], navMenuIcons.getResourceId(2, -1)));//, true, "1"));
 
         // Recycle the typed array
@@ -167,26 +185,29 @@ public class Activity_Logged extends Activity_Publicidad{
                 displayView(position);
             }
         });
-
     }
 
-    public void updatePoints(){
+    public void updatePoints() {
         ((TextView) findViewById(R.id.tool_puntos)).setText(String.valueOf(BLSession.getInstance().getPuntos()));
     }
 
-    private void setupNavigationDrawer(){
+    private void setupNavigationDrawer() {
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.navList);
 
+        //@drawable/ic_launcher
+        ImageView img = (ImageView) findViewById(R.id.header_id);
         TextView txtNombre = (TextView) findViewById(R.id.header_nombre);
         TextView txtMail = (TextView) findViewById(R.id.header_mail);
 
-        if(BLSession.getInstance() == null
+        if (BLSession.getInstance() == null
                 || BLSession.getInstance().getUsuario() == null
                 || BLSession.getInstance().getUsuario().getApellido1() == null) {
             finish();
         }
+
+        img.setImageResource(R.drawable.ic_launcher);
 
         String nombre =
                 BLSession.getInstance().getUsuario().getApellido1() + " " +
@@ -198,11 +219,11 @@ public class Activity_Logged extends Activity_Publicidad{
         updatePoints();
 
 
-        RelativeLayout profileBox = (RelativeLayout) findViewById(R.id.profileBox);
+        LinearLayout profileBox = (LinearLayout) findViewById(R.id.profileBox);
         profileBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numClicks == 10) {
+                if (numClicks == 10) {
                     setTitle("Preferencias Especiales");
                     fragment = new FragmentPreferencesEspecial();
                     FragmentManager fragmentManager = getSupportFragmentManager();
@@ -241,58 +262,53 @@ public class Activity_Logged extends Activity_Publicidad{
 
     /**
      * Diplaying fragment view for selected nav drawer list item
-     * */
+     */
     private void displayView(int position) {
         // update the main content by replacing fragments
         BLSession.getInstance().setPosicionAlumno(-1);
-    switch (position) {
+        if (position != 10) setTitle(navMenuTitles[position]);
+        switch (position) {
             case 0:
-                setTitle(navMenuTitles[0]);
-                fragment = new FragmentVideosEspeciales();
+                fragment = new FragmentTabsPagina();
                 break;
             case 1:
-                setTitle(navMenuTitles[1]);
-                if(FragmentTabsDisciplinas.mSlidingTabLayout != null)
+                fragment = new FragmentVideosEspeciales();
+                break;
+            case 2:
+                if (FragmentTabsDisciplinas.mSlidingTabLayout != null)
                     FragmentTabsDisciplinas.mSlidingTabLayout.removeAllViews();
-                if(FragmentTabsDisciplinas.mViewPager != null)
+                if (FragmentTabsDisciplinas.mViewPager != null)
                     FragmentTabsDisciplinas.mViewPager.removeAllViews();
                 BLSession.getInstance().setTabsDisciplinas(null);
                 fragment = new FragmentTabsDisciplinas();
                 break;
-            case 2:
-                setTitle(navMenuTitles[2]);
+            case 3:
                 fragment = new FragmentArticulos();
                 break;
-            case 3:
-                setTitle(navMenuTitles[3]);
+            case 4:
                 fragment = new FragmentCursos();
                 break;
-            case 4:
-                setTitle(navMenuTitles[4]);
+            case 5:
                 fragment = new FragmentClubes();
                 break;
-            case 5:
-                setTitle(navMenuTitles[5]);
+            case 6:
                 BLSession.getInstance().setFichero(null);
                 fragment = new FragmentAlumnos();
                 break;
-            case 6:
-                setTitle(navMenuTitles[6]);
+            case 7:
                 fragment = new FragmentDescargas();
                 break;
-            case 7:
-                setTitle(navMenuTitles[7]);
+            case 8:
                 BLSession.getInstance().setAlumnos(null);
                 fragment = new FragmentTabsAlumnos();
-                ((FragmentTabsAlumnos)fragment).setAlumno(false);
+                ((FragmentTabsAlumnos) fragment).setAlumno(false);
                 (new TaskUtiles(this, null)).borrarPuntos();
                 (new TaskUtiles(this, null)).borrarEstadisticas();
                 break;
-            case 8:
-                setTitle(navMenuTitles[8]);
+            case 9:
                 fragment = new FragmentPreferences();
                 break;
-            case 9:
+            case 10:
                 LOG_OUT = true;
                 salir();
                 break;
@@ -341,20 +357,20 @@ public class Activity_Logged extends Activity_Publicidad{
     public void setTitle(CharSequence title) {
         mTitle = title;
         getSupportActionBar().setTitle(mTitle);
-        ((TextView)findViewById(R.id.tool_title)).setText(mTitle);
+        ((TextView) findViewById(R.id.tool_title)).setText(mTitle);
     }
 
-    public void setSubtitle(Date fecha){
-        if(Utiles.getConfiguracion(this).isVerUltimaDescarga() && fecha != null){
-            try{
+    public void setSubtitle(Date fecha) {
+        if (Utiles.getConfiguracion(this).isVerUltimaDescarga() && fecha != null) {
+            try {
                 getSupportActionBar().setSubtitle(Utiles.getDateFormatDMAHMS().format(fecha));
-                ((TextView)findViewById(R.id.tool_subtitle)).setText(Utiles.getDateFormatDMAHMS().format(fecha));
-            }catch(Exception e){
+                ((TextView) findViewById(R.id.tool_subtitle)).setText(Utiles.getDateFormatDMAHMS().format(fecha));
+            } catch (Exception e) {
                 Log.d(this.getClass().getCanonicalName(), "Error al insertar subtitulo");
             }
         } else {
             getSupportActionBar().setSubtitle(null);
-            ((TextView)findViewById(R.id.tool_subtitle)).setText("");
+            ((TextView) findViewById(R.id.tool_subtitle)).setText("");
         }
     }
 
@@ -371,7 +387,7 @@ public class Activity_Logged extends Activity_Publicidad{
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    private void salir(){
+    private void salir() {
         UtilesDialog.createQuestionYesNo(this,
                 "Salir",
                 "¿ Desea salir de la aplicación ?",
@@ -393,8 +409,8 @@ public class Activity_Logged extends Activity_Publicidad{
 
     @Override
     public void siguiente() {
-        if((fragmentPublicidad instanceof FragmentFicheros || fragmentPublicidad instanceof FragmentDescargas) && BLSession.getInstance().getFichero() != null) {
-            if (BLSession.getInstance().getFichero().getExtension().equalsIgnoreCase("PDF")){
+        if ((fragmentPublicidad instanceof FragmentFicheros || fragmentPublicidad instanceof FragmentDescargas) && BLSession.getInstance().getFichero() != null) {
+            if (BLSession.getInstance().getFichero().getExtension().equalsIgnoreCase("PDF")) {
                 Intent i = new Intent(this, Activity_Pdf_View.class);
                 fragmentPublicidad.getActivity().startActivity(i);
             } else {
@@ -402,7 +418,7 @@ public class Activity_Logged extends Activity_Publicidad{
                 fragmentPublicidad.getActivity().startActivity(i);
             }
 
-            if(BLSession.getInstance().getFichero().getTamano() != null)
+            if (BLSession.getInstance().getFichero().getTamano() != null)
                 taskUtiles.visualizaciones(1);
 
         }
@@ -415,7 +431,7 @@ public class Activity_Logged extends Activity_Publicidad{
             salir();
         } else {
             super.onBackPressed();
-            if(LOG_OUT) onBackPressed();
+            if (LOG_OUT) onBackPressed();
         }
     }
 
@@ -466,7 +482,7 @@ public class Activity_Logged extends Activity_Publicidad{
         }
     }
 
-    public void mostrarPublicidad(FragmentAbstract fragmentPublicidad){
+    public void mostrarPublicidad(FragmentAbstract fragmentPublicidad) {
         this.fragmentPublicidad = fragmentPublicidad;
         mostrarPublicidad();
     }
@@ -475,5 +491,45 @@ public class Activity_Logged extends Activity_Publicidad{
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putCharSequence("title", mTitle);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Activity_Logged Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://bris.es.budolearning/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Activity_Logged Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://bris.es.budolearning/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }

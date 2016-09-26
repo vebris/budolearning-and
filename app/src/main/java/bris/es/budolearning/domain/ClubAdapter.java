@@ -12,9 +12,10 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
+
 import bris.es.budolearning.R;
-import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.task.TaskClub;
+import bris.es.budolearning.utiles.BLSession;
 
 public class ClubAdapter extends BaseAdapter {
 
@@ -53,6 +54,7 @@ public class ClubAdapter extends BaseAdapter {
         TextView email;
         TextView telefono;
         TextView web;
+        TextView profesor;
     }
 
     @Override
@@ -73,6 +75,7 @@ public class ClubAdapter extends BaseAdapter {
             holder.email = (TextView) convertView.findViewById(R.id.club_email);
             holder.telefono = (TextView) convertView.findViewById(R.id.club_telefono);
             holder.web = (TextView) convertView.findViewById(R.id.club_web);
+            holder.profesor= (TextView) convertView.findViewById(R.id.club_profesor);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -108,6 +111,11 @@ public class ClubAdapter extends BaseAdapter {
             holder.web.setText(rowItem.getWeb());
         } else {
             holder.web.setText("");
+        }
+        if(rowItem.getProfesor() != null && !rowItem.getProfesor().equalsIgnoreCase("null")) {
+            holder.profesor.setText(rowItem.getProfesor());
+        } else {
+            holder.profesor.setText("");
         }
 
 

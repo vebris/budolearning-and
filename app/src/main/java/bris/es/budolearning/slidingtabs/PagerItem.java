@@ -13,6 +13,7 @@ import bris.es.budolearning.fragments.FragmentDisciplinas;
 import bris.es.budolearning.fragments.FragmentEstadisticas;
 import bris.es.budolearning.fragments.FragmentFicheros;
 import bris.es.budolearning.fragments.FragmentGrados;
+import bris.es.budolearning.fragments.FragmentPagina;
 import bris.es.budolearning.fragments.FragmentPassword;
 import bris.es.budolearning.fragments.FragmentPuntos;
 import bris.es.budolearning.fragments.FragmentRecursos;
@@ -22,6 +23,7 @@ public class PagerItem implements Serializable{
     private final CharSequence mTitle;
     private final int mIndicatorColor;
     private final int mDividerColor;
+    private final CharSequence mUrl;
 
     public static int DEFAULT_INDICATOR_COLOR = Color.rgb(205,149,12);//Color.rgb(255,215,0);
     public static int DEFAULT_DIVIDER_COLOR = Color.DKGRAY;
@@ -31,6 +33,14 @@ public class PagerItem implements Serializable{
         mTitle = title;
         mIndicatorColor = DEFAULT_INDICATOR_COLOR;
         mDividerColor = DEFAULT_DIVIDER_COLOR;
+        mUrl = null;
+    }
+    public PagerItem(Class c, CharSequence title, CharSequence url) {
+        aClass = c;
+        mTitle = title;
+        mIndicatorColor = DEFAULT_INDICATOR_COLOR;
+        mDividerColor = DEFAULT_DIVIDER_COLOR;
+        mUrl = url;
     }
 
     /**
@@ -56,6 +66,9 @@ public class PagerItem implements Serializable{
             fragment = new FragmentPassword();
         } else if(aClass.equals(FragmentPuntos.class)) {
             fragment = new FragmentPuntos();
+        } else if(aClass.equals(FragmentPagina.class)) {
+            fragment = new FragmentPagina();
+            ((FragmentPagina)fragment).setUrl(mUrl.toString());
         }
         return fragment;
     }

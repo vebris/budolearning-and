@@ -35,6 +35,7 @@
     <!-- Nombres de los items -->
 
     <string-array name="menu_items_left">
+        <item>Historia</item>
         <item>Especial</item>
         <item>Disciplinas</item>
         <item>Articulos</item>
@@ -48,7 +49,8 @@
     </string-array>
     <!-- Iconos de los items -->
     <array name="menu_icons_left">
-        <item>@android:drawable/btn_star_big_on</item>              <!--Especial-->
+        <item>@android:drawable/ic_menu_recent_history</item>       <!--Historia-->
+        <item>@android:drawable/star_off</item>                     <!--Especial-->
         <item>@drawable/ic_menu_archive</item>                      <!--Disciplinas-->
         <item>@drawable/ic_menu_moreoverflow</item>                 <!--Articulos-->
         <item>@drawable/ic_menu_my_calendar</item>                  <!--Cursos-->
@@ -116,6 +118,7 @@
     <string name="club_email">E-mail</string>
     <string name="club_telefono">Teléfono</string>
     <string name="club_web">WEB</string>
+    <string name="club_profesor">Profesor</string>
 
     <!-- FRAGMENT CURSO -->
     <string name="curso_id">ID</string>
