@@ -1,30 +1,35 @@
 package bris.es.budolearning.domain;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 public class Club extends GenericObject {
 
-    String nombre;
-    String descripcion;
-    String direccion;
-    String localidad;
-    String email;
-    String telefono;
-    String web;
-    String profesor;
+    private String nombre;
+    private String descripcion;
+    private String direccion;
+    private String localidad;
+    private String email;
+    private String telefono;
+    private String web;
+    private String profesor;
+    private String gradoProfesor;
 
-    public Club(){};
+    public Club(){}
 
     public Club(JSONObject json) {
-        try {            setId(json.getInt("id"));        } catch (Exception e) {        }
-        try {            setNombre(json.getString("nombre"));        } catch (Exception e) {        }
-        try {            setDescripcion(json.getString("descripcion"));        } catch (Exception e) {        }
-        try {            setDireccion(json.getString("direccion"));        } catch (Exception e) {        }
-        try {            setLocalidad(json.getString("localidad"));        } catch (Exception e) {        }
-        try {            setEmail(json.getString("email"));        } catch (Exception e) {        }
-        try {            setTelefono(json.getString("telefono"));        } catch (Exception e) {        }
-        try {            setWeb(json.getString("web"));        } catch (Exception e) {        }
-        try {            setWeb(json.getString("profesor"));        } catch (Exception e) {        }
+        try {setId(json.getInt("id"));                          } catch (Exception e) {
+            Log.d(this.getClass().toString(),"Error parser id");}
+        try {setNombre(json.getString("nombre"));               } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser nombre");}
+        try {setDescripcion(json.getString("descripcion"));     } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser descripcion");}
+        try {setDireccion(json.getString("direccion"));         } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser direccion");}
+        try {setLocalidad(json.getString("localidad"));         } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser localidad");}
+        try {setEmail(json.getString("email"));                 } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser email");}
+        try {setTelefono(json.getString("telefono"));           } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser telefono");}
+        try {setWeb(json.getString("web"));                     } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser web");}
+        try {setProfesor(json.getString("profesor"));           } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser profesor");}
+        try {setGradoProfesor(json.getString("gradoProfesor")); } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser gradoProfesor");}
     }
 
     public String getNombre() {
@@ -75,4 +80,8 @@ public class Club extends GenericObject {
     public void setProfesor(String profesor) {
         this.profesor = profesor;
     }
+    public String getGradoProfesor() {
+        return gradoProfesor;
+    }
+    public void setGradoProfesor(String gradoProfesor) {this.gradoProfesor = gradoProfesor;}
 }

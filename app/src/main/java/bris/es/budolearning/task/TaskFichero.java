@@ -2,6 +2,7 @@ package bris.es.budolearning.task;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -11,7 +12,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,15 +26,16 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 
-import bris.es.budolearning.Activity_Mp4_View;
-import bris.es.budolearning.Activity_Pdf_View;
+import bris.es.budolearning.Activity_View_Mp4;
+import bris.es.budolearning.Activity_View_Pdf;
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Fichero;
-import bris.es.budolearning.domain.FicheroAdapter;
+import bris.es.budolearning.domain.Recurso;
+import bris.es.budolearning.domain.adapter.FicheroAdapter;
 import bris.es.budolearning.domain.Usuario;
+import bris.es.budolearning.domain.adapter.FicheroCustomRecyclerAdapter;
 import bris.es.budolearning.fragments.FDialog;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.fragments.FragmentFicheroDetalle;
@@ -66,14 +67,56 @@ public class TaskFichero extends TaskAbstract{
         this.view = view;
     }
 
+    public void listSinRecursos(Usuario usuario, Object filtro, final Object view) {
+        JsonPeticion peticion = new JsonPeticion();
+        peticion.setUser(new Usuario(usuario));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                url + "/listSinRecurso",
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        updateGeneric(jsonObject);
+
+                        mostrarList(jsonObject , view, null);
+
+                        onResponseFinished();
+                    }
+
+                    @Override
+                    protected void finalize() throws Throwable {
+                        super.finalize();
+                        onConnectionFinished();
+                    }
+
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Show Error message
+                UtilesDialog.createErrorMessage(activity, "ERROR", volleyError.getMessage());
+                Log.e("Error Response: ", volleyError.toString());
+                onConnectionFailed(volleyError.toString());
+            }
+        }
+        );
+        request.setShouldCache(true);
+        addToQueue(request, false);
+    }
+
     @Override
     public void list(Usuario usuario, Object filtro, final Object view) {
+        list(usuario, filtro, view, null);
+    }
+    public void list(Usuario usuario, Object filtro, final Object view, final FicheroCustomRecyclerAdapter.OnItemClickListener listener) {
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
         if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
-                mostrarList(new JSONObject(data), view, new Date(entry.serverDate));
+                mostrarList(new JSONObject(data), view, listener);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -83,13 +126,15 @@ public class TaskFichero extends TaskAbstract{
             peticion.setRecurso(filtro);
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                     url + LIST,
-                    Utiles.getGson().toJson(peticion),
+                    Utiles.getGson().toJson(peticion)
+                            .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                            .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject jsonObject) {
                             updateGeneric(jsonObject);
 
-                            mostrarList(jsonObject , view, new Date());
+                            mostrarList(jsonObject , view, listener);
 
                             onResponseFinished();
                         }
@@ -116,7 +161,7 @@ public class TaskFichero extends TaskAbstract{
         }
     }
 
-    private void mostrarList(JSONObject jsonObject, Object view, Date fecha) {
+    private void mostrarList(JSONObject jsonObject, Object view, FicheroCustomRecyclerAdapter.OnItemClickListener listener) {
         BLSession.getInstance().setFicheros(new ArrayList<Fichero>());
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -127,11 +172,16 @@ public class TaskFichero extends TaskAbstract{
         } catch (JSONException je) {
             Log.e("Error Response: ", je.toString(), je);
         }
-
-        FicheroAdapter adapter = new FicheroAdapter(
-                BLSession.getInstance().getFicheros(),
-                activity);
-        ((ListView) view).setAdapter(adapter);
+        if(view instanceof ListView) {
+            FicheroAdapter adapter = new FicheroAdapter(
+                    BLSession.getInstance().getFicheros(),
+                    activity, fragment);
+            ((ListView) view).setAdapter(adapter);
+        }
+        if (view instanceof RecyclerView){
+            FicheroCustomRecyclerAdapter adapter = new FicheroCustomRecyclerAdapter(BLSession.getInstance().getFicheros(), activity, fragment, null, listener);
+            ((RecyclerView)view).setAdapter(adapter);
+        }
     }
 
     @Override
@@ -139,10 +189,14 @@ public class TaskFichero extends TaskAbstract{
         JsonPeticion peticion = new JsonPeticion();
         peticion.setUser(new Usuario(usuario));
         peticion.setData(filtro);
+        peticion.setRecurso(BLSession.getInstance().getRecurso());
+
         // Define your request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url + SELECT,
-                Utiles.getGson().toJson(peticion),
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -165,7 +219,6 @@ public class TaskFichero extends TaskAbstract{
                                 .commit();
                         */
                         onResponseFinished();
-                        updateSubtitle(new Date());
                     }
                     @Override
                     protected void finalize() throws Throwable {
@@ -197,7 +250,9 @@ public class TaskFichero extends TaskAbstract{
         // Define your request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url + INSERT,
-                Utiles.getGson().toJson(peticion),
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -206,12 +261,56 @@ public class TaskFichero extends TaskAbstract{
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
                         onResponseFinished();
-                        updateSubtitle(new Date());
+                        activity.onBackPressed();
+                        Utiles.hideKeyboard();
+                    }
+                    @Override
+                    protected void finalize() throws Throwable {
+                        super.finalize();
+                        onConnectionFinished();
+                    }
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Show Error message
+                UtilesDialog.createErrorMessage(activity,"ERROR",volleyError.getMessage());
+                Log.e("Error Response: ", volleyError.toString());
+                onConnectionFailed(volleyError.toString());
+            }
+        }
+        );
+        request.setShouldCache(false);
+        addToQueue(request, false);
+    }
+
+    public void updateRecurso(Usuario usuario, Fichero fichero, Recurso recurso) {
+        JsonPeticion peticion = new JsonPeticion();
+        peticion.setUser(new Usuario(usuario));
+        peticion.setData(fichero);
+        peticion.setRecurso(recurso);
+        // Define your request
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                url + "/updateRecurso",
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        updateGeneric(jsonObject);
+
+                        try {
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        } catch (JSONException je) {
+                            Log.e("Error Response: ", je.toString(), je);
+                        }
+                        onResponseFinished();
                         activity.onBackPressed();
                         Utiles.hideKeyboard();
                     }
@@ -243,7 +342,9 @@ public class TaskFichero extends TaskAbstract{
         // Define your request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url + UPDATE,
-                Utiles.getGson().toJson(peticion),
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -252,12 +353,11 @@ public class TaskFichero extends TaskAbstract{
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
                         onResponseFinished();
-                        updateSubtitle(new Date());
                         activity.onBackPressed();
                         Utiles.hideKeyboard();
                     }
@@ -289,7 +389,9 @@ public class TaskFichero extends TaskAbstract{
         // Define your request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url + DELETE,
-                Utiles.getGson().toJson(peticion),
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -298,12 +400,11 @@ public class TaskFichero extends TaskAbstract{
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
                         onResponseFinished();
-                        updateSubtitle(new Date());
                         activity.onBackPressed();
                         Utiles.hideKeyboard();
                     }
@@ -389,11 +490,11 @@ public class TaskFichero extends TaskAbstract{
 
     private void verDocumento(Object elemento, File fichero, TaskUtiles taskUtiles, int coste){
         if (((Fichero) elemento).getExtension().equalsIgnoreCase("PDF")){
-            Intent i = new Intent(activity, Activity_Pdf_View.class);
+            Intent i = new Intent(activity, Activity_View_Pdf.class);
             fragment.getActivity().startActivity(i);
             if(taskUtiles != null) taskUtiles.visualizaciones(coste);
         } else {
-            Intent i = new Intent(activity, Activity_Mp4_View.class);
+            Intent i = new Intent(activity, Activity_View_Mp4.class);
             fragment.getActivity().startActivity(i);
             if(taskUtiles != null) taskUtiles.visualizaciones(coste);
             /*
@@ -445,7 +546,13 @@ public class TaskFichero extends TaskAbstract{
 
     public void uploadFile(Usuario usuario, Object elemento, File fichero){
         String urlUploadFile = url + UPLOAD_FILE;// + "/" + usuario.getId()+"/"+((Curso)elemento).getId();
-        String nombreFichero = "Fichero_" + usuario.getId() + "_" + ((Fichero)elemento).getId() + fichero.getName().substring(fichero.getName().indexOf('.'));
+        String nombreFichero = "";
+        if(elemento != null){
+            nombreFichero = "Fichero_" + usuario.getId() + "_" + ((Fichero)elemento).getId() + fichero.getName().substring(fichero.getName().indexOf('.'));
+        } else {
+            nombreFichero = "Fichero_" + usuario.getId() + "_" + 0 + fichero.getName().substring(fichero.getName().indexOf('.'));
+        }
+
         VolleyRequestMultipart request = new VolleyRequestMultipart(
                 urlUploadFile,
                 new Response.ErrorListener() {

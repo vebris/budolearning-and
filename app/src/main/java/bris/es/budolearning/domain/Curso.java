@@ -1,29 +1,31 @@
 package bris.es.budolearning.domain;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import java.util.Date;
 
 public class Curso extends GenericObject {
 
-    String nombre;
-    String descripcion;
-    String direccion;
-    String profesor;
-    String precios;
-    Date inicio;
-    Date fin;
+    private String nombre;
+    private String descripcion;
+    private String direccion;
+    private String profesor;
+    private String precios;
+    private Date inicio;
+    private Date fin;
 
     public Curso(){}
     public Curso(JSONObject json) {
-        try {            setId(json.getInt("id"));        } catch (Exception e) {        }
-        try {            setNombre(json.getString("nombre"));        } catch (Exception e) {        }
-        try {            setDescripcion(json.getString("descripcion"));        } catch (Exception e) {        }
-        try {            setDireccion(json.getString("direccion"));        } catch (Exception e) {        }
-        try {            setProfesor(json.getString("profesor"));        } catch (Exception e) {        }
-        try {            setPrecios(json.getString("precios"));        } catch (Exception e) {        }
-        try {            setInicio(new Date(json.getLong("inicio")));        } catch (Exception e) {        }
-        try {            setFin(new Date(json.getLong("fin")));        } catch (Exception e) {        }
+        try {setId(json.getInt("id"));                      } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser id");}
+        try {setNombre(json.getString("nombre"));           } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser nombre");}
+        try {setDescripcion(json.getString("descripcion")); } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser descripcion");}
+        try {setDireccion(json.getString("direccion"));     } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser direccion");}
+        try {setProfesor(json.getString("profesor"));       } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser profesor");}
+        try {setPrecios(json.getString("precios"));         } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser precios");}
+        try {setInicio(new Date(json.getLong("inicio")));   } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser inicio");}
+        try {setFin(new Date(json.getLong("fin")));         } catch (Exception e) {Log.d(this.getClass().toString(),"Error parser fin");}
     }
 
     public String getNombre() {

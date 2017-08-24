@@ -80,7 +80,8 @@ public class FragmentArticulos extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_recargar_anadir, menu);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, true, false, false, true, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -88,13 +89,13 @@ public class FragmentArticulos extends FragmentAbstract {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.menu_nuevo:
+            case R.id.btn_menu_nuevo:
                 BLSession.getInstance().setArticulo(new Articulo());
                 getFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentArticuloDetalle())
                         .addToBackStack(this.getClass().getName()).commit();
                 return true;
-            case R.id.menu_recargar:
+            case R.id.btn_menu_recargar:
                 Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                 cache.remove("1:" + taskArticulo.getUrl() + TaskAbstract.LIST);
                 taskArticulo.list(BLSession.getInstance().getUsuario(), null, mArticulosDescargadosView);

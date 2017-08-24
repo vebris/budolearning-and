@@ -1,9 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="bris.es.budolearning.Activity_Usuario_Registrar">
-
-    <item android:id="@+id/registrar_usuarioBtnGuardar" android:title="@string/action_registrar_usuario"
-        android:icon="@android:drawable/ic_menu_save"
-        android:orderInCategory="90" app:showAsAction="always" />
-</menu>

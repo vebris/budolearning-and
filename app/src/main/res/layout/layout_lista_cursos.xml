@@ -13,13 +13,14 @@
 
         <ImageView
             android:id="@+id/curso_id"
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="8dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary_dark"
+            android:contentDescription="@string/imagen"
             />
 
         <!-- Title -->
@@ -33,9 +34,9 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.7"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/titulo1"
+                android:textSize="@dimen/titulo"
                 android:textStyle="bold"
-                android:textColor="@color/color_text_darkgrey"/>
+                android:textColor="@color/primary_dark"/>
         </LinearLayout>
         <TextView
             android:id="@+id/curso_descripcion"
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/titulo3"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary_text"
             android:layout_marginTop="1dip" />
         <TextView
             android:id="@+id/curso_profesor"
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/titulo3"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary_text"
             android:layout_marginTop="1dip" />
         <TextView
             android:id="@+id/curso_direccion"
@@ -62,7 +63,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/titulo3"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary_text"
             android:layout_marginTop="1dip" />
         <TextView
             android:id="@+id/curso_precio"
@@ -71,7 +72,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/titulo3"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary_text"
             android:layout_marginTop="1dip"
             />
         <TextView
@@ -79,18 +80,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:textSize="@dimen/tituloDerecha"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary_dark"
             />
         <TextView
             android:id="@+id/curso_fin"
             android:layout_below="@+id/curso_inicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:textSize="@dimen/tituloDerecha"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary_dark"
             />
     </RelativeLayout>
 </LinearLayout>

@@ -20,6 +20,7 @@ import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Fichero;
 import bris.es.budolearning.task.TaskFichero;
 import bris.es.budolearning.task.TaskUtiles;
+import bris.es.budolearning.task.TaskVideoEspecial;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
@@ -28,6 +29,7 @@ public class FragmentFicheros extends FragmentAbstract {
 
     private TaskUtiles taskUtiles;
     private TaskFichero taskFichero;
+    private TaskVideoEspecial taskVideoEspecial;
     private FragmentFicheros este;
 
     @Override
@@ -38,14 +40,17 @@ public class FragmentFicheros extends FragmentAbstract {
 
         taskUtiles = new TaskUtiles(getActivity(), this);
         taskFichero = new TaskFichero(getActivity(), this);
+        taskVideoEspecial = new TaskVideoEspecial(getActivity(), this);
 
         ListView mDisciplinaView = (ListView) view.findViewById(R.id.ficheroListView);
+        /*
         mDisciplinaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, final int posicion, long arg3) {
                 mostrarFichero(posicion);
             }
         });
+        */
 
         if(Utiles.esSoloAdmin()) {
             mDisciplinaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -99,11 +104,8 @@ public class FragmentFicheros extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (Utiles.esSoloAdmin()) {
-            inflater.inflate(R.menu.menu_ficheros_admin, menu);
-        } else {
-            inflater.inflate(R.menu.menu_ficheros, menu);
-        }
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, true, true, Utiles.esSoloAdmin(), false, false, true, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -111,11 +113,37 @@ public class FragmentFicheros extends FragmentAbstract {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.menu_nuevo:
+            case R.id.btn_menu_upload:
+                BLSession.getInstance().setFichero(null);
+                UtilesDialog.createQuestionYesNo(getActivity(),
+                        "COMPARTIR FICHEROS",
+                        getString(R.string.fichero_subida),
+                        "Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                                intent.setType("video/mp4");
+                                intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"video/mp4", "application/pdf"});
+
+                                getActivity().startActivityForResult(Intent.createChooser(intent, getActivity().getResources().getString(R.string.select_archive)), FragmentAbstract.CHOOSER_VIDEO);
+                            }
+                        },
+                        "Cancelar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                dialogo1.dismiss();
+                            }
+                        }
+                ).show();
+                return true;
+            case R.id.btn_menu_extra_video:
+                taskVideoEspecial.listUsuario(BLSession.getInstance().getUsuario(), null, getActivity());
+                return true;
+            case R.id.btn_menu_nuevo:
                 BLSession.getInstance().setFichero(null);
                 taskFichero.select(BLSession.getInstance().getUsuario(), BLSession.getInstance().getFichero());
                 return true;
-            case R.id.menu_recargar:
+            case R.id.btn_menu_recargar:
                 taskFichero.borrarList();
                 taskFichero.list(BLSession.getInstance().getUsuario(), BLSession.getInstance().getRecurso(), getView().findViewById(R.id.ficheroListView));
                 return true;

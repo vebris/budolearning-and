@@ -7,13 +7,16 @@
 
     <ImageView
         android:id="@+id/alumno_id"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/color_text_darkgrey"
+        android:textColor="@color/primary"
+        android:contentDescription="@string/imagen"
         />
     <TextView
         android:id="@+id/alumno_nombre"
@@ -21,7 +24,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/titulo1"
         android:textStyle="bold"
-        android:textColor="@color/color_text_darkgrey"
+        android:textColor="@color/primary"
         android:layout_marginTop="1dip" />
     <TextView
         android:id="@+id/alumno_email"
@@ -30,7 +33,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/titulo3"
         android:textStyle="bold"
-        android:textColor="@color/color_text_darkgrey"
+        android:textColor="@color/primary"
         android:layout_marginTop="1dip" />
     <TextView
         android:id="@+id/alumno_telefono"
@@ -39,28 +42,32 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/titulo3"
         android:textStyle="bold"
-        android:textColor="@color/color_text_darkgrey"
+        android:textColor="@color/primary"
         android:layout_marginTop="1dip" />
     <TextView
         android:id="@+id/alumno_activo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:textStyle="bold"
         android:textSize="@dimen/tituloDerecha"
-        android:textColor="@color/color_text_darkgrey"
+        android:textColor="@color/primary"
+        android:layout_toEndOf="@+id/alumno_telefono"
+        android:layout_toRightOf="@+id/alumno_telefono"
         />
     <TextView
         android:id="@+id/alumno_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="false"
         android:layout_below="@+id/alumno_activo"
         android:textStyle="bold"
         android:textSize="@dimen/tituloDerecha"
-        android:textColor="@color/color_text_darkgrey"
+        android:textColor="@color/primary"
         />
     <TextView
         android:id="@+id/alumno_puntos"
@@ -68,10 +75,11 @@
         style="@style/ToolbarPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:textSize="@dimen/tituloDerecha"
-        android:textColor="@color/color_text_ligthblack"
+        android:textColor="@color/primary_dark"
         android:background="@drawable/shape_gold"
         />
     <!--

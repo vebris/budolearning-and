@@ -2,14 +2,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="CONECTIVIDAD" >
-        <ListPreference
+        <Preference
             android:key="preferences_download_redes"
-            android:title="@string/pref_download_descargas"
             android:defaultValue="0"
             android:entries="@array/pref_download_list_titles"
             android:entryValues="@array/pref_download_list_values"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
+            android:maxLines="1"
+            android:title="@string/pref_download_descargas"
+            android:summary=" "
+
             />
     </PreferenceCategory>
 

@@ -1,60 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
     style="@style/item_list"
     android:weightSum="1"
-    android:id="@+id/linearlayout_idFichero"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:id="@+id/linearlayout_video_especial"
     >
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_weight=".17"
+        android:layout_weight="0"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        >
+        android:gravity="top|start">
         <ImageView
             android:id="@+id/fichero_especial_id"
+            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            android:contentDescription="@string/imagen"
             />
-        <TextView
-            android:id="@+id/fichero_especial_tamano"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/tituloDerecha"
-            android:textColor="@color/color_text_darkgrey"
-            android:layout_below="@+id/fichero_especial_id"
-            android:gravity="center"/>
     </LinearLayout>
+
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_weight=".83"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:id="@+id/linearlayout_video_especial"
-        >
+        android:gravity="top|end">
         <TextView
             android:id="@+id/fichero_especial_fichero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/titulo1"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             android:layout_marginTop="1dip" />
-
         <TextView
             android:id="@+id/fichero_especial_club"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/titulo2"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             android:layout_marginTop="1dip" />
 
         <TextView
@@ -62,45 +53,118 @@
             android:layout_width="match_parent"
             android:textSize="@dimen/titulo2"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             android:layout_marginTop="1dip"
             android:layout_height="wrap_content" />
-        <TableLayout
-            android:gravity="left"
-            android:layout_height="wrap_content"
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/fichero_especial_fecha"
+                android:layout_width="0dp"
+                android:layout_weight=".35"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titulo4"
+                android:textColor="@color/primary_dark"
+                android:drawableStart="@android:drawable/stat_notify_more"
+                android:drawableLeft="@android:drawable/stat_notify_more"
+                android:drawablePadding="5dp"
+                android:textStyle="bold"
+                android:textIsSelectable="false" />
+            <TextView
+                android:id="@+id/fichero_especial_tamano"
+                android:layout_width="0dp"
+                android:layout_weight=".32"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titulo4"
+                android:textColor="@color/primary_dark"
+                android:drawableStart="@android:drawable/stat_notify_sdcard"
+                android:drawableLeft="@android:drawable/stat_notify_sdcard"
+                android:drawablePadding="5dp"
+                android:textStyle="bold"
+                android:textIsSelectable="false" />
+
+            <TextView
+                android:id="@+id/fichero_especial_segundos"
+                android:layout_width="0dp"
+                android:layout_weight=".32"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titulo4"
+                android:textColor="@color/primary_dark"
+                android:drawableStart="@android:drawable/stat_notify_voicemail"
+                android:drawableLeft="@android:drawable/stat_notify_voicemail"
+                android:drawablePadding="5dp"
+                android:textStyle="bold"
+                android:textIsSelectable="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
             android:weightSum="1"
-            style="@style/item_list"
             >
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal">
-
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight=".8"
+                android:layout_height="wrap_content"
+                style="@style/item_list_med"
+                android:weightSum="1">
                 <TextView
                     android:id="@+id/fichero_especial_inicio"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:textSize="@dimen/titulo3"
                     android:textStyle="bold"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="0"
-                    android:gravity="center"/>
+                    android:textColor="@color/primary"
+                    />
 
                 <TextView
                     android:id="@+id/fichero_especial_fin"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:textSize="@dimen/titulo3"
                     android:textStyle="bold"
-                    android:textColor="@color/color_text_darkgrey"
-                    android:layout_column="1"
-                    android:gravity="center"/>
-            </TableRow>
+                    android:textColor="@color/primary"
+                    />
+            </LinearLayout>
 
-        </TableLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_weight=".20"
+                android:layout_height="wrap_content"
+                android:gravity="top|end">
+                <ImageView
+                    android:id="@+id/fichero_especial_salvar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_save"
+                    android:contentDescription="@string/salvar"
+                    />
+                <ImageView
+                    android:id="@+id/fichero_especial_ver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_media_play"
+                    android:contentDescription="@string/ver"
+                    />
+                <ImageView
+                    android:id="@+id/fichero_especial_borrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_menu_delete"
+                    android:contentDescription="@string/borrar"
+                    />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

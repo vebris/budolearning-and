@@ -33,7 +33,7 @@ public class FragmentTabsPagina extends FragmentAbstract {
             }
         }
 
-        pagerItems = new ArrayList<>();
+        pagerItems = new ArrayList<PagerItem>();
         pagerItems.add(new PagerItem(FragmentPagina.class, "Origenes","http://www.budolearning.es/#!Origenes"));
         pagerItems.add(new PagerItem(FragmentPagina.class, "Escuelas","http://www.budolearning.es/#!Escuelas"));
         pagerItems.add(new PagerItem(FragmentPagina.class, "Maestros","http://www.budolearning.es/#!Maestros"));

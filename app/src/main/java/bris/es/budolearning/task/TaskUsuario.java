@@ -27,7 +27,7 @@ import bris.es.budolearning.Activity_Login;
 import bris.es.budolearning.R;
 import bris.es.budolearning.asyncTask.TaskLimpieza;
 import bris.es.budolearning.domain.Usuario;
-import bris.es.budolearning.domain.UsuarioAdapter;
+import bris.es.budolearning.domain.adapter.UsuarioAdapter;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.fragments.FragmentAlumnoGrado;
 import bris.es.budolearning.fragments.FragmentAlumnos;
@@ -110,7 +110,7 @@ public class TaskUsuario extends TaskAbstract{
                                 BLSession.getInstance().setDisciplinas(usuario.getDisciplinas());
 
                                 onResponseFinished();
-                                updateSubtitle(new Date());
+                                
                             } else {
                                 UtilesDialog.createErrorMessage(activity, "ERROR", jsonObject.getString("msg")).show();
                             }
@@ -151,19 +151,14 @@ public class TaskUsuario extends TaskAbstract{
             BLSession.getInstance().setUsuario(usuario);
             BLSession.getInstance().setIdUser(usuario.getId());
             ((FragmentDisciplinas) fragment).recargar();
-            updateSubtitle(fecha);
         } else if (fragment instanceof FragmentGrados) {
             ((FragmentGrados) fragment).recargar();
-            updateSubtitle(fecha);
         } else if (fragment instanceof FragmentRecursos) {
             ((FragmentRecursos) fragment).recargar();
-            updateSubtitle(fecha);
         } else if (fragment instanceof FragmentFicheros) {
             ((FragmentFicheros) fragment).recargar();
-            updateSubtitle(fecha);
         } else if (fragment instanceof FragmentAlumnoGrado){
             ((FragmentAlumnoGrado) fragment).refrescar(usuario, BLSession.getInstance().getUsuario());
-            updateSubtitle(fecha);
         }
     }
 
@@ -182,7 +177,7 @@ public class TaskUsuario extends TaskAbstract{
                         updateGeneric(jsonObject);
 
                         try {
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg"));
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg"));
                         } catch (JSONException je) {
                             UtilesDialog.createErrorMessage(activity, "ERROR", "Error al activar el usuario.");
                         }
@@ -222,7 +217,7 @@ public class TaskUsuario extends TaskAbstract{
                         updateGeneric(jsonObject);
 
                         try {
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg"));
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg"));
                         } catch (JSONException je) {
                             UtilesDialog.createErrorMessage(activity, "ERROR", "Error al crear el usuario. Pruebe con un login diferente");
                         }
@@ -265,7 +260,7 @@ public class TaskUsuario extends TaskAbstract{
 
                         try {
                             if(jsonObject.getBoolean("success")){
-                                UtilesDialog.createAlertMessage(activity,"OK",jsonObject.getString("msg")).show();
+                                UtilesDialog.createInfoMessage(activity,"OK",jsonObject.getString("msg")).show();
                                 onResponseFinished();
 
                                 select(usuario, filtro);
@@ -323,7 +318,6 @@ public class TaskUsuario extends TaskAbstract{
 
                             onResponseFinished();
                             mostrarList(jsonObject, view, new Date());
-                            updateSubtitle(new Date());
                         }
 
                         @Override
@@ -350,7 +344,7 @@ public class TaskUsuario extends TaskAbstract{
 
     private void mostrarList(JSONObject jsonObject, Object view, Date fecha) {
         BLSession.getInstance().setAlumnos(new ArrayList<Usuario>());
-        List<String> txtAlumno = new ArrayList<>();
+        List<String> txtAlumno = new ArrayList<String>();
         int elegido = 0;
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -365,7 +359,7 @@ public class TaskUsuario extends TaskAbstract{
             Log.e("Error Response: ", je.toString(), je);
         }
         if(view instanceof Spinner) {
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, txtAlumno);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, txtAlumno);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             ((Spinner) view).setAdapter(dataAdapter);
             ((Spinner) view).setSelection(elegido);
@@ -375,7 +369,6 @@ public class TaskUsuario extends TaskAbstract{
                     BLSession.getInstance().getAlumnos(),
                     activity);
             ((ListView)view).setAdapter(adapter);
-            updateSubtitle(fecha);
         }
     }
 
@@ -417,7 +410,6 @@ public class TaskUsuario extends TaskAbstract{
                         }
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
                 }
                 @Override
                 protected void finalize() throws Throwable {
@@ -454,12 +446,11 @@ public class TaskUsuario extends TaskAbstract{
                     updateGeneric(jsonObject);
 
                     try {
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         UtilesDialog.createErrorMessage(activity, "ERROR", "Error al insertar usuario");
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
                     Utiles.hideKeyboard();
                 }
                 @Override
@@ -501,12 +492,11 @@ public class TaskUsuario extends TaskAbstract{
                         if(usuario.getId() == ((Usuario)elemento).getId()) {
                             login(usuario.getLogin(), usuario.getPassword());
                         }
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         UtilesDialog.createErrorMessage(activity, "ERROR", "Error al modificar el usuario");
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
 
                     Utiles.hideKeyboard();
                 }
@@ -546,12 +536,11 @@ public class TaskUsuario extends TaskAbstract{
 
                     BLSession.getInstance().setAlumnos(new ArrayList<Usuario>());
                     try {
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg"));
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg"));
                     } catch (JSONException je) {
                         UtilesDialog.createErrorMessage(activity, "ERROR", "Error al borrar usuario.");
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
                     Utiles.hideKeyboard();
                 }
                 @Override

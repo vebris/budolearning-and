@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Disciplina extends GenericObject{
 
-    String nombre;
-    String descripcion;
-    List<Grado> grados;
+    private String nombre;
+    private String descripcion;
+    private List<Grado> grados;
 
     public Disciplina(){}
     public Disciplina(JSONObject json, boolean completo) {
@@ -43,8 +43,8 @@ public class Disciplina extends GenericObject{
         return grados;
     }
 
-    public void setGrados(JSONArray grados, boolean completo) {
-        this.grados = new ArrayList<>();
+    private void setGrados(JSONArray grados, boolean completo) {
+        this.grados = new ArrayList<Grado>();
         for(int i=0;i<grados.length();i++){
             try{
                 this.grados.add(new Grado(grados.getJSONObject(i), completo));

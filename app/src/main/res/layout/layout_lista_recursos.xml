@@ -1,79 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
     style="@style/item_list"
     android:weightSum="1"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
     >
-
-    <TextView
-        android:id="@+id/recurso_id"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="0dp"
         android:layout_weight=".12"
         android:layout_height="wrap_content"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        android:textColor="@color/color_text_darkgrey"
-        android:gravity="center" />
-
+        android:gravity="top|start">
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/recurso_img"
+            android:layout_marginEnd="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <TextView
+            android:id="@+id/recurso_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_dark"
+            android:gravity="center" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_weight=".88"
-        android:layout_height="match_parent"
-        android:gravity="center|left|center_horizontal|center_vertical">
+        android:layout_weight=".85"
+        android:layout_height="wrap_content"
+        android:gravity="top|end">
+
+        <TextView
+            android:id="@+id/recurso_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/titulo1"
+            android:textStyle="bold"
+            android:textColor="@color/primary_dark"
+            android:layout_marginTop="1dip" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/recurso_nombre"
-                android:layout_width="0dp"
-                android:layout_weight=".7"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/titulo1"
-                android:textStyle="bold"
-                android:textColor="@color/color_text_darkgrey"
-                android:layout_marginTop="1dip"
-                android:autoText="false" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_nuevo"
-                android:id="@+id/recurso_nuevo" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             >
             <TextView
                 android:id="@+id/recurso_tipo"
                 android:layout_width="0dp"
                 android:layout_weight=".7"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/recurso_nombre"
-                android:layout_toRightOf="@+id/recurso_id"
+                android:layout_height="match_parent"
                 android:layout_marginTop="1dip"
                 android:textSize="@dimen/titulo2"
-                android:textColor="@color/color_text_darkgrey"
-                android:gravity="left"
+                android:textStyle="bold"
+                android:textColor="@color/primary_dark"
+                android:gravity="start"
                 />
             <TextView
                 android:id="@+id/recurso_enPrograma"
                 android:layout_width="0dp"
                 android:layout_weight=".3"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textSize="@dimen/tituloDerecha"
-                android:textColor="@color/color_text_darkgrey"
-                android:layout_below="@id/recurso_tipo"
-                android:gravity="right"
+                android:textColor="@color/primary_dark"
+                android:gravity="end|center_vertical"
                 />
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

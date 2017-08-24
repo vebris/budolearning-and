@@ -53,8 +53,8 @@ public class Grado extends GenericObject{
         }
         return null;
     }
-    public void setRecursos(JSONArray recursos) {
-        this.recursos = new ArrayList<>();
+    private void setRecursos(JSONArray recursos) {
+        this.recursos = new ArrayList<Recurso>();
         for(int i=0;i<recursos.length();i++){
             try{
                 this.recursos.add(new Recurso(recursos.getJSONObject(i)));

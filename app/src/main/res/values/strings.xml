@@ -14,6 +14,10 @@
     <string name="drawer_open">Menú Abierto</string>
     <string name="drawer_close">Menú Cerrado</string>
 
+    <string name="salvar">Salvar</string>
+    <string name="ver">Ver</string>
+    <string name="borrar">Borrar</string>
+
     <!-- Login -->
     <string name="prompt_email">Login</string>
     <string name="prompt_password">Contraseña</string>
@@ -31,13 +35,32 @@
     <string name="desconectado">Desconectado</string>
     <string name="conectado">Conectado</string>
 
+    <!-- Botones de Menu -->
+    <string name="btn_menu_upload">Subir Fichero</string>
+    <string name="btn_menu_video_extra">Otros Videos</string>
+    <string name="btn_menu_nuevo">Nuevo</string>
+    <string name="btn_menu_activar">Activar</string>
+    <string name="btn_menu_guardar">Guardar</string>
+    <string name="btn_menu_recargar">Recargar</string>
+    <string name="btn_menu_atras">Atrás</string>
+
+    <string name="select_archive">Seleccione un archivo</string>
+    <string name="fichero_subida">
+        &lt;b>TIPOS DE FICHEROS&lt;/b>&lt;br/>&lt;br/>
+        * MP4 para vídeos.&lt;br/>
+        * PDF para textos.&lt;br/>&lt;br/>
+        &lt;b>REGLAS PARA COMPARTIR&lt;/b>&lt;br/>&lt;br/>
+        * No comparta documentos sujetos a derechos de propiedad intelectual de terceros&lt;br/>
+        * No comparta documentos sin las licencias y derechos o en su caso los consentimientos y permisos de los autores.&lt;br/>
+    </string>
+
     <!-- Menu -->
     <!-- Nombres de los items -->
-
     <string-array name="menu_items_left">
         <item>Historia</item>
         <item>Especial</item>
-        <item>Disciplinas</item>
+        <item>Ficheros Nuevos</item>
+        <item>Programas</item>
         <item>Articulos</item>
         <item>Cursos</item>
         <item>Club</item>
@@ -51,13 +74,14 @@
     <array name="menu_icons_left">
         <item>@android:drawable/ic_menu_recent_history</item>       <!--Historia-->
         <item>@android:drawable/star_off</item>                     <!--Especial-->
-        <item>@drawable/ic_menu_archive</item>                      <!--Disciplinas-->
-        <item>@drawable/ic_menu_moreoverflow</item>                 <!--Articulos-->
-        <item>@drawable/ic_menu_my_calendar</item>                  <!--Cursos-->
-        <item>@drawable/ic_menu_myplaces</item>                     <!--Clubes-->
-        <item>@drawable/ic_menu_allfriends</item>                   <!--Alumnos-->
-        <item>@drawable/ic_menu_attachment</item>                   <!--Descargas-->
-        <item>@drawable/ic_menu_friendslist</item>                  <!--Mis Datos-->
+        <item>@android:drawable/ic_menu_add</item>                  <!--listSinRecurso-->
+        <item>@android:drawable/ic_menu_slideshow</item>            <!--Disciplinas-->
+        <item>@android:drawable/ic_menu_agenda</item>               <!--Articulos-->
+        <item>@android:drawable/ic_menu_my_calendar</item>          <!--Cursos-->
+        <item>@android:drawable/ic_menu_myplaces</item>             <!--Clubes-->
+        <item>@android:drawable/ic_menu_sort_alphabetically</item>  <!--Alumnos-->
+        <item>@android:drawable/ic_menu_manage</item>               <!--Descargas-->
+        <item>@android:drawable/ic_menu_info_details</item>         <!--Mis Datos-->
         <item>@android:drawable/ic_menu_preferences</item>          <!--Preferencias-->
         <item>@android:drawable/ic_menu_close_clear_cancel</item>   <!--Salir-->
     </array>
@@ -84,6 +108,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="imagen">Imagen</string>
+    <string name="texto_ok">Ok</string>
 
     <string name="select_video_mp4">Seleccione un archivo</string>
 

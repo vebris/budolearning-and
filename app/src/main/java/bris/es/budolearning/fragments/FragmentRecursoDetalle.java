@@ -21,6 +21,7 @@ import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Tipo;
 import bris.es.budolearning.task.TaskRecurso;
 import bris.es.budolearning.utiles.BLSession;
+import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
 
 public class FragmentRecursoDetalle extends FragmentAbstract {
@@ -45,13 +46,13 @@ public class FragmentRecursoDetalle extends FragmentAbstract {
 
         recursoId.setText(String.valueOf(BLSession.getInstance().getRecurso().getId()));
         recursoNombre.setText(BLSession.getInstance().getRecurso().getNombre());
-        List<String> txtTipos = new ArrayList<>();
+        List<String> txtTipos = new ArrayList<String>();
         txtTipos.add("HOJOUNDO");
         txtTipos.add("KATA");
         txtTipos.add("KUMI HOJOUNDO");
         txtTipos.add("KUMIWAZA");
         txtTipos.add("KATA OYO");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, txtTipos);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, txtTipos);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         recursoTipo.setAdapter(dataAdapter);
         if(BLSession.getInstance().getRecurso().getTipo() != null) {
@@ -67,7 +68,7 @@ public class FragmentRecursoDetalle extends FragmentAbstract {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.registrar_usuarioBtnActivar:
+            case R.id.btn_menu_activar:
                 UtilesDialog.createQuestionYesNo(getActivity(),
                         "BORRAR",
                         "¿ Está seguro de eliminar el Recurso ?",
@@ -85,7 +86,7 @@ public class FragmentRecursoDetalle extends FragmentAbstract {
                 ).show();
 
                 return true;
-            case R.id.registrar_usuarioBtnGuardar:
+            case R.id.btn_menu_guardar:
                 BLSession.getInstance().getRecurso().setId(Integer.parseInt(recursoId.getText().toString()));
                 BLSession.getInstance().getRecurso().setNombre(recursoNombre.getText().toString());
                 BLSession.getInstance().getRecurso().setTipo(new Tipo(recursoTipo.getSelectedItem().toString()));
@@ -104,8 +105,9 @@ public class FragmentRecursoDetalle extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_guardar_borrar, menu);
-        menu.findItem(R.id.registrar_usuarioBtnActivar).setIcon(android.R.drawable.ic_delete);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, true, true, false, false);
+        menu.findItem(R.id.btn_menu_activar).setIcon(android.R.drawable.ic_delete);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

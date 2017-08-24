@@ -1,6 +1,7 @@
 package bris.es.budolearning.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,9 +14,12 @@ import android.widget.ListView;
 
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Recurso;
+import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.slidingtabs.PagerItem;
+import bris.es.budolearning.task.JsonPeticion;
 import bris.es.budolearning.task.TaskFichero;
 import bris.es.budolearning.task.TaskRecurso;
+import bris.es.budolearning.task.TaskVideoEspecial;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
@@ -23,6 +27,7 @@ import bris.es.budolearning.utiles.UtilesDialog;
 public class FragmentRecursos extends FragmentAbstract {
 
     private TaskRecurso taskRecurso;
+    private TaskVideoEspecial taskVideoEspecial;
     private FragmentRecursos este;
 
     @Override
@@ -31,6 +36,7 @@ public class FragmentRecursos extends FragmentAbstract {
         View view = inflater.inflate(R.layout.fragment_recursos, container, false);
         este = this;
         taskRecurso = new TaskRecurso(getActivity(), this);
+        taskVideoEspecial = new TaskVideoEspecial(getActivity(), this);
 
         ListView mRecursoView = (ListView) view.findViewById(R.id.recursoListView);
         mRecursoView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -90,11 +96,8 @@ public class FragmentRecursos extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (Utiles.esSoloAdmin()) {
-            inflater.inflate(R.menu.menu_recargar_anadir, menu);
-        } else {
-            inflater.inflate(R.menu.menu_recargar, menu);
-        }
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, true, false, Utiles.esSoloAdmin(), false, false, true, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -102,13 +105,39 @@ public class FragmentRecursos extends FragmentAbstract {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.menu_nuevo:
+            case R.id.btn_menu_upload:
+                BLSession.getInstance().setFichero(null);
+                UtilesDialog.createQuestionYesNo(getActivity(),
+                        "COMPARTIR FICHEROS",
+                        getString(R.string.fichero_subida),
+                        "Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                                intent.setType("video/mp4");
+                                intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"video/mp4", "application/pdf"});
+
+                                getActivity().startActivityForResult(Intent.createChooser(intent, getActivity().getResources().getString(R.string.select_archive)), FragmentAbstract.CHOOSER_VIDEO);
+                            }
+                        },
+                        "Cancelar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                dialogo1.dismiss();
+                            }
+                        }
+                ).show();
+                return true;
+            case R.id.btn_menu_extra_video:
+                taskVideoEspecial.listUsuario(BLSession.getInstance().getUsuario(), null, getActivity());
+                return true;
+            case R.id.btn_menu_nuevo:
                 BLSession.getInstance().setRecurso(new Recurso());
                 taskRecurso.select(BLSession.getInstance().getUsuario(), BLSession.getInstance().getRecurso());
                 return true;
-            case R.id.menu_recargar:
+            case R.id.btn_menu_recargar:
                 taskRecurso.borrarList();
-                taskRecurso.list(BLSession.getInstance().getUsuario(), BLSession.getInstance().getDisciplina(), BLSession.getInstance().getGrado(), getView().findViewById(R.id.recursoListView));
+               recargar();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -116,6 +145,10 @@ public class FragmentRecursos extends FragmentAbstract {
     }
 
     public void recargar(){
-        taskRecurso.list(BLSession.getInstance().getUsuario(), BLSession.getInstance().getDisciplina(), BLSession.getInstance().getGrado(), getView().findViewById(R.id.recursoListView));
+        JsonPeticion peticion = new JsonPeticion();
+        peticion.setUser(new Usuario(BLSession.getInstance().getUsuario()));
+        peticion.setDisciplina(BLSession.getInstance().getDisciplina());
+        peticion.setGrado(BLSession.getInstance().getGrado());
+        taskRecurso.list(BLSession.getInstance().getUsuario(), peticion, getView().findViewById(R.id.recursoListView));
     }
 }

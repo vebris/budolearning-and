@@ -33,7 +33,7 @@ public class FragmentTabsAlumnos extends FragmentAbstract{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        pagerItems = new ArrayList<>();
+        pagerItems = new ArrayList<PagerItem>();
         pagerItems.add(new PagerItem(FragmentAlumno.class, "Datos"));
 
         if(getAlumno()) {

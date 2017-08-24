@@ -1,6 +1,7 @@
 package bris.es.budolearning.asyncTask;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,16 +9,13 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.PowerManager;
-import android.support.v4.app.Fragment;
-import bris.es.budolearning.Activity_Logged;
-import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.UtilesDialog;
 
 public abstract class TaskAbstract extends AsyncTask<String, Integer, String> {
 
     protected TaskAbstract esteTask;
     protected Activity activity;
-    protected ProgressDialog progressDialog;
+    protected Dialog progressDialog;
     protected boolean descarga;
     protected String tituloDialogo;
     protected String textoDialogo;
@@ -57,18 +55,18 @@ public abstract class TaskAbstract extends AsyncTask<String, Integer, String> {
         // instantiate it within the onCreate method
         progressDialog = UtilesDialog.createProgressDialog(activity, tituloDialogo, textoDialogo);
         if (descarga) {
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            if(progressDialog instanceof ProgressDialog) ((ProgressDialog)progressDialog).setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         }else {
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            if(progressDialog instanceof ProgressDialog) ((ProgressDialog)progressDialog).setProgressStyle(ProgressDialog.STYLE_SPINNER);
         }
         progressDialog.setCancelable(true);
-        progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Cancelar", new DialogInterface.OnClickListener() {
+        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //Cancel download task
+            public void onCancel(DialogInterface dialog) {
                 progressDialog.cancel();
             }
         });
+
         progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -84,10 +82,6 @@ public abstract class TaskAbstract extends AsyncTask<String, Integer, String> {
         super.onPostExecute(s);
         unlockScreenOrientation();
         progressDialog.dismiss();
-
-        if(activity instanceof Activity_Logged) {
-            ((Activity_Logged) activity).setSubtitle(BLSession.getInstance().getFechaFichero());
-        }
     }
 
     @Override
@@ -96,9 +90,9 @@ public abstract class TaskAbstract extends AsyncTask<String, Integer, String> {
         if(descarga) {
             // if we get here, length is known, now set indeterminate to false
             if(progressDialog != null) {
-                progressDialog.setIndeterminate(false);
-                progressDialog.setMax(values[1]);
-                progressDialog.setProgress(values[0]);
+                ((ProgressDialog)progressDialog).setIndeterminate(false);
+                ((ProgressDialog)progressDialog).setMax(values[1]);
+                ((ProgressDialog)progressDialog).setProgress(values[0]);
             }
         }
 

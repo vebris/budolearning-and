@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
-import bris.es.budolearning.domain.FicheroEspecialAdapter;
+import bris.es.budolearning.domain.Fichero;
+import bris.es.budolearning.domain.adapter.FicheroEspecialAdapter;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.domain.VideoEspecial;
 import bris.es.budolearning.fragments.FragmentAbstract;
@@ -98,7 +100,7 @@ public class TaskVideoEspecial extends TaskAbstract {
         BLSession.getInstance().setVideosEspeciales(new ArrayList<VideoEspecial>());
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
-            for (int i = 0; i < jsonArray.length(); i++) {
+            for (int i = 1; i < jsonArray.length(); i++) {
                 BLSession.getInstance().getVideosEspeciales().add(new VideoEspecial(jsonArray.getJSONObject(i)));
             }
         } catch (JSONException je) {
@@ -116,10 +118,9 @@ public class TaskVideoEspecial extends TaskAbstract {
         if (view instanceof ListView) {
             FicheroEspecialAdapter adapter = new FicheroEspecialAdapter(
                     BLSession.getInstance().getVideosEspeciales(),
-                    activity);
+                    activity, fragment);
             ((ListView) view).setAdapter(adapter);
         }
-        updateSubtitle(fecha);
     }
 
     @Override
@@ -135,19 +136,20 @@ public class TaskVideoEspecial extends TaskAbstract {
         // Define your request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url + INSERT,
-                Utiles.getGson().toJson(peticion),
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         updateGeneric(jsonObject);
 
                         try {
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             UtilesDialog.createErrorMessage(activity, "ERROR", "Error al insertar usuario");
                         }
                         onResponseFinished();
-                        updateSubtitle(new Date());
                         activity.onBackPressed();
                         Utiles.hideKeyboard();
                     }
@@ -179,7 +181,9 @@ public class TaskVideoEspecial extends TaskAbstract {
         // Define your request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url + UPDATE,
-                Utiles.getGson().toJson(peticion),
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -188,12 +192,11 @@ public class TaskVideoEspecial extends TaskAbstract {
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
                         onResponseFinished();
-                        updateSubtitle(new Date());
                         activity.onBackPressed();
                         Utiles.hideKeyboard();
                     }
@@ -225,7 +228,9 @@ public class TaskVideoEspecial extends TaskAbstract {
         // Define your request
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 url + DELETE,
-                Utiles.getGson().toJson(peticion),
+                Utiles.getGson().toJson(peticion)
+                        .replace("\"activo\":1", "\"activo\":true").replace("\"activo\":0", "\"activo\":false")
+                        .replace("\"propio\":1", "\"propio\":true").replace("\"propio\":0", "\"propio\":false"),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -234,12 +239,11 @@ public class TaskVideoEspecial extends TaskAbstract {
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
                         onResponseFinished();
-                        updateSubtitle(new Date());
                         activity.onBackPressed();
                         Utiles.hideKeyboard();
                     }
@@ -262,4 +266,59 @@ public class TaskVideoEspecial extends TaskAbstract {
         request.setShouldCache(false);
         addToQueue(request, false);
     }
+
+    public void listUsuario(final Usuario usuario, final Object filtro, final Object view) {
+        JsonPeticion peticion = new JsonPeticion();
+        peticion.setUser(new Usuario(usuario));
+        peticion.setClub(usuario.getEntrena());
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                url + LIST,
+                Utiles.getGson().toJson(peticion),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        updateGeneric(jsonObject);
+                        onResponseFinished();
+
+                        final List<Fichero> videos = new ArrayList<Fichero>();
+                        try {
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                Fichero f = new Fichero(jsonArray.getJSONObject(i).getJSONObject("fichero"));
+                                videos.add(f);
+                            }
+                        } catch (JSONException je) {
+                            Log.e("Error Response: ", je.toString(), je);
+                        }
+
+                        if(videos.size() > 0) {
+                            UtilesDialog.createVideoExtraMessage(activity, fragment, "VIDEOS ADICIONALES", videos).show();
+                        } else {
+                            UtilesDialog.createErrorMessage(activity, "NO HAY VIDEOS","").show();
+                        }
+
+                    }
+
+                    @Override
+                    protected void finalize() throws Throwable {
+                        super.finalize();
+                        onConnectionFinished();
+                    }
+
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Show Error message
+                UtilesDialog.createErrorMessage(activity, "ERROR", volleyError.getMessage());
+                Log.e("Error Response: ", volleyError.toString());
+                onConnectionFailed(volleyError.toString());
+            }
+        }
+        );
+        request.setShouldCache(true);
+        addToQueue(request, false);
+    }
+
 }

@@ -10,8 +10,10 @@
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/disciplina_id"
+        android:layout_alignParentStart="false"
         android:layout_alignParentLeft="false"
         android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
@@ -22,7 +24,10 @@
         android:src="@drawable/ic_nuevo"
         android:id="@+id/disciplina_nuevo"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
+        android:contentDescription="@string/imagen"/>
 
     <TextView
         android:id="@+id/disciplina_nombre"
@@ -31,7 +36,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/titulo4"
         android:textStyle="bold"
-        android:textColor="@color/color_text_darkgrey"
+        android:textColor="@color/primary_dark"
         android:layout_marginTop="1dip"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"

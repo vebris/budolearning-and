@@ -4,9 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_alignParentTop="true"
-    android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true"
-    android:background="@color/background_generic"
+    android:layout_alignParentRight="true"
     >
 
     <LinearLayout
@@ -14,13 +13,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:gravity="top|left">
+        android:gravity="top|start">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/estadisticas_nombre_usuario"
             android:textSize="@dimen/titulo1"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             android:layout_weight=".75" />
 
         <TextView
@@ -29,8 +28,8 @@
             android:id="@+id/estadisticas_fecha"
             android:textSize="@dimen/titulo4"
             android:layout_weight=".24"
-            android:gravity="center_vertical|right"
-            android:text="alsdfj" />
+            android:gravity="center_vertical|end"
+            android:text="@string/texto_ok" />
     </LinearLayout>
 
     <ListView

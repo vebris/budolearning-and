@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Curso;
-import bris.es.budolearning.domain.CursoAdapter;
+import bris.es.budolearning.domain.adapter.CursoAdapter;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.fragments.FragmentCursos;
@@ -117,7 +117,6 @@ public class TaskCurso extends TaskAbstract{
                     activity);
             ((ListView) view).setAdapter(adapter);
         }
-        updateSubtitle(fecha);
     }
 
     @Override
@@ -140,7 +139,6 @@ public class TaskCurso extends TaskAbstract{
                             .addToBackStack(FragmentCursos.class.getName())
                             .commit();
                     onResponseFinished();
-                    updateSubtitle(new Date());
                 }
                 @Override
                 protected void finalize() throws Throwable {
@@ -179,12 +177,11 @@ public class TaskCurso extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
                     activity.onBackPressed();
                     Utiles.hideKeyboard();
                 }
@@ -225,12 +222,11 @@ public class TaskCurso extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
                     activity.onBackPressed();
                     Utiles.hideKeyboard();
                 }
@@ -271,12 +267,11 @@ public class TaskCurso extends TaskAbstract{
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
                         onResponseFinished();
-                        updateSubtitle(new Date());
                         activity.onBackPressed();
                         Utiles.hideKeyboard();
                     }

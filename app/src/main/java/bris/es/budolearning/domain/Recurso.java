@@ -1,10 +1,8 @@
 package bris.es.budolearning.domain;
 
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,6 +16,7 @@ public class Recurso extends GenericObject{
     private int numVideos;
     private int numPdf;
     private List<Fichero> ficheros;
+    private Arma arma;
 
     public Recurso(){}
     public Recurso(JSONObject json) {
@@ -61,6 +60,16 @@ public class Recurso extends GenericObject{
         } catch (Exception e) {
             Log.e(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName());
         }
+        try {
+            Arma arma = new Arma();
+            JSONObject jsonTipoArma = json.getJSONObject("arma");
+            arma.setId(jsonTipoArma.getInt("id"));
+            arma.setNombre(jsonTipoArma.getString("nombre"));
+            arma.setDescripcion(jsonTipoArma.getString("descripcion"));
+            setArma(arma);
+        } catch (Exception e) {
+            Log.e(this.getClass().getCanonicalName(), "Error crear " + this.getClass().getCanonicalName());
+        }
     }
     public String getNombre() {
         return nombre;
@@ -73,6 +82,12 @@ public class Recurso extends GenericObject{
     }
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
+    }
+    public Arma getArma() {
+        return arma;
+    }
+    public void setArma(Arma arma) {
+        this.arma = arma;
     }
     public boolean isEnPrograma() {
         return enPrograma;
@@ -96,7 +111,7 @@ public class Recurso extends GenericObject{
         return ficheros;
     }
     public void setFicheros(JSONArray ficheros) {
-        this.ficheros = new ArrayList<>();
+        this.ficheros = new ArrayList<Fichero>();
         for(int i=0;i<ficheros.length();i++){
             try{
                 this.ficheros.add(new Fichero(ficheros.getJSONObject(i)));

@@ -51,7 +51,7 @@ public class FragmentClubes extends FragmentAbstract {
             }
         });
 
-        if (Utiles.esAdmin()) {
+        if (Utiles.esSoloAdmin()) {
             mClubesListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -89,11 +89,9 @@ public class FragmentClubes extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (Utiles.esSoloAdmin()) {
-            inflater.inflate(R.menu.menu_recargar_anadir, menu);
-        } else {
-            inflater.inflate(R.menu.menu_recargar, menu);
-        }
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, Utiles.esSoloAdmin(), false, false, true, false);
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -101,13 +99,13 @@ public class FragmentClubes extends FragmentAbstract {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.menu_nuevo:
+            case R.id.btn_menu_nuevo:
                 BLSession.getInstance().setClub(null);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentClubDetalle())
                         .addToBackStack(this.getClass().getName()).commit();
                 return true;
-            case R.id.menu_recargar:
+            case R.id.btn_menu_recargar:
                 Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                 cache.remove("1:" + taskClub.getUrl() + TaskAbstract.LIST);
                 taskClub.list(BLSession.getInstance().getUsuario(), null, mClubesListView);

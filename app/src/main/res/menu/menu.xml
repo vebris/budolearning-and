@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+     >
+
+    <item android:id="@+id/btn_menu_extra_video" android:title="@string/btn_menu_video_extra"
+        android:icon="@android:drawable/ic_menu_today"
+        android:orderInCategory="90" app:showAsAction="ifRoom" />
+    <item android:id="@+id/btn_menu_upload" android:title="@string/btn_menu_upload"
+        android:icon="@android:drawable/ic_menu_upload_you_tube"
+        android:orderInCategory="90" app:showAsAction="ifRoom" />
+    <item android:id="@+id/btn_menu_nuevo" android:title="@string/btn_menu_nuevo"
+        android:icon="@android:drawable/ic_input_add"
+        android:orderInCategory="95" app:showAsAction="ifRoom"/>
+    <item android:id="@+id/btn_menu_activar" android:title="@string/btn_menu_activar"
+        android:icon="@android:drawable/ic_input_add"
+        android:orderInCategory="85" app:showAsAction="ifRoom"/>
+    <item android:id="@+id/btn_menu_guardar" android:title="@string/btn_menu_guardar"
+        android:icon="@android:drawable/ic_menu_save"
+        android:orderInCategory="90" app:showAsAction="ifRoom"/>
+    <item android:id="@+id/btn_menu_recargar" android:title="@string/btn_menu_recargar"
+        android:icon="@android:drawable/ic_menu_rotate"
+        android:orderInCategory="95" app:showAsAction="ifRoom"/>
+    <item android:id="@+id/btn_menu_atras" android:title="@string/btn_menu_atras"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:orderInCategory="95" app:showAsAction="ifRoom"/>
+</menu>

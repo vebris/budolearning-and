@@ -115,7 +115,8 @@ public class FragmentPuntos extends FragmentAbstract {
 
             @Override
             public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-                inflater.inflate(R.menu.menu_atras, menu);
+                inflater.inflate(R.menu.menu, menu);
+                visualizarMenus(menu, false, false, false, false, false, false, true);
                 super.onCreateOptionsMenu(menu, inflater);
             }
 

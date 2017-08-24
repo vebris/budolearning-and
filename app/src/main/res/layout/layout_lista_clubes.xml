@@ -3,109 +3,95 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     style="@style/item_list"
+    android:orientation="vertical"
     >
 
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         >
-
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/club_id"
-            android:layout_alignParentLeft="true"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:scaleType="fitXY" />
 
-        <TextView
-            android:id="@+id/club_nombre"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/titulo1"
-            android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/club_id"
-            android:layout_toEndOf="@+id/club_id"
-            android:layout_marginLeft="6dp" />
+            android:layout_height="75dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/club_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titulo"
+                android:textStyle="bold"
+                android:textColor="@color/primary_dark"
+                android:layout_marginStart="6dp" />
+            <TextView
+                android:id="@+id/club_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/titulo2"
+                android:textStyle="bold"
+                android:textColor="@color/primary_dark"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/club_descripcion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/titulo2"
-            android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
-            android:layout_below="@+id/club_nombre"
-            android:layout_toRightOf="@+id/club_id"
-            android:layout_toEndOf="@+id/club_id"
-            android:layout_marginLeft="6dp" />
-        <TextView
-            android:id="@+id/club_direccion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textSize="@dimen/titulo2"
-            android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
-            android:layout_below="@+id/club_id"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-        <TextView
-            android:id="@+id/club_localidad"
-            android:layout_below="@+id/club_direccion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textSize="@dimen/titulo2"
-            android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
-            android:layout_marginTop="1dip"
-            />
-        <TextView
-            android:id="@+id/club_email"
-            android:layout_below="@+id/club_localidad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textSize="@dimen/titulo2"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_blue_light"
-            android:layout_marginTop="1dip"
-            />
-        <TextView
-            android:id="@+id/club_telefono"
-            android:layout_below="@+id/club_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textSize="@dimen/titulo2"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_blue_light"
-            android:layout_marginTop="1dip"
-            />
-        <TextView
-            android:id="@+id/club_web"
-            android:layout_below="@+id/club_telefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textSize="@dimen/titulo2"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_blue_light"
-            android:layout_marginTop="1dip"
-            />
-        <TextView
-            android:id="@+id/club_profesor"
-            android:layout_below="@+id/club_web"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textSize="@dimen/titulo2"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_blue_light"
-            android:layout_marginTop="1dip"
-            />
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/club_profesor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/titulo2"
+        android:textStyle="bold"
+        android:textColor="@color/primary_dark"
+        android:layout_marginTop="1dip"
+        />
+
+    <TextView
+        android:id="@+id/club_direccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/titulo2"
+        android:textColor="@color/primary_dark"
+        android:drawableStart="@android:drawable/ic_menu_directions"
+        android:textIsSelectable="true"
+        />
+
+    <TextView
+        android:id="@+id/club_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/titulo2"
+        android:textColor="@color/primary_dark"
+        android:layout_marginTop="1dip"
+        android:drawableStart="@android:drawable/sym_action_email"
+        android:textIsSelectable="true"
+        />
+    <TextView
+        android:id="@+id/club_telefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/titulo2"
+        android:textColor="@color/primary_dark"
+        android:layout_marginTop="1dip"
+        android:drawableStart="@android:drawable/sym_action_call"
+        android:textIsSelectable="true"
+        />
+
+    <TextView
+        android:id="@+id/club_web"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/titulo2"
+        android:textColor="@color/primary_dark"
+        android:layout_marginTop="1dip"
+        android:drawableStart="@android:drawable/sym_action_chat"
+        android:textIsSelectable="true"
+        />
+
+
 </LinearLayout>

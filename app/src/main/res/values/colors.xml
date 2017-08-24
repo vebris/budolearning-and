@@ -1,57 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="genre">#666666</color>
-    <color name="year">#888888</color>
 
-   <color name="actionbar_warning">#FFFF0000</color>
+   <color name="background">@color/Blue_Grey_200</color>
+   <color name="background2">@color/Blue_Grey_600</color>
+   <color name="background3">@color/Blue_Grey_900</color>
+   <color name="accent">@color/Black</color>
 
+   <color name="primary">@color/Blue_Grey_700</color>
+   <color name="primary_dark">@color/Blue_Grey_800</color>
+   <color name="primary_light">@color/Blue_Grey_200</color>
+   <color name="primary_text">@color/Blue_Grey_800</color>
 
-   <!-- <color name="list_divider">#fffac200</color>#d9d9d9-->
-    <color name="list_row_start_color">#fffac200</color><!--#ffffff-->
-    <color name="list_row_end_color">#fffac200</color>
-    <color name="list_row_hover_start_color">#ffffdddd</color><!--#ebeef0-->
-    <color name="list_row_hover_end_color">#ffffdddd</color>
+   <color name="secondary">@color/Deep_Orange_400</color>
+   <color name="secondary_dark">@color/Deep_Orange_800</color>
+   <color name="secondary_light">@color/Deep_Orange_200</color>
 
-    <color name="color_grado_blanco">#ffffff</color>
-    <color name="color_grado_amarillo">#ffffff00</color>
-    <color name="color_grado_naranja">#ffffa500</color>
-    <color name="color_grado_verde">#ff00a000</color>
-    <color name="color_grado_azul">#ff0000ff</color>
-    <color name="color_grado_marron">#ff8b4513</color>
-    <color name="color_grado_negro">#ff111111</color>
+   <color name="tertiary">@color/Red_600</color>
+   <color name="tertiary_dark">@color/Red_800</color>
+   <color name="tertiary_light">@color/Red_200</color>
 
-    <color name="color_text_darkgrey">#FF555555</color>
-    <color name="color_text_ligthblack">#FF222222</color>
-    <color name="color_text_yellow">#ffffa500</color>
-    <color name="color_text_gold">#ffFFD700</color>
+    <color name="scrollbar_track_start">@color/Blue_Grey_300</color>
+    <color name="scrollbar_track_end">@color/Blue_Grey_400</color>
+    <color name="scrollbar_thumb_start">@color/Blue_Grey_700</color>
+    <color name="scrollbar_thumb_end">@color/Teal_900</color>
 
-
-    <!-- MENU LATERAL -->
-    <color name="list_item_title">#BBBBBB</color>
-    <color name="list_background">#FF404040</color>
-    <!--<color name="list_background_pressed">#992416</color>-->
-    <color name="list_background_pressed">#FF8b6508</color>
-    <color name="list_background_header">#FF202020</color>
-    <color name="list_background_preferences">#FF555555</color>
-
-    <color name="list_divider">#272727</color>
-    <color name="counter_text_bg">#626262</color>
-    <color name="counter_text_color">#c5c4c4</color>
-
-    <!-- -->
-    <color name="background_generic">#FFCCCCCC</color>
-    <color name="grid_background">#FFAAAAAA</color>
-    <color name="grid_background_item">#FFDDDDDD</color>
-
-    <color name="black_overlay">#66000000</color>
+   <!-- MENU LATERAL -->
+   <color name="list_background">@color/Blue_Grey_200</color>
+   <color name="list_background_header">@color/Blue_Grey_900</color>
+   <color name="list_item_title">@color/Blue_Grey_200</color>
+   <color name="list_background_pressed">#FF8b6508</color>
+   <color name="counter_text_bg">@color/Blue_Grey_300</color>
+   <color name="counter_text_color">@color/White</color>
+   <!-- FIN MENU LATERAL -->
 
 
- <color name="md_text_white">#ffffffff</color>
- <color name="md_indigo_500">#3f51b5</color>
- <color name="md_red_500">#f44336</color>
- <color name="md_black_1000_20">#33000000</color>
- <color name="md_secondary_text_icons_white">#b3ffffff</color>
-
+    <!--
+  <color name="background">#FFCCCCCC</color>
+  <color name="background2">#FF777777</color>
+  <color name="background3">#FF333333</color>
+  <color name="accent">#050505</color>
+  <color name="primary">#FF555555</color>
+  <color name="primary_dark">#FF222222</color>
+  <color name="primary_light">#FFBBBBBB</color>
+  <color name="primary_text">#FF444444</color>
+  <color name="secondary">#FF9107</color>
+  <color name="secondary_dark">#FF6107</color>
+  <color name="secondary_light">#FFC107</color>
+  <color name="tertiary">#F44336</color>
+  <color name="tertiary_dark">#D32F2F</color>
+  <color name="tertiary_light">#FFCDD2</color>
+  -->
 </resources>
 

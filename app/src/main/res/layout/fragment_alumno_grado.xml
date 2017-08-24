@@ -4,9 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_alignParentTop="true"
-    android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true"
-    android:background="@color/background_generic"
+    android:layout_alignParentRight="true"
     >
 
     <TextView
@@ -16,7 +15,7 @@
         android:padding="5dp"
         android:layout_margin="5dp"
         android:textSize="@dimen/titulo1"
-        android:textColor="@color/color_text_darkgrey"
+        android:textColor="@color/primary"
         />
 
     <ListView

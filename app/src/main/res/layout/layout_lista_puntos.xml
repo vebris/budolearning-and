@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    style="@style/item_list"
+
     >
 
     <RelativeLayout
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/titulo1"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             android:layout_marginTop="1dip" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_alignParentRight="true"
             android:textSize="@dimen/titulo1"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             />
         <!--
         <TextView
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/titulo3"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/color_primary"
             android:layout_below="@id/puntos_numero"
             />
         -->

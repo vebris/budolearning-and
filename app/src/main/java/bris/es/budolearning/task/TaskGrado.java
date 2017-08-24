@@ -1,6 +1,7 @@
 package bris.es.budolearning.task;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
@@ -20,10 +21,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Grado;
-import bris.es.budolearning.domain.GradoAdapter;
+import bris.es.budolearning.domain.adapter.CustomRecyclerAdapter;
+import bris.es.budolearning.domain.adapter.GradoAdapter;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.task.volley.VolleyControler;
@@ -49,55 +52,48 @@ public class TaskGrado extends TaskAbstract{
 
     @Override
     public void list(Usuario usuario, Object filtro, final Object view) {
-        Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
-        Cache.Entry entry = cache.get("1:" + url + LIST);
-        if(entry != null && !entry.isExpired()){
-            try {
-                String data = new String(entry.data, "UTF-8");
-                mostrarList(new JSONObject(data), view, new Date(entry.serverDate));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else {
-            JsonPeticion peticion = new JsonPeticion();
-            peticion.setUser(new Usuario(usuario));
-            peticion.setDisciplina(filtro);
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
-                    url + LIST,
-                    Utiles.getGson().toJson(peticion),
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject jsonObject) {
-                            updateGeneric(jsonObject);
-
-                            mostrarList(jsonObject, view, new Date());
-
-                            onResponseFinished();
-                        }
-
-                        @Override
-                        protected void finalize() throws Throwable {
-                            super.finalize();
-                            onConnectionFinished();
-                        }
-
-                    }
-                    , new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    // Show Error message
-                    UtilesDialog.createErrorMessage(activity, "ERROR", volleyError.getMessage());
-                    Log.e("Error Response: ", volleyError.toString());
-                    onConnectionFailed(volleyError.toString());
-                }
-            }
-            );
-            request.setShouldCache(true);
-            addToQueue(request, false);
-        }
+        list(usuario, filtro, view, null);
     }
 
-    private void mostrarList(JSONObject jsonObject, final Object view, Date fecha){
+    public void list(Usuario usuario, Object filtro, final Object view, final CustomRecyclerAdapter.OnItemClickListener listener) {
+        JsonPeticion peticion = new JsonPeticion();
+        peticion.setUser(new Usuario(usuario));
+        peticion.setDisciplina(filtro);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                url + LIST,
+                Utiles.getGson().toJson(peticion),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        updateGeneric(jsonObject);
+
+                        mostrarList(jsonObject, view, listener);
+
+                        onResponseFinished();
+                    }
+
+                    @Override
+                    protected void finalize() throws Throwable {
+                        super.finalize();
+                        onConnectionFinished();
+                    }
+
+                }
+                , new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                // Show Error message
+                UtilesDialog.createErrorMessage(activity, "ERROR", volleyError.getMessage());
+                Log.e("Error Response: ", volleyError.toString());
+                onConnectionFailed(volleyError.toString());
+            }
+        }
+        );
+        request.setShouldCache(true);
+        addToQueue(request, false);
+    }
+
+    private void mostrarList(JSONObject jsonObject, final Object view, final CustomRecyclerAdapter.OnItemClickListener listener){
         BLSession.getInstance().setGrados(new ArrayList<Grado>());
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -108,11 +104,16 @@ public class TaskGrado extends TaskAbstract{
         } catch (JSONException je) {
             Log.e("Error Response: ", je.toString(), je);
         }
-
-        GradoAdapter adapter = new GradoAdapter(
-                BLSession.getInstance().getGrados(),
-                activity);
-        ((GridView) view).setAdapter(adapter);
+        if(view instanceof GridView) {
+            GradoAdapter adapter = new GradoAdapter(
+                    BLSession.getInstance().getGrados(),
+                    activity);
+            ((GridView) view).setAdapter(adapter);
+        }
+        if(view instanceof RecyclerView) {
+            CustomRecyclerAdapter adapter = new CustomRecyclerAdapter(BLSession.getInstance().getGrados(), fragment.getActivity(), null, listener);
+            ((RecyclerView) view).setAdapter(adapter);
+        }
     }
 
     @Override
@@ -134,7 +135,7 @@ public class TaskGrado extends TaskAbstract{
     public void downloadFile(Usuario usuario, Object elemento, View view){
         String urlDownloadFile = url + DOWNLOAD_FILE + "/"+usuario.getId()+"/"+((Grado)elemento).getId();
         ((NetworkImageView) view).setImageUrl(urlDownloadFile, VolleyControler.getInstance().getImageLoader());
-        ((NetworkImageView) view).setDefaultImageResId(R.anim.loading_animation);
+        ((NetworkImageView) view).setDefaultImageResId(android.R.anim.cycle_interpolator);
         ((NetworkImageView) view).setErrorImageResId(R.drawable.no_image);
     }
 

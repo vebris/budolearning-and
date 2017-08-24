@@ -17,7 +17,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import bris.es.budolearning.R;
-import bris.es.budolearning.domain.FicheroAdapter;
+import bris.es.budolearning.domain.adapter.FicheroAdapter;
 import bris.es.budolearning.utiles.Constants;
 import bris.es.budolearning.utiles.Utiles;
 */

@@ -30,7 +30,7 @@
             android:layout_toRightOf="@+id/fichero_id"
             android:textSize="@dimen/titulo1"
             android:textStyle="bold"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             android:layout_marginTop="1dip"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:textSize="@dimen/tituloDerecha"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             />
 
         <TextView
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:textSize="@dimen/tituloDerecha"
-            android:textColor="@color/color_text_darkgrey"
+            android:textColor="@color/primary"
             android:layout_below="@+id/fichero_descargado_fecha"
             />
     </LinearLayout>

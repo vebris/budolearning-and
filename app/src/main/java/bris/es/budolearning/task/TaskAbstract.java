@@ -1,6 +1,7 @@
 package bris.es.budolearning.task;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,7 +39,7 @@ public abstract class TaskAbstract {
     public static String DOWNLOAD_FILE = "/downloadFile";
     public static String DOWNLOAD_FILE_ESPECIAL = "/downloadFileEspecial";
 
-    private ProgressDialog pDialog;
+    private Dialog pDialog;
     private PowerManager.WakeLock mWakeLock;
     private boolean descarga = false;
 
@@ -66,29 +67,22 @@ public abstract class TaskAbstract {
 
     public void onPreStartConnection(final Request request) {
         if(pDialog != null) return;
-        pDialog = UtilesDialog.createProgressDialog(activity, "", "Cargando...");
+        pDialog = UtilesDialog.createProgressDialog(activity, "Conectando Servidor", "Cargando...");
 
         if (isDescarga()) {
-            pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            if(pDialog instanceof ProgressDialog) ((ProgressDialog)pDialog).setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         }else {
-            pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            if(pDialog instanceof ProgressDialog) ((ProgressDialog)pDialog).setProgressStyle(ProgressDialog.STYLE_SPINNER);
         }
         pDialog.setCancelable(true);
-        pDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //Cancel download task
-                pDialog.cancel();
-                request.cancel();
-            }
-        });
+
         pDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
 
             }
         });
-        pDialog.show();
+        if(pDialog != null) pDialog.show();
         lockScreenOrientation();
     }
 
@@ -112,13 +106,6 @@ public abstract class TaskAbstract {
 
     public String getUrl(){return url;}
 
-    protected void updateSubtitle(Date fecha) {
-        try {
-            ((Activity_Logged) activity).setSubtitle(fecha);
-        }catch(Exception e){
-            Log.d(getClass().getCanonicalName(), "Error al cambiar el Subtitulo.");
-        }
-    }
 
     public abstract void list(Usuario usuario, Object filtro, Object view);
     public void borrarList(){

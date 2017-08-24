@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import bris.es.budolearning.R;
@@ -66,7 +65,8 @@ public class FragmentEstadisticas extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_atras, menu);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, false, false, false, true);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

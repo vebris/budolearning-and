@@ -9,6 +9,10 @@
             android:key="preferences_general_recordar_usuario"
             android:title="@string/pref_general_recordar_usuario"
             android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="preferences_general_vista_reducida"
+            android:title="@string/pref_general_vista_reducida"
+            android:defaultValue="false" />
         <EditTextPreference
             android:key="preferences_url"
             android:title="@string/pref_url"

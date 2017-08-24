@@ -46,12 +46,15 @@ public class FragmentVideosEspeciales extends FragmentAbstract {
         taskFichero = new TaskFichero(getActivity(), this);
 
         mDisciplinaView = (ListView) view.findViewById(R.id.ficheroListView);
+
+        /*
         mDisciplinaView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, final int posicion, long arg3) {
                 mostrarFichero(posicion);
             }
         });
+        */
 
         if(Utiles.esAdmin()) {
             mDisciplinaView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -81,6 +84,7 @@ public class FragmentVideosEspeciales extends FragmentAbstract {
             });
         }
 
+
         setHasOptionsMenu(true);
 
         return view;
@@ -94,11 +98,8 @@ public class FragmentVideosEspeciales extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (Utiles.esAdmin()) {
-            inflater.inflate(R.menu.menu_ficheros_admin, menu);
-        } else {
-            inflater.inflate(R.menu.menu_ficheros, menu);
-        }
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, Utiles.esSoloAdmin(), false, false, true, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -106,13 +107,13 @@ public class FragmentVideosEspeciales extends FragmentAbstract {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.menu_nuevo:
+            case R.id.btn_menu_nuevo:
                 BLSession.getInstance().setVideoEspecial(new VideoEspecial());
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentVideoEspecialDetalle())
                         .addToBackStack(this.getClass().getName()).commit();
                 return true;
-            case R.id.menu_recargar:
+            case R.id.btn_menu_recargar:
                 Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                 cache.remove("1:" + taskVideoEspecial.getUrl() + TaskAbstract.LIST);
                 taskVideoEspecial.list(BLSession.getInstance().getUsuario(), null, mDisciplinaView);

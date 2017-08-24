@@ -14,6 +14,7 @@ import android.widget.TextView;
 import bris.es.budolearning.R;
 import bris.es.budolearning.task.TaskDisciplina;
 import bris.es.budolearning.utiles.BLSession;
+import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
 
 public class FragmentDisciplinaDetalle extends FragmentAbstract {
@@ -45,7 +46,7 @@ public class FragmentDisciplinaDetalle extends FragmentAbstract {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.registrar_usuarioBtnActivar:
+            case R.id.btn_menu_activar:
                 UtilesDialog.createQuestionYesNo(getActivity(),
                         "BORRAR",
                         "¿ Está seguro de eliminar la disciplina ?",
@@ -63,7 +64,7 @@ public class FragmentDisciplinaDetalle extends FragmentAbstract {
                 ).show();
 
                 return true;
-            case R.id.registrar_usuarioBtnGuardar:
+            case R.id.btn_menu_guardar:
                 BLSession.getInstance().getDisciplina().setId(Integer.parseInt(disciplinaId.getText().toString()));
                 BLSession.getInstance().getDisciplina().setNombre(disciplinaNombre.getText().toString());
                 BLSession.getInstance().getDisciplina().setDescripcion(disciplinaDescripcion.getText().toString());
@@ -80,8 +81,9 @@ public class FragmentDisciplinaDetalle extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_guardar_borrar, menu);
-        menu.findItem(R.id.registrar_usuarioBtnActivar).setIcon(android.R.drawable.ic_delete);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, true, true, false, false);
+        menu.findItem(R.id.btn_menu_activar).setIcon(android.R.drawable.ic_delete);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

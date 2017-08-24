@@ -8,11 +8,14 @@
     <string name="pref_url">URL</string>
     <string name="pref_general_recordar_usuario">Recordar usuario y contraseña</string>
 
-    <string name="pref_default_url">http://budolearning.noip.me</string>
+    <string name="pref_default_url">http://www.budolearning.es</string>
+    <!--<string name="pref_default_url">http://172.28.4.59:8082</string>-->
 
     <!-- Opciones Cache -->
     <string name="pref_header_cache">CACHE</string>
 
+    <!-- Opciones Vista -->
+    <string name="pref_general_vista_reducida">Visualización Reducida</string>
 
     <!-- Strings Download -->
     <string name="pref_header_downloads">DOWNLOADS</string>
@@ -51,6 +54,6 @@
     <string name="pref_default_download_limite_cache_imagenes">5</string>
 
     <string name="pref_download_limite_cache_videos">Limite Videos (MB)</string>
-    <string name="pref_default_download_limite_cache_videos">256</string>
+    <string name="pref_default_download_limite_cache_videos">512</string>
 
 </resources>

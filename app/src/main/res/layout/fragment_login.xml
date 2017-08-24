@@ -1,105 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="bris.es.budolearning.Activity_Login"
-    android:weightSum="1"
-    android:background="@color/background_generic"
-    android:id="@+id/main_cc">
-
-    <RelativeLayout
+    android:id="@+id/main_cc"
+    android:background="@color/background"
+    >
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:weightSum="1"
-        android:background="@color/background_generic"
-        android:layout_above="@+id/adMobBanner"
-        android:gravity="center_vertical">
-
-    <ScrollView android:id="@+id/login_form"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
 
-        <LinearLayout android:id="@+id/email_login_form" android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:orientation="vertical"
-            android:weightSum="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:id="@+id/imageLogin"
                 android:src="@drawable/ic_login"
-                android:layout_weight="11.75"
-                android:contentDescription="Imagen" />
-
-            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Identificador de Usuario"
-                android:id="@+id/textLogin"
-                android:textColor="@color/color_text_darkgrey"
-                android:textStyle="bold"/>
+                android:layout_marginTop="24dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/id_img"
+                android:paddingTop="20dp"
+                android:layout_height="120dp"
+                android:contentDescription="Logo" />
 
-            <AutoCompleteTextView android:id="@+id/email" android:layout_width="fill_parent"
-                android:layout_height="wrap_content" android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress" android:maxLines="1"
-                android:singleLine="true" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Contraseña Budolearning, para app y web"
-                android:id="@+id/textPassword"
-                android:textColor="@color/color_text_darkgrey"
-                android:textStyle="bold"/>
-
-            <EditText android:id="@+id/password" android:layout_width="fill_parent"
-                android:layout_height="wrap_content" android:hint="@string/prompt_password"
-                android:imeActionId="@+id/btn_login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified" android:inputType="textPassword"
-                android:maxLines="1" android:singleLine="true" />
-
-            <Button android:id="@+id/btn_login"
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/action_sign_in"
-                style="@style/Button"
-                />
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:elevation="10dp"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/zz_rounded"
+                android:id="@+id/login_form"
+                >
 
-            <Button android:id="@+id/btn_registrarUsuario"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/action_registrar_usuario"
-                style="@style/Button2"
-                />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <Button android:id="@+id/btn_olvidoUsuario"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/action_olvido_usuario"
-                style="@style/Button2"
-                />
+                    <EditText android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailSubject"
+                        android:drawableTint="@color/primary_dark"
+                        android:hint="Usuario"
+                        tools:targetApi="m" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:inputType="textPassword"
+                        android:drawableTint="@color/primary_dark"
+                        android:hint="Password"
+                        tools:targetApi="m" />
+                </android.support.design.widget.TextInputLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp">
+                    <TextView android:id="@+id/btn_registrarUsuario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Registrarse"
+                        android:textSize="15sp"
+                        android:textColor="@color/primary_dark"
+                        android:layout_gravity="left"/>
+
+                    <TextView android:id="@+id/btn_olvidoUsuario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recordar Contraseña"
+                        android:textSize="15sp"
+                        android:textColor="@color/primary_dark"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Login"
+                    android:layout_margin="24dp" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
-    </RelativeLayout>
-    <!--<com.google.android.gms.ads.AdView
-        android:id="@+id/adMobBanner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/admob_banner"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        >
-    </com.google.android.gms.ads.AdView>
-    -->
-</RelativeLayout>
+</LinearLayout>

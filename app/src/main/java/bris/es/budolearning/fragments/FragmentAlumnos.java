@@ -63,9 +63,9 @@ public class FragmentAlumnos extends FragmentAbstract{
             taskClub.list(BLSession.getInstance().getUsuario(), null, clubes);
         } else {
             Club c = BLSession.getInstance().getUsuario().getProfesor();
-            List<String> txtClub = new ArrayList<>();
+            List<String> txtClub = new ArrayList<String>();
             txtClub.add(c.getNombre());
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_item, txtClub);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, txtClub);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             clubes.setAdapter(dataAdapter);
         }
@@ -92,7 +92,8 @@ public class FragmentAlumnos extends FragmentAbstract{
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_recargar, menu);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, false, true, false, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -100,7 +101,7 @@ public class FragmentAlumnos extends FragmentAbstract{
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.menu_recargar:
+            case R.id.btn_menu_recargar:
                 BLSession.getInstance().setAlumnos(new ArrayList<Usuario>());
                 recargar();
                 return true;

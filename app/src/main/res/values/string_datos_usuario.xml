@@ -21,5 +21,6 @@
 
     <string name="usuario_btn_guardar">Guardar</string>
     <string name="usuario_btn_cambiar_pass">Cambiar Password</string>
+    <string name="usuario_btn_reg_pass">Regenerar Contraseña</string>
 
 </resources>

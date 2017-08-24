@@ -19,6 +19,10 @@ public class Configuracion implements Serializable{
     private boolean publicidadInterstialAdMob = false;
 
     private boolean verUltimaDescarga = true;
+    private boolean vistaReducida = false;
+
+    public boolean isVistaReducida(){return vistaReducida;}
+    public void setVistaReducida(boolean vistaReducida) {this.vistaReducida = vistaReducida;}
 
     public int getUsoRedes() {
         return usoRedes;

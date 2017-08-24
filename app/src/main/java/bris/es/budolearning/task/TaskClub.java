@@ -27,7 +27,7 @@ import java.util.List;
 
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Club;
-import bris.es.budolearning.domain.ClubAdapter;
+import bris.es.budolearning.domain.adapter.ClubAdapter;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.fragments.FragmentClubes;
@@ -38,6 +38,7 @@ import bris.es.budolearning.utiles.Configuracion;
 import bris.es.budolearning.utiles.Constants;
 import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
+import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class TaskClub extends TaskAbstract{
 
@@ -116,7 +117,7 @@ public class TaskClub extends TaskAbstract{
 
     private void mostrarList(JSONObject jsonObject, Object view, Date fecha) {
         BLSession.getInstance().setClubes(new ArrayList<Club>());
-        List<String> txtClub = new ArrayList<>();
+        List<String> txtClub = new ArrayList<String>();
         int elegido = 0;
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -125,28 +126,26 @@ public class TaskClub extends TaskAbstract{
                 BLSession.getInstance().getClubes().add(club);
                 txtClub.add(club.getNombre());
                 if(club.getNombre().equalsIgnoreCase(nombreClub))
-                    elegido = i;
+                    elegido = i + 1;
             }
         } catch (JSONException je) {
             Log.e("Error Response: ", je.toString(), je);
         }
-        if(view instanceof Spinner) {
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, txtClub);
+
+
+        if(view instanceof Spinner ) {
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, txtClub);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            ((Spinner) view).setAdapter(dataAdapter);
-            ((Spinner) view).setSelection(elegido);
-            if(fijarClub){
-                ((Spinner) view).setEnabled(false);
+            if(view instanceof MaterialSpinner) {
+                ((MaterialSpinner) view).setAdapter(dataAdapter);
+                ((MaterialSpinner) view).setSelection(elegido);
             } else {
-                ((Spinner) view).setEnabled(true);
+                ((Spinner) view).setAdapter(dataAdapter);
+                ((Spinner) view).setSelection(elegido - 1 );
             }
-        }
-        if(view instanceof ListView) {
-            ClubAdapter adapter = new ClubAdapter(
-                    BLSession.getInstance().getClubes(),
-                    activity);
-            ((ListView)view).setAdapter(adapter);
-            updateSubtitle(fecha);
+        } else{
+            ClubAdapter adapter = new ClubAdapter(BLSession.getInstance().getClubes(), activity);
+            ((ListView) view).setAdapter(adapter);
         }
     }
 
@@ -170,7 +169,6 @@ public class TaskClub extends TaskAbstract{
                             .addToBackStack(FragmentClubes.class.getName())
                             .commit();
                     onResponseFinished();
-                    updateSubtitle(new Date());
                 }
                 @Override
                 protected void finalize() throws Throwable {
@@ -209,12 +207,11 @@ public class TaskClub extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
                     activity.onBackPressed();
                     Utiles.hideKeyboard();
                 }
@@ -255,12 +252,11 @@ public class TaskClub extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
                     activity.onBackPressed();
                     Utiles.hideKeyboard();
                 }
@@ -301,12 +297,11 @@ public class TaskClub extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }
                     onResponseFinished();
-                    updateSubtitle(new Date());
                     activity.onBackPressed();
                     Utiles.hideKeyboard();
                 }

@@ -7,7 +7,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_generic">
+    android:background="@color/background"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,14 +19,12 @@
         >
         <android.support.v7.widget.Toolbar
             xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/toolbar"
-            app:theme="@style/ToolbarTheme"
-            app:titleTextAppearance="@style/ToolbarTitle"
-            app:subtitleTextAppearance="@style/ToolbarSubtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|right">
+            android:gravity="center"
+            app:theme="@style/Toolbar"
+            >
 
             <LinearLayout
                 android:baselineAligned="false"
@@ -35,43 +34,25 @@
                 android:weightSum="1"
                 android:gravity="center_vertical|center_horizontal">
 
-                <LinearLayout
+
+                <TextView
                     android:layout_width="0dp"
-                    android:layout_weight=".63"
+                    android:layout_weight=".75"
                     android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    android:gravity="left|center_vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tool_title"
-                        style="@style/ToolbarTitle"/>
+                    android:id="@+id/tool_title"
+                    style="@style/ToolbarTitle"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tool_subtitle"
-                        style="@style/ToolbarSubtitle"
-                        android:visibility="invisible"
-                         />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <TextView
                     android:layout_width="0dp"
                     android:layout_weight=".25"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical|center_horizontal">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tool_puntos"
-                        style="@style/ToolbarPoints"
-                        android:textSize="@dimen/tituloDerecha"
-                        android:textColor="@color/color_text_ligthblack"
-                        android:background="@drawable/shape_gold"
-                    />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tool_puntos"
+                    style="@style/ToolbarPoints"
+                    android:textSize="@dimen/tituloDerecha"
+                    android:textColor="@color/primary_dark"
+                    android:background="@drawable/shape_gold"
+                />
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
@@ -100,7 +81,7 @@
     <!-- Menú Lateral Izquierdo-->
     <!-- The navigation drawer -->
     <RelativeLayout
-        android:layout_width="250dp"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:id="@+id/drawerPane"
         android:layout_gravity="start"
@@ -110,44 +91,58 @@
         <LinearLayout
             android:id="@+id/profileBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:background="@color/list_background_header"
-            android:padding="8dp"
             android:orientation="horizontal">
 
-                <com.github.siyamed.shapeimageview.CircularImageView
+            <ImageView
+                android:id="@+id/header_id"
+                android:layout_width="64dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/imagen"
+                android:src="@drawable/ic_drawer"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                />
+            <!--
+                <com.github.siyamed.shapeimageview.OctogonImageView
                     android:id="@+id/header_id"
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/imagen"
                     android:src="@drawable/ic_drawer"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp" />
-            <!--
-            app:siBorderWidth="0.3dp"
-            app:siBorderColor="@color/color_text_gold"
-            -->
+                    android:layout_margin="4dp"
+                    app:siBorderWidth="0.3dp"
+                    app:siBorderColor="@android:color/transparent"
+                    />
+             -->
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp">
-                    <TextView
-                        android:id="@+id/header_nombre"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/titulo1"
-                        android:textColor="@android:color/tab_indicator_text"
-                        android:gravity="center_vertical"
-                        />
-                    <TextView
-                        android:id="@+id/header_mail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/titulo3"
-                        android:textColor="@android:color/tab_indicator_text"
-                        android:gravity="center_vertical"
-                        />
+                <TextView
+                    android:id="@+id/header_nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/titulo1"
+                    android:textColor="@color/primary_light"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/header_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/titulo3"
+                    android:textColor="@color/primary_light"
+                    android:gravity="center_vertical"
+                    />
             </LinearLayout>
         </LinearLayout>
 

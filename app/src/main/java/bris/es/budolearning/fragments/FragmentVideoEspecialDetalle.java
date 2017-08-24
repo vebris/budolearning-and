@@ -2,6 +2,8 @@ package bris.es.budolearning.fragments;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -30,11 +31,13 @@ import bris.es.budolearning.domain.Grado;
 import bris.es.budolearning.domain.Recurso;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.domain.VideoEspecial;
+import bris.es.budolearning.domain.adapter.CustomRecyclerAdapter;
 import bris.es.budolearning.task.TaskClub;
 import bris.es.budolearning.task.TaskUsuario;
 import bris.es.budolearning.task.TaskVideoEspecial;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
+import bris.es.budolearning.utiles.UtilesDialog;
 
 public class FragmentVideoEspecialDetalle extends FragmentAbstract {
 
@@ -42,16 +45,22 @@ public class FragmentVideoEspecialDetalle extends FragmentAbstract {
     private Spinner clubes;
     private CheckBox usarAlumno;
     private Spinner alumno;
-    private Spinner disciplina;
-    private Spinner grado;
-    private Spinner recurso;
-    private Spinner fichero;
+    private RecyclerView disciplina;
+    private RecyclerView grado;
+    private RecyclerView recurso;
+    private RecyclerView fichero;
     private TextView inicio;
     private TextView fin;
 
     private TaskVideoEspecial taskVideoEspecial;
-    private TaskClub taskClub;
     private TaskUsuario taskUsuario;
+
+    static Disciplina disciplinaL;
+    static Grado gradoL;
+    static Recurso recursoL;
+    static Fichero ficheroL;
+
+    VideoEspecial videoEspecial;
 
 
     @Override
@@ -59,7 +68,7 @@ public class FragmentVideoEspecialDetalle extends FragmentAbstract {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_video_especial_detalle, container, false);
         taskVideoEspecial = new TaskVideoEspecial(getActivity(), this);
-        taskClub = new TaskClub(getActivity(), this);
+        TaskClub taskClub = new TaskClub(getActivity(), this);
         taskUsuario = new TaskUsuario(getActivity(), this);
 
         videoEspecialId = (TextView) view.findViewById(R.id.videoEspecialId);
@@ -67,32 +76,101 @@ public class FragmentVideoEspecialDetalle extends FragmentAbstract {
         usarAlumno = (CheckBox) view.findViewById(R.id.videoEspecialUsarUsuario);
         alumno = (Spinner) view.findViewById(R.id.videoEspecialAlumno);
 
-        disciplina = (Spinner) view.findViewById(R.id.videoEspecialDisciplina);
-        grado = (Spinner) view.findViewById(R.id.videoEspecialGrado);
-        recurso = (Spinner) view.findViewById(R.id.videoEspecialRecurso);
-        fichero = (Spinner) view.findViewById(R.id.videoEspecialFichero);
+        disciplina = (RecyclerView) view.findViewById(R.id.videoEspecial_Disciplina_ReciclerView);
+        grado = (RecyclerView) view.findViewById(R.id.videoEspecial_Grado_ReciclerView);
+        recurso = (RecyclerView) view.findViewById(R.id.videoEspecial_Recurso_ReciclerView);
+        fichero = (RecyclerView) view.findViewById(R.id.videoEspecial_Fichero_ReciclerView);
 
         inicio = (EditText)view.findViewById(R.id.videoEspecialInicio);
         fin = (EditText)view.findViewById(R.id.videoEspecialFin);
 
-        final VideoEspecial ve = BLSession.getInstance().getVideoEspecial();
 
-        clubes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if(ve.getUsuario() != null)
-                    buscarAlumnos(ve.getUsuario().getId());
-                else
-                    buscarAlumnos(0);
+        // Asignar los Layouts a los ReciclerView
+        disciplina.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        grado.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recurso.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        fichero.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+
+        videoEspecial = BLSession.getInstance().getVideoEspecial();
+
+        // Asignar los datos a cada View.
+        disciplinaL = null;
+        gradoL = null;
+        recursoL = null;
+        ficheroL = null;
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        // Asignar los datos al View: ALUMNO
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        if(videoEspecial.getClub() != null) {
+            taskClub.setNombreClub(videoEspecial.getClub().getNombre());
+
+            if (videoEspecial.getUsuario() != null && videoEspecial.getUsuario().getId() > 0) {
+                usarAlumno.setChecked(true);
+                alumno.setEnabled(true);
+            } else {
+                usarAlumno.setChecked(false);
+                alumno.setEnabled(false);
             }
+        }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        // Asignar los datos al View: CLUB
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        if("PROFESOR".equalsIgnoreCase(BLSession.getInstance().getUsuario().getRol())) {
+            taskClub.setFijarClub(true);
+            taskClub.setNombreClub(BLSession.getInstance().getUsuario().getProfesor().getNombre());
+        } else {
+            taskClub.setFijarClub(false);
+            if(videoEspecial.getClub() != null)
+                taskClub.setNombreClub(videoEspecial.getClub().getNombre());
+        }
+        taskClub.list(BLSession.getInstance().getUsuario(), null, clubes);
 
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        // Asignar los datos a los View de Fechas
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        if(videoEspecial.getInicio() != null)  inicio.setText(Utiles.getDateFormatDMA().format(videoEspecial.getInicio()));
+        if(videoEspecial.getFin()    != null)  fin.setText(Utiles.getDateFormatDMA().format(videoEspecial.getFin()));
+
+
+
+        // Buscar los datos para la carga de los RecycleView
+        if(videoEspecial.getFichero() != null) {
+            for (Disciplina d : BLSession.getInstance().getUsuario().getDisciplinas()) {
+                for (Grado g : d.getGrados()) {
+                    for (Recurso r : g.getRecursos()) {
+                        for (Fichero f : r.getFicheros()) {
+                            if (videoEspecial.getFichero().getId() == f.getId()) {
+                                disciplinaL = d;
+                                gradoL = g;
+                                recursoL = r;
+                                ficheroL = f;
+                            }
+                            if (ficheroL != null) break;
+                        }
+                        if (recursoL != null) break;
+                    }
+                    if (gradoL != null) break;
+                }
+                if (disciplinaL != null) break;
             }
-        });
+        }
 
+        // Asignar los datos al View: FICHERO
+        if(recursoL != null) cargarComboFichero(recursoL, ficheroL);
+        // Asignar los datos al View: RECURSO
+        if(gradoL != null) cargarComboRecurso(gradoL, recursoL);
+        // Asignar los datos al View: GRADO
+        if(disciplinaL != null) cargarComboGrado(disciplinaL, gradoL);
+        // Asignar los datos al View: DISCIPLINA
+        cargarComboDisciplinas(disciplinaL);
 
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        // EVENTOS
+        ////////////////////////////////////////////////////////////////////////////////////////////
         inicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,117 +220,33 @@ public class FragmentVideoEspecialDetalle extends FragmentAbstract {
             }
         });
 
-        if(ve.getClub() != null) {
-            taskClub.setNombreClub(ve.getClub().getNombre());
-
-            if(ve.getUsuario() != null && ve.getUsuario().getId() > 0) {
-                usarAlumno.setChecked(true);
-                alumno.setEnabled(true);
-            } else {
-                usarAlumno.setChecked(false);
-                alumno.setEnabled(false);
-            }
-
-            inicio.setText(Utiles.getDateFormatDMA().format(ve.getInicio()));
-            fin.setText(Utiles.getDateFormatDMA().format(ve.getFin()));
-
-            boolean cargado = false;
-            idxDisciplina = 0;
-            for(Disciplina d: BLSession.getInstance().getUsuario().getDisciplinas()){
-                idxGrado = 0;
-                for(Grado g:d.getGrados()){
-                    idxRecurso = 0;
-                    for(Recurso r: g.getRecursos()){
-                        idxFichero = 0;
-                        for(Fichero f: r.getFicheros()){
-                            if(ve.getFichero().getId() == f.getId()){
-                                cargarComboDisciplinas();
-                                cargarComboGrado(d);
-                                cargarComboRecurso(g);
-                                cargarComboFichero(r);
-                                cargado = true;
-                            }
-                            if(cargado) break;
-                            idxFichero++;
-                        }
-                        if(cargado) break;
-                        idxRecurso++;
-                    }
-                    if(cargado) break;
-                    idxGrado++;
-                }
-                if(cargado) break;
-                idxDisciplina++;
-            }
-        } else {
-            cargarComboDisciplinas();
-            cargarComboGrado(disciplinas.get(0));
-        }
-
-        if("PROFESOR".equalsIgnoreCase(BLSession.getInstance().getUsuario().getRol())) {
-            taskClub.setFijarClub(true);
-            taskClub.setNombreClub(BLSession.getInstance().getUsuario().getProfesor().getNombre());
-        } else {
-            taskClub.setFijarClub(false);
-            if(ve != null && ve.getClub() != null)
-                taskClub.setNombreClub(ve.getClub().getNombre());
-        }
-        taskClub.list(BLSession.getInstance().getUsuario(), null, clubes);
-
-        disciplina.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                idxDisciplina = position;
-                cargarComboGrado(disciplinas.get(position));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
-        grado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                idxGrado = position;
-                cargarComboRecurso(grados.get(position));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-
-        });
-        recurso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                idxRecurso = position;
-                cargarComboFichero(recursos.get(position));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
-        fichero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                idxFichero = position;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
-
         usarAlumno.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    alumno.setVisibility(View.VISIBLE);
-                    if(ve.getUsuario() != null) {
-                        buscarAlumnos(ve.getUsuario().getId());
+                    alumno.setEnabled(true);
+                    if(videoEspecial.getUsuario() != null) {
+                        buscarAlumnos(videoEspecial.getUsuario().getId());
                     } else {
                         buscarAlumnos(0);
                     }
                 } else {
-                    alumno.setVisibility(View.INVISIBLE);
+                    alumno.setEnabled(false);
                 }
+            }
+        });
+
+        clubes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if(videoEspecial.getUsuario() != null)
+                    buscarAlumnos(videoEspecial.getUsuario().getId());
+                else
+                    buscarAlumnos(0);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
             }
         });
 
@@ -279,87 +273,143 @@ public class FragmentVideoEspecialDetalle extends FragmentAbstract {
         }
     }
 
-    int idxFichero;
-    int idxRecurso;
-    int idxGrado;
-    int idxDisciplina;
-    List<Disciplina> disciplinas = new ArrayList<>();
-    List<Grado> grados = new ArrayList<>();
-    List<Recurso> recursos = new ArrayList<>();
-    List<Fichero> ficheros = new ArrayList<>();
+    private void cargarComboDisciplinas(final Disciplina disciplinaL){
+        FragmentVideoEspecialDetalle.disciplinaL = disciplinaL;
+        FragmentVideoEspecialDetalle.gradoL = null;
+        FragmentVideoEspecialDetalle.recursoL = null;
+        FragmentVideoEspecialDetalle.ficheroL = null;
 
-    private void cargarComboDisciplinas(){
-        disciplinas = new ArrayList<>();
-        List<String> txtDisciplina = new ArrayList<>();
+        List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+        int id=0;
+        int idSelected = -1;
         for(Disciplina d: BLSession.getInstance().getUsuario().getDisciplinas()) {
-            txtDisciplina.add(d.getNombre());
             disciplinas.add(d);
+            if(disciplinaL != null && d.getId() == disciplinaL.getId()) {
+                idSelected = id;
+            }
+            id++;
         }
+        CustomRecyclerAdapter adapter = new CustomRecyclerAdapter(disciplinas, getActivity(), disciplinaL,
+                new CustomRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Object item, View view) {
+                        cargarComboGrado((Disciplina)item, null);
+                        cargarComboRecurso(null, null);
+                        cargarComboFichero(null, null);
 
-        ArrayAdapter<String> dataAdapterDisciplina = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, txtDisciplina);
-        dataAdapterDisciplina.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        disciplina.setAdapter(dataAdapterDisciplina);
-        if (idxDisciplina >= 0 && idxDisciplina < txtDisciplina.size())
-            disciplina.setSelection(idxDisciplina);
+                        FragmentVideoEspecialDetalle.disciplinaL = (Disciplina) item;
+                        FragmentVideoEspecialDetalle.gradoL = null;
+                        FragmentVideoEspecialDetalle.recursoL = null;
+                        FragmentVideoEspecialDetalle.ficheroL = null;
+                    }
+                });
+        disciplina.setAdapter(adapter);
+        disciplina.scrollToPosition(idSelected);
 
     }
-    private void cargarComboGrado(Disciplina d){
-        grados = new ArrayList<>();
-        List<String> txtGrados = new ArrayList<>();
-        for(Grado g: d.getGrados()) {
-            txtGrados.add(g.getNombre());
-            grados.add(g);
-        }
+    private void cargarComboGrado(Disciplina d, Grado gradoL){
+        FragmentVideoEspecialDetalle.gradoL = gradoL;
+        FragmentVideoEspecialDetalle.recursoL = null;
+        FragmentVideoEspecialDetalle.ficheroL = null;
 
-        ArrayAdapter<String> dataAdapterGrado = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, txtGrados);
-        dataAdapterGrado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        grado.setAdapter(dataAdapterGrado);
-        grado.setSelection(idxGrado);
-        if (idxGrado >= 0 && idxGrado < txtGrados.size())
-            grado.setSelection(idxGrado);
-
-    }
-    private void cargarComboRecurso(Grado g){
-        recursos = new ArrayList<>();
-        List<String> txtRecurso = new ArrayList<>();
-        for(Recurso r: g.getRecursos()) {
-            txtRecurso.add(r.getNombre());
-            recursos.add(r);
-        }
-
-        ArrayAdapter<String> dataAdapterGrado = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, txtRecurso);
-        dataAdapterGrado.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        recurso.setAdapter(dataAdapterGrado);
-        if (idxRecurso >= 0 && idxRecurso < txtRecurso.size())
-            recurso.setSelection(idxRecurso);
-
-    }
-    private void cargarComboFichero(Recurso r){
-        ficheros = new ArrayList<>();
-        List<String> txtFicheros = new ArrayList<>();
-        for(Fichero f: r.getFicheros()) {
-            if(f.getCoste() == 0 || BLSession.getInstance().getUsuario().getRol().equalsIgnoreCase("ADMINISTRADOR")) {
-                txtFicheros.add(f.getDescripcion());
-                ficheros.add(f);
+        List<Grado> grados = new ArrayList<Grado>();
+        int id=0;
+        int idSelected = -1;
+        if(d != null) {
+            for (Grado g : d.getGrados()) {
+                grados.add(g);
+                if(gradoL != null && g.getId() == gradoL.getId()) {
+                    idSelected = id;
+                }
+                id++;
             }
         }
 
-        ArrayAdapter<String> dataAdapterFichero = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, txtFicheros);
-        dataAdapterFichero.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        fichero.setAdapter(dataAdapterFichero);
+        CustomRecyclerAdapter adapter = new CustomRecyclerAdapter(grados, getActivity(), gradoL,
+                new CustomRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Object item, View view) {
+                        cargarComboRecurso((Grado) item, null);
+                        cargarComboFichero(null, null);
 
-        if (idxFichero >= 0 && idxFichero < txtFicheros.size())
-            fichero.setSelection(idxFichero);
+                        FragmentVideoEspecialDetalle.gradoL = (Grado) item;
+                        FragmentVideoEspecialDetalle.recursoL = null;
+                        FragmentVideoEspecialDetalle.ficheroL = null;
+                    }
+                });
+        grado.setAdapter(adapter);
+        grado.scrollToPosition(idSelected);
+
+    }
+    private void cargarComboRecurso(Grado g, Recurso recursoL){
+        FragmentVideoEspecialDetalle.recursoL = recursoL;
+        FragmentVideoEspecialDetalle.ficheroL = null;
+
+        List<Recurso> recursos = new ArrayList<Recurso>();
+        int id=0;
+        int idSelected = -1;
+        if(g != null) {
+            for (Recurso r : g.getRecursos()) {
+                recursos.add(r);
+                if(recursoL != null && r.getId() == recursoL.getId()) {
+                    idSelected = id;
+                }
+                id++;
+            }
+        }
+        CustomRecyclerAdapter adapter = new CustomRecyclerAdapter(recursos, getActivity(), recursoL,
+                new CustomRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Object item, View view) {
+                        cargarComboFichero((Recurso) item, null);
+                        FragmentVideoEspecialDetalle.recursoL = (Recurso) item;
+                        FragmentVideoEspecialDetalle.ficheroL = null;
+                    }
+                });
+        recurso.setAdapter(adapter);
+        recurso.scrollToPosition(idSelected);
+
+    }
+    private void cargarComboFichero(Recurso r, Fichero ficheroL){
+        FragmentVideoEspecialDetalle.ficheroL = ficheroL;
+
+        List<Fichero> ficheros = new ArrayList<Fichero>();
+        int id=0;
+        int idSelected = -1;
+        if(r != null) {
+            for (Fichero f : r.getFicheros()) {
+                if (BLSession.getInstance().getUsuario().getRol().equalsIgnoreCase("ADMINISTRADOR")) {
+                    ficheros.add(f);
+                    if(ficheroL != null && f.getId() == ficheroL.getId()){
+                        idSelected = id;
+                    }
+                }
+                id++;
+            }
+        }
+        CustomRecyclerAdapter adapter = new CustomRecyclerAdapter(ficheros, getActivity(), ficheroL,
+                new CustomRecyclerAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Object item, View view) {
+                        FragmentVideoEspecialDetalle.ficheroL = (Fichero) item;
+                    }
+                });
+        fichero.setAdapter(adapter);
+        fichero.scrollToPosition(idSelected);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.registrar_usuarioBtnGuardar:
-                VideoEspecial videoEspecial = BLSession.getInstance().getVideoEspecial();
+            case R.id.btn_menu_guardar:
 
-                if(videoEspecial == null) videoEspecial = new VideoEspecial();
+                if(ficheroL == null) {
+                    UtilesDialog.createErrorMessage(getActivity(),"Error", "Debe elegir un fichero.").show();
+                    return true;
+                } else {
+                    videoEspecial.setFichero(ficheroL);
+                }
 
                 if(videoEspecialId.getText().length()>0) {
                     videoEspecialId.setId(Integer.parseInt(videoEspecialId.getText().toString()));
@@ -375,29 +425,24 @@ public class FragmentVideoEspecialDetalle extends FragmentAbstract {
                     videoEspecial.setFin(new Date());
                 }
 
-                Integer idClub = BLSession.getInstance().getClubes().get(clubes.getSelectedItemPosition()).getId();
-                Club c = new Club();
-                c.setId(idClub);
-                videoEspecial.setClub(c);
-
-                Fichero fichero = null;
-                int idx = -1;
-                for(Fichero fAux:recursos.get(idxRecurso).getFicheros()){
-                    if(fAux.getCoste() == 0 || BLSession.getInstance().getUsuario().getRol().equalsIgnoreCase("ADMINISTRADOR")){
-                        idx++;
-                    }
-                    if(idx == idxFichero){
-                        fichero = fAux;
-                    }
+                if(clubes.getSelectedItemPosition() > 0) {
+                    Integer idClub = BLSession.getInstance().getClubes().get(clubes.getSelectedItemPosition() - 1).getId();
+                    Club c = new Club();
+                    c.setId(idClub);
+                    videoEspecial.setClub(c);
+                } else {
+                    return false;
                 }
 
-                videoEspecial.setFichero(fichero);
-
                 if(usarAlumno.isChecked()) {
-                    Integer idUsuario = BLSession.getInstance().getAlumnos().get(alumno.getSelectedItemPosition()).getId();
-                    Usuario usuario = new Usuario();
-                    usuario.setId(idUsuario);
-                    videoEspecial.setUsuario(usuario);
+                    if(alumno.getSelectedItemPosition() > 0) {
+                        Integer idUsuario = BLSession.getInstance().getAlumnos().get(alumno.getSelectedItemPosition()-1).getId();
+                        Usuario usuario = new Usuario();
+                        usuario.setId(idUsuario);
+                        videoEspecial.setUsuario(usuario);
+                    } else {
+                        videoEspecial.setUsuario(null);
+                    }
                 } else {
                     videoEspecial.setUsuario(null);
                 }
@@ -409,7 +454,7 @@ public class FragmentVideoEspecialDetalle extends FragmentAbstract {
                 }
 
                 return true;
-            case R.id.registrar_usuarioBtnActivar:
+            case R.id.btn_menu_activar:
                 taskVideoEspecial.delete(BLSession.getInstance().getUsuario(), BLSession.getInstance().getVideoEspecial());
                 return true;
             default:
@@ -419,11 +464,12 @@ public class FragmentVideoEspecialDetalle extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu, menu);
         if(BLSession.getInstance().getVideoEspecial().getId() == 0) {
-            inflater.inflate(R.menu.menu_guardar, menu);
+            visualizarMenus(menu, false, false, false, false, true, false, false);
         } else {
-            inflater.inflate(R.menu.menu_usuario_modificar, menu);
-            menu.findItem(R.id.registrar_usuarioBtnActivar).setIcon(android.R.drawable.ic_delete);
+            visualizarMenus(menu, false, false, false, true, true, false, false);
+            menu.findItem(R.id.btn_menu_activar).setIcon(android.R.drawable.ic_delete);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }

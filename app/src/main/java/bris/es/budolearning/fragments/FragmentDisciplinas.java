@@ -17,6 +17,7 @@ import bris.es.budolearning.domain.Disciplina;
 import bris.es.budolearning.slidingtabs.PagerItem;
 import bris.es.budolearning.task.TaskDisciplina;
 import bris.es.budolearning.task.TaskGrado;
+import bris.es.budolearning.task.TaskVideoEspecial;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
@@ -24,6 +25,7 @@ import bris.es.budolearning.utiles.UtilesDialog;
 public class FragmentDisciplinas extends FragmentAbstract {
 
     private TaskDisciplina taskDisciplina;
+    private TaskVideoEspecial taskVideoEspecial;
     private FragmentDisciplinas este;
 
     @Override
@@ -33,6 +35,7 @@ public class FragmentDisciplinas extends FragmentAbstract {
         este = this;
 
         taskDisciplina = new TaskDisciplina(getActivity(), this);
+        taskVideoEspecial = new TaskVideoEspecial(getActivity(), this);
 
         GridView mDisciplinaView = (GridView) view.findViewById(R.id.disciplinaListView);
 
@@ -93,11 +96,8 @@ public class FragmentDisciplinas extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (Utiles.esSoloAdmin()) {
-            inflater.inflate(R.menu.menu_recargar_anadir, menu);
-        } else {
-            inflater.inflate(R.menu.menu_recargar, menu);
-        }
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, true, false, Utiles.esSoloAdmin(), false, false, true, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -105,11 +105,37 @@ public class FragmentDisciplinas extends FragmentAbstract {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.menu_nuevo:
+            case R.id.btn_menu_upload:
+                BLSession.getInstance().setFichero(null);
+                UtilesDialog.createQuestionYesNo(getActivity(),
+                        "COMPARTIR FICHEROS",
+                        getString(R.string.fichero_subida),
+                        "Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                                intent.setType("video/mp4");
+                                intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"video/mp4", "application/pdf"});
+
+                                getActivity().startActivityForResult(Intent.createChooser(intent, getActivity().getResources().getString(R.string.select_archive)), FragmentAbstract.CHOOSER_VIDEO);
+                            }
+                        },
+                        "Cancelar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo1, int id) {
+                                dialogo1.dismiss();
+                            }
+                        }
+                ).show();
+                return true;
+            case R.id.btn_menu_extra_video:
+                taskVideoEspecial.listUsuario(BLSession.getInstance().getUsuario(), null, getActivity());
+                return true;
+            case R.id.btn_menu_nuevo:
                 BLSession.getInstance().setDisciplina(new Disciplina());
                 taskDisciplina.select(BLSession.getInstance().getUsuario(), BLSession.getInstance().getDisciplina());
                 return true;
-            case R.id.menu_recargar:
+            case R.id.btn_menu_recargar:
                 taskDisciplina.borrarList();
                 taskDisciplina.list(BLSession.getInstance().getUsuario(), null, getView().findViewById(R.id.disciplinaListView));
                 return true;

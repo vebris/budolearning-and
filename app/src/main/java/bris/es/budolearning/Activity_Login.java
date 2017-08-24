@@ -1,9 +1,13 @@
 package bris.es.budolearning;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,12 +32,14 @@ import bris.es.budolearning.task.TaskUtiles;
 
 public class Activity_Login extends AppCompatActivity {
 
+    static int PERMISSIONS_CODE = 1;
+
     public TaskUsuario taskUsuario;
     public TaskUtiles taskUtiles;
     public boolean pedidoVersion = false;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+    private EditText mEmailView;
     private EditText mPasswordView;
 
     @Override
@@ -47,7 +53,7 @@ public class Activity_Login extends AppCompatActivity {
 
 
        // Set up the login form.
-       mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+       mEmailView = (EditText) findViewById(R.id.email);
 
        mPasswordView = (EditText) findViewById(R.id.password);
        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -61,7 +67,7 @@ public class Activity_Login extends AppCompatActivity {
            }
        });
 
-       Button mRegistrarUsuario = (Button) findViewById(R.id.btn_registrarUsuario);
+        TextView mRegistrarUsuario = (TextView) findViewById(R.id.btn_registrarUsuario);
        mRegistrarUsuario.setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View view) {
@@ -70,7 +76,7 @@ public class Activity_Login extends AppCompatActivity {
            }
        });
 
-        Button mOlvidoUsuario = (Button) findViewById(R.id.btn_olvidoUsuario);
+        TextView mOlvidoUsuario = (TextView) findViewById(R.id.btn_olvidoUsuario);
         mOlvidoUsuario.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +114,8 @@ public class Activity_Login extends AppCompatActivity {
         });
 
         //cargarPublicidad();
+
+        comprobarPermisos();
 
     }
 
@@ -240,6 +248,38 @@ public class Activity_Login extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean("pedidoVersion", pedidoVersion);
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void comprobarPermisos(){
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PackageInfo info = getPackageManager().getPackageInfo(this.getPackageName(), PackageManager.GET_PERMISSIONS);
+                requestPermissions(info.requestedPermissions, 0);
+            }
+        } catch (Exception e){
+            Log.e(this.getClass().getCanonicalName(), "Error al comprobar los permisos",e);
+        }
+    }
+
+    @Override
+    @TargetApi(Build.VERSION_CODES.M)
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            if (requestCode == PERMISSIONS_CODE) {
+                for (int i = 0; i < permissions.length; i++) {
+                    String permission = permissions[i];
+                    int grantResult = grantResults[i];
+
+                    if (permission.equals(Manifest.permission.SEND_SMS)) {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                            requestPermissions(new String[]{Manifest.permission.SEND_SMS}, PERMISSIONS_CODE);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

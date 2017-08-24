@@ -12,36 +12,44 @@
 
     <!-- Bloquear orientacion terminal -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- Camara -->
+    <!--
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
+    -->
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
 
     <application
         android:name=".task.volley.VolleyControler"
         android:configChanges="keyboardHidden|orientation|screenSize"
-        android:icon="@drawable/ic_launcher"
-        android:logo="@drawable/ic_launcher"
+        android:icon="@drawable/ic_drawer"
+        android:logo="@drawable/ic_drawer"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme"
+        android:allowBackup="true"
         >
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".Activity_Login"
+            android:name=".Activity_Splash"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Activity_Login"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".Activity_Logged"
@@ -59,12 +67,12 @@
         </activity>
 
         <activity
-            android:name=".Activity_Pdf_View"
+            android:name=".Activity_View_Pdf"
             android:label="@string/app_name"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
-            android:name=".Activity_Mp4_View"
+            android:name=".Activity_View_Mp4"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme" >

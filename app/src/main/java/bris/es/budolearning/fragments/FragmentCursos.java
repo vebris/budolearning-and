@@ -49,7 +49,7 @@ public class FragmentCursos extends FragmentAbstract {
             }
         });
 
-        if (Utiles.esAdmin()) {
+        if (Utiles.esSoloAdmin()) {
             mCursosView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -85,11 +85,8 @@ public class FragmentCursos extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(Utiles.esSoloAdmin()) {
-            inflater.inflate(R.menu.menu_recargar_anadir, menu);
-        } else {
-            inflater.inflate(R.menu.menu_recargar, menu);
-        }
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, false, Utiles.esSoloAdmin(), true, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -97,13 +94,13 @@ public class FragmentCursos extends FragmentAbstract {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.menu_nuevo:
+            case R.id.btn_menu_nuevo:
                 BLSession.getInstance().setCurso(null);
                 getFragmentManager().beginTransaction()
                         .replace(R.id.content_frame, new FragmentCursoDetalle())
                         .addToBackStack(this.getClass().getName()).commit();
                 return true;
-            case R.id.menu_recargar:
+            case R.id.btn_menu_recargar:
                 Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                 cache.remove("1:" + taskCurso.getUrl() + TaskCurso.LIST);
                 taskCurso.list(BLSession.getInstance().getUsuario(), null, mCursosView);

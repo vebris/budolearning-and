@@ -1,6 +1,7 @@
 package bris.es.budolearning.task;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
@@ -19,13 +20,13 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Disciplina;
-import bris.es.budolearning.domain.DisciplinaAdapter;
+import bris.es.budolearning.domain.adapter.DisciplinaAdapter;
 import bris.es.budolearning.domain.Usuario;
+import bris.es.budolearning.domain.adapter.CustomRecyclerAdapter;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.fragments.FragmentDisciplinaDetalle;
 import bris.es.budolearning.fragments.FragmentDisciplinas;
@@ -50,14 +51,13 @@ public class TaskDisciplina extends TaskAbstract{
         fragment = fragmento;
     }
 
-    @Override
-    public void list(Usuario usuario, Object filtro, final Object view) {
+    public void list(Usuario usuario, Object filtro, final Object view, final CustomRecyclerAdapter.OnItemClickListener listener) {
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
         if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
-                mostrarList(new JSONObject(data), view, new Date(entry.serverDate));
+                mostrarList(new JSONObject(data), view, listener);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -73,7 +73,7 @@ public class TaskDisciplina extends TaskAbstract{
                         public void onResponse(JSONObject jsonObject) {
                             updateGeneric(jsonObject);
 
-                            mostrarList(jsonObject, view, new Date());
+                            mostrarList(jsonObject, view, listener);
 
                             onResponseFinished();
                         }
@@ -100,7 +100,12 @@ public class TaskDisciplina extends TaskAbstract{
         }
     }
 
-    private void mostrarList(JSONObject jsonObject, final Object view, Date fecha){
+    @Override
+    public void list(Usuario usuario, Object filtro, final Object view) {
+        list(usuario, filtro, view, null);
+    }
+
+    private void mostrarList(JSONObject jsonObject, final Object view, CustomRecyclerAdapter.OnItemClickListener listener){
         BLSession.getInstance().setDisciplinas(new ArrayList<Disciplina>());
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -112,10 +117,21 @@ public class TaskDisciplina extends TaskAbstract{
             Log.e("Error Response: ", je.toString(), je);
         }
 
-        DisciplinaAdapter adapter = new DisciplinaAdapter(
-                BLSession.getInstance().getDisciplinas(),
-                activity);
-        ((GridView) view).setAdapter(adapter);
+        if(view instanceof GridView) {
+            DisciplinaAdapter adapter = new DisciplinaAdapter(
+                    BLSession.getInstance().getDisciplinas(),
+                    activity);
+            ((GridView) view).setAdapter(adapter);
+        }
+
+        if(view instanceof RecyclerView) {
+            CustomRecyclerAdapter adapter = new CustomRecyclerAdapter(
+                    BLSession.getInstance().getDisciplinas(),
+                    activity,
+                    null,
+                    listener);
+            ((RecyclerView) view).setAdapter(adapter);
+        }
     }
 
     @Override
@@ -143,7 +159,6 @@ public class TaskDisciplina extends TaskAbstract{
                                 .addToBackStack(FragmentDisciplinas.class.getName()).commit();
 
                         onResponseFinished();
-                        updateSubtitle(new Date());
                     }
                     @Override
                     protected void finalize() throws Throwable {
@@ -182,7 +197,7 @@ public class TaskDisciplina extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }
@@ -225,7 +240,7 @@ public class TaskDisciplina extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }

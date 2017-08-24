@@ -165,6 +165,31 @@ public class FragmentPreferences extends PreferenceFragment {
                 return true;
             }
         });
+
+        final Preference preferences_download_redes = findPreference( "preferences_download_redes" );
+        final String opciones[] = {"3G/4G/WIFI", "Sólo WIFI"};
+        try {
+            preferences_download_redes.setSummary(opciones[preferences_download_redes.getPreferenceManager().getSharedPreferences().getInt(preferences_download_redes.getKey(), 0)]);
+        } catch(Exception e){
+            preferences_download_redes.setSummary(opciones[Integer.parseInt(preferences_download_redes.getPreferenceManager().getSharedPreferences().getString(preferences_download_redes.getKey(), "0"))]);
+        }
+        preferences_download_redes.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(final Preference pref) {
+                UtilesDialog.createListDialog(getActivity(),
+                        "REDES",
+                        opciones,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogo, int id) {
+                                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext()).edit();
+                                editor.putInt("preferences_download_redes", id);
+                                editor.apply();
+                                preferences_download_redes.setSummary(opciones[preferences_download_redes.getPreferenceManager().getSharedPreferences().getInt(preferences_download_redes.getKey(), 0)]);
+                            }
+                        }
+                ).show();
+                return true;
+            }
+        });
     }
 
     private void controlPreferencias(Preference preference, final String aditionalText){

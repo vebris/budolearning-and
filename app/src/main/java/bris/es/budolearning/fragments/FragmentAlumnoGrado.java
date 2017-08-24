@@ -17,7 +17,7 @@ import bris.es.budolearning.domain.Disciplina;
 import bris.es.budolearning.domain.Grado;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.domain.UsuarioDisciplinaGrado;
-import bris.es.budolearning.domain.UsuarioDisciplinaGradoAdapter;
+import bris.es.budolearning.domain.adapter.UsuarioDisciplinaGradoAdapter;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
 import bris.es.budolearning.utiles.UtilesDialog;
@@ -125,7 +125,8 @@ public class FragmentAlumnoGrado extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_atras, menu);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, false, false, false, true);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

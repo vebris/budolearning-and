@@ -176,7 +176,7 @@ public class FragmentCursoDetalle extends FragmentAbstract {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.registrar_usuarioBtnGuardar:
+            case R.id.btn_menu_guardar:
                 Curso curso = BLSession.getInstance().getCurso();
 
                 if(curso == null) curso = new Curso();
@@ -216,7 +216,8 @@ public class FragmentCursoDetalle extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_guardar, menu);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, false, true, false, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

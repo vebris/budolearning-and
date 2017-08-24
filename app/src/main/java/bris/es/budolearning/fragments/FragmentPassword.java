@@ -32,16 +32,6 @@ public class FragmentPassword extends FragmentAbstract {
 
         ((TextView) vista.findViewById(R.id.password_login)).setText(BLSession.getInstance().getUsuario().getLogin());
 
-        Button btnGuardar = (Button) vista.findViewById(R.id.btn_cambiarPassword);
-        btnGuardar.setVisibility(View.INVISIBLE);
-
-        btnGuardar.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cambiarPass();
-            }
-        });
-
         setHasOptionsMenu(true);
         return vista;
     }
@@ -73,7 +63,8 @@ public class FragmentPassword extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_usuario_cambiar_pass, menu);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, false, true, false, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -81,7 +72,7 @@ public class FragmentPassword extends FragmentAbstract {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.registrar_usuarioBtnGuardar:
+            case R.id.btn_menu_guardar:
                 cambiarPass();
                 return true;
             default:

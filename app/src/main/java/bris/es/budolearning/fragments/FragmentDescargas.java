@@ -19,7 +19,7 @@ import bris.es.budolearning.Activity_Logged;
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Articulo;
 import bris.es.budolearning.domain.Fichero;
-import bris.es.budolearning.domain.FicherosDescargadosAdapter;
+import bris.es.budolearning.domain.adapter.FicherosDescargadosAdapter;
 import bris.es.budolearning.task.TaskUtiles;
 import bris.es.budolearning.utiles.BLSession;
 import bris.es.budolearning.utiles.Utiles;
@@ -93,9 +93,6 @@ public class FragmentDescargas extends FragmentAbstract {
                         }).show();
             }
         });
-
-
-        ((Activity_Logged) getActivity()).setSubtitle(null);
 
         return view;
     }

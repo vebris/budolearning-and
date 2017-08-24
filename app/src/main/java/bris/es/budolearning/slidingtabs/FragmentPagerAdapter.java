@@ -26,7 +26,7 @@ public class FragmentPagerAdapter extends android.support.v4.app.FragmentStatePa
     @Override
     public int getItemPosition(Object object) {
         Fragment oFragment=(Fragment)object;
-        oPooledFragments=new ArrayList<>(oFragmentManager.getFragments());
+        oPooledFragments=new ArrayList<Fragment>(oFragmentManager.getFragments());
         if(oPooledFragments.contains(oFragment))
             return POSITION_NONE;
         else

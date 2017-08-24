@@ -44,8 +44,7 @@ public class CustomMenuListAdapter extends BaseAdapter {
 
         if(navDrawerItems.get(position).isVisible()) {
             if (convertView == null) {
-                LayoutInflater mInflater = (LayoutInflater)
-                        context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
                 convertView = mInflater.inflate(R.layout.lateral_menu_list_item, null);
             }
 
@@ -70,8 +69,7 @@ public class CustomMenuListAdapter extends BaseAdapter {
 
         } else {
             if (convertView == null) {
-                LayoutInflater mInflater = (LayoutInflater)
-                        context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
                 convertView = mInflater.inflate(R.layout.lateral_menu_list_item_vacio, null);
             }
         }

@@ -90,7 +90,7 @@ public class FragmentArticuloDetalle extends FragmentAbstract {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.registrar_usuarioBtnActivar:
+            case R.id.btn_menu_activar:
                 UtilesDialog.createQuestionYesNo(getActivity(),
                         "BORRAR",
                         "¿ Está seguro de eliminar el artículo ?",
@@ -108,7 +108,7 @@ public class FragmentArticuloDetalle extends FragmentAbstract {
                 ).show();
 
                 return true;
-            case R.id.registrar_usuarioBtnGuardar:
+            case R.id.btn_menu_guardar:
                 Articulo art = BLSession.getInstance().getArticulo();
                 if(articuloId.getText().length()>0) {
                     art.setId(Integer.parseInt(articuloId.getText().toString()));
@@ -138,8 +138,9 @@ public class FragmentArticuloDetalle extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_guardar_borrar, menu);
-        menu.findItem(R.id.registrar_usuarioBtnActivar).setIcon(android.R.drawable.ic_delete);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, true, true, false, false);
+        menu.findItem(R.id.btn_menu_activar).setIcon(android.R.drawable.ic_delete);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
@@ -38,6 +41,24 @@ import bris.es.budolearning.R;
 import bris.es.budolearning.task.volley.VolleyControler;
 
 public class Utiles {
+
+    public static int getColor(Context context, int id) {
+        final int version = Build.VERSION.SDK_INT;
+        if (version >= Build.VERSION_CODES.M) {
+            return context.getColor(id);
+        } else {
+            return context.getResources().getColor(id);
+        }
+    }
+
+    public static String toMinSeg(int segs){
+        if(segs <= 0) return "";
+        String minutos = (segs/60) + "";
+        String segundos = (segs%60) + "";
+        if(minutos.length()<2) minutos = "0" + minutos;
+        if(segundos.length()<2) segundos = "0" + segundos;
+        return minutos + ":" + segundos + "min.";
+    }
 
     public static boolean esSoloAdmin(){
         return "ADMINISTRADOR".equalsIgnoreCase(BLSession.getInstance().getUsuario().getRol());
@@ -76,7 +97,7 @@ public class Utiles {
         configuracion.setRecordarUsuario(prefs.getBoolean("preferences_general_recordar_usuario", true));
         configuracion.setUrl(prefs.getString("preferences_url", context.getResources().getString(R.string.pref_default_url)));
 
-        configuracion.setUsoRedes(prefs.getString("preferences_download_redes", context.getResources().getString(R.string.pref_default_download_redes)));
+        configuracion.setUsoRedes(prefs.getInt("preferences_download_redes", Integer.parseInt(context.getResources().getString(R.string.pref_default_download_redes))));
 
 
         configuracion.setPublicidadBannerAdMob(prefs.getBoolean("pref_PublicidadBannerAdMob", Boolean.parseBoolean(context.getResources().getString(R.string.pref_default_especial_publi_banner_adMob))));
@@ -86,6 +107,8 @@ public class Utiles {
         configuracion.setTamanoCachePeticiones(Integer.parseInt(prefs.getString("preferences_limite_cache_peticiones", context.getResources().getString(R.string.pref_default_download_limite_cache_peticiones))));
         configuracion.setTamanoCacheImagenes(Integer.parseInt(prefs.getString("preferences_limite_cache_imagenes", context.getResources().getString(R.string.pref_default_download_limite_cache_imagenes))));
         configuracion.setTamanoCacheVideos(Integer.parseInt(prefs.getString("preferences_limite_cache_videos", context.getResources().getString(R.string.pref_default_download_limite_cache_videos))));
+
+        configuracion.setVistaReducida(prefs.getBoolean("preferences_general_vista_reducida", false));
 
         return configuracion;
     }
@@ -248,7 +271,9 @@ public class Utiles {
             };
 
             return new GsonBuilder().registerTypeAdapter(Date.class, ser).registerTypeAdapter(Date.class, deser).create();
-        } catch (JsonSyntaxException | JsonIOException e) {
+        } catch (JsonSyntaxException e){
+            e.printStackTrace();
+        } catch (JsonIOException e) {
             e.printStackTrace();
         }
         return null;

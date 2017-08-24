@@ -1,304 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
-    android:background="@color/background_generic"
-    >
-
+>
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/zz_rounded"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_margin="5dp"
         >
 
-        <TableLayout
-            android:layout_height="wrap_content"
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:visibility="visible"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:visibility="invisible"
-                >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_id"
-                    android:id="@+id/txtId"
-                    android:layout_column="0"/>
-                <TextView
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/usuarioId"
-                    android:layout_column="1" />
-            </TableRow>
-
-            <TableRow
+            <EditText
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:inputType="text"
+                android:id="@+id/usuarioId"
+                android:visibility="invisible"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:id="@+id/usuarioNombre_wrapper"
                 >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_nombre"
-                    android:id="@+id/txtNombre"
-                    android:layout_column="0"                    
-                    />
                 <EditText
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usuarioNombre"
-                    android:layout_column="1"
                     android:inputType="text"
-                    />
-            </TableRow>
+                    android:hint="@string/usuario_nombre"
+                    android:id="@+id/usuarioNombre"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:id="@+id/usuarioApellido1_wrapper"
                 >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_apellido1"
-                    android:id="@+id/txtApellido1"
-                    android:layout_column="0"
-                    />
-
                 <EditText
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usuarioApellido1"
-                    android:layout_column="1"
-                    android:inputType="text"                    
-                    />
-            </TableRow>
+                    android:inputType="text"
+                    android:hint="@string/usuario_apellido1"
+                    android:id="@+id/usuarioApellido1"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
                 >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_apellido2"
-                    android:id="@+id/txtApellido2"
-                    android:layout_column="0"
-                    />
                 <EditText
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usuarioApellido2"
-                    android:layout_column="1"
-                    android:inputType="text"                    
-                    />
-            </TableRow>
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                    android:inputType="text"
+                    android:hint="@string/usuario_apellido2"
+                    android:id="@+id/usuarioApellido2"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
                 >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_dni"
-                    android:id="@+id/txtDNI"
-                    android:layout_column="0"
-                    />
                 <EditText
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usuarioDNI"
-                    android:layout_column="1"
-                    android:inputType="text"                    
-                    />
-            </TableRow>
+                    android:inputType="text"
+                    android:hint="@string/usuario_dni"
+                    android:id="@+id/usuarioDNI"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:id="@+id/usuarioEmail_wrapper"
                 >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_email"
-                    android:id="@+id/txtEmail"
-                    android:layout_column="0"                    
-                    />
                 <EditText
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usuarioEmail"
-                    android:layout_column="1"
-                    android:inputType="textEmailAddress"                    
-                    />
-            </TableRow>
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/usuario_email"
+                    android:id="@+id/usuarioEmail"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
                 >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_direccion"
-                    android:id="@+id/txtDireccion"
-                    android:layout_column="0"                    
-                    />
                 <EditText
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usuarioDireccion"
-                    android:layout_column="1"
-                    android:inputType="text"                    
-                    />
-            </TableRow>
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                    android:inputType="text"
+                    android:hint="@string/usuario_direccion"
+                    android:id="@+id/usuarioDireccion"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
                 >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_localidad"
-                    android:id="@+id/txtLocalidad"
-                    android:layout_column="0"                    
-                    />
                 <EditText
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usuarioLocalidad"
-                    android:layout_column="1"
-                    android:inputType="text"                    
-                    />
-            </TableRow>
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                    android:inputType="text"
+                    android:hint="@string/usuario_localidad"
+                    android:id="@+id/usuarioLocalidad"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
                 >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_telefono"
-                    android:id="@+id/txtTelefono"
-                    android:layout_column="0"                    
-                    />
                 <EditText
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/usuarioTelefono"
-                    android:layout_column="1"
-                    android:inputType="text"                    
-                    />
-            </TableRow>
+                    android:inputType="text"
+                    android:hint="@string/usuario_telefono"
+                    android:id="@+id/usuarioTelefono"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_entrenaEn"
-                    android:id="@+id/txtEntrena"
-                    android:layout_column="0"                    
-                    />
-                <Spinner
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/usuarioEntrena"
-                    android:layout_column="1"
-                    style="@style/CustomSpinnerTheme"
-                    />
-            </TableRow>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_rol"
-                    android:id="@+id/txtRol"
-                    android:layout_column="0"
-                    />
-                <Spinner
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/usuarioRol"
-                    android:layout_column="1"
-                    style="@style/CustomSpinnerTheme"
-                    />
-            </TableRow>
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                app:ms_hint="@string/usuario_entrenaEn"
+                android:id="@+id/usuarioEntrena"/>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_profesor"
-                    android:layout_column="0"
-                    />
-                <Spinner
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/usuarioProfesor"
-                    android:layout_column="1"
-                    style="@style/CustomSpinnerTheme"
-                    />
-            </TableRow>
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                app:ms_hint="@string/usuario_rol"
+                android:id="@+id/usuarioRol"/>
 
-            <TableRow
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
-                <TextView
-                    android:layout_weight=".25"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    />
-                <CheckBox
-                    android:layout_weight=".7"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/usuario_verPDF"
-                    android:id="@+id/usuario_verPDF"
-                    android:layout_column="1" />
-            </TableRow>
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                app:ms_hint="@string/usuario_profesor"
+                android:id="@+id/usuarioProfesor"/>
 
-        </TableLayout>
+
+            <CheckBox
+                android:layout_weight=".7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@string/usuario_verPDF"
+                android:id="@+id/usuario_verPDF"
+                android:layout_column="1" />
+
+
+        </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

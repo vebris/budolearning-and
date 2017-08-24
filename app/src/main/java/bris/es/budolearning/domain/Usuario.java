@@ -264,8 +264,8 @@ public class Usuario extends GenericObject {
         this.verPDF = verPDF;
     }
 
-    public void setDisciplinas(JSONArray disciplinas, boolean completo) {
-        this.disciplinas= new ArrayList<>();
+    private void setDisciplinas(JSONArray disciplinas, boolean completo) {
+        this.disciplinas= new ArrayList<Disciplina>();
         for(int i=0;i<disciplinas.length();i++){
             try{this.disciplinas.add(new Disciplina(disciplinas.getJSONObject(i), completo));}catch(Exception e){}
         }

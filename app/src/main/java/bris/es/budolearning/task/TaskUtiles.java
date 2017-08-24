@@ -35,15 +35,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import bris.es.budolearning.Activity_Login;
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Estadistica;
-import bris.es.budolearning.domain.EstadisticaAdapter;
+import bris.es.budolearning.domain.adapter.EstadisticaAdapter;
 import bris.es.budolearning.domain.Fichero;
 import bris.es.budolearning.domain.Puntos;
-import bris.es.budolearning.domain.PuntosAdapter;
+import bris.es.budolearning.domain.adapter.PuntosAdapter;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.task.volley.VolleyControler;
@@ -250,6 +251,14 @@ public class TaskUtiles extends TaskAbstract{
 
         JsonPeticion peticion = new JsonPeticion();
         peticion.setUser(new Usuario(BLSession.getInstance().getUsuario()));
+        int pos = 0;
+        Iterator<JsonElement> it = jsonArray.iterator();
+        while(it.hasNext()){
+            JsonElement el = it.next();
+            el.getAsJsonObject().get("fichero").getAsJsonObject().addProperty("activo", false);
+            el.getAsJsonObject().get("fichero").getAsJsonObject().addProperty("propio", false);
+            jsonArray.set(pos++,el);
+        }
         peticion.setVisualizaciones(jsonArray);
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
@@ -352,7 +361,7 @@ public class TaskUtiles extends TaskAbstract{
         }
     }
     private void mostrarEstadisticas(JSONArray jsonArray, Object view){
-        List<Estadistica> estadisticas = new ArrayList<>();
+        List<Estadistica> estadisticas = new ArrayList<Estadistica>();
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 estadisticas.add(new Estadistica(jsonArray.getJSONObject(i)));
@@ -467,7 +476,7 @@ public class TaskUtiles extends TaskAbstract{
         }
     }
     private void mostrarPuntos(JSONArray jsonArray, Object view, int total){
-        List<Puntos> puntos = new ArrayList<>();
+        List<Puntos> puntos = new ArrayList<Puntos>();
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 puntos.add(new Puntos(jsonArray.getJSONObject(i)));

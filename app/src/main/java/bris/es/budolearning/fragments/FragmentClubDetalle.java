@@ -24,6 +24,7 @@ public class FragmentClubDetalle extends FragmentAbstract {
     private EditText clubEmail;
     private EditText clubTelefono;
     private EditText clubWeb;
+    private EditText clubProfesor;
 
     private TaskClub taskClub;
 
@@ -42,6 +43,7 @@ public class FragmentClubDetalle extends FragmentAbstract {
         clubEmail = (EditText) view.findViewById(R.id.clubEmail);
         clubTelefono = (EditText) view.findViewById(R.id.clubTelefono);
         clubWeb = (EditText) view.findViewById(R.id.clubWeb);
+        clubProfesor = (EditText) view.findViewById(R.id.clubProfesor);
 
 
         Club club = BLSession.getInstance().getClub();
@@ -54,6 +56,7 @@ public class FragmentClubDetalle extends FragmentAbstract {
             clubEmail.setText(club.getEmail());
             clubTelefono.setTag(club.getTelefono());
             clubWeb.setTag(club.getWeb());
+            clubProfesor.setTag(club.getNombre());
         }
 
         setHasOptionsMenu(true);
@@ -63,7 +66,7 @@ public class FragmentClubDetalle extends FragmentAbstract {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.registrar_usuarioBtnGuardar:
+            case R.id.btn_menu_guardar:
                 Club club = BLSession.getInstance().getClub();
 
                 if(club == null) club = new Club();
@@ -78,6 +81,7 @@ public class FragmentClubDetalle extends FragmentAbstract {
                 club.setEmail(clubEmail.getText().toString());
                 club.setTelefono(clubTelefono.getText().toString());
                 club.setWeb(clubWeb.getText().toString());
+                club.setProfesor(clubProfesor.getText().toString());
 
                 if(club.getId() == 0) {
                     taskClub.insert(BLSession.getInstance().getUsuario(), club);
@@ -93,7 +97,8 @@ public class FragmentClubDetalle extends FragmentAbstract {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_guardar, menu);
+        inflater.inflate(R.menu.menu, menu);
+        visualizarMenus(menu, false, false, false, false, true, false, false);
         super.onCreateOptionsMenu(menu, inflater);
     }
 

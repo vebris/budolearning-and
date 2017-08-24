@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:background="@drawable/list_item_bg_normal">
 
 
-            <com.github.siyamed.shapeimageview.CircularImageView
-                android:id="@+id/icon"
-                android:layout_width="24dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/imagen"
-                app:siBorderWidth="0.3dp"
-                app:siBorderColor="@color/color_text_gold"
-                android:src="@drawable/ic_drawer"
-                android:layout_gravity="center"
-                android:layout_margin="4dp" />
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@android:color/tab_indicator_text"
-                android:gravity="center_vertical"
-                android:textAllCaps="true"
-                />
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/imagen"
+        android:src="@drawable/ic_drawer"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/primary_dark"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:textAllCaps="true"
+        />
 
 
-        <!--
-        <TextView android:id="@+id/counter"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/counter_bg"
-            android:textColor="@android:color/tab_indicator_text"/>
-        -->
+    <!--
+    <TextView android:id="@+id/counter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="@android:color/tab_indicator_text"/>
+    -->
 </LinearLayout>

@@ -80,8 +80,8 @@ public class BLSession implements Serializable{
 
     protected BLSession() {
         // Exists only to defeat instantiation.
-        cursos = new ArrayList<>();
-        ficherosDescargados = new ArrayList<>();
+        cursos = new ArrayList<Curso>();
+        ficherosDescargados = new ArrayList<Fichero>();
     }
 
     public static void setInstance(BLSession blsession){
@@ -125,7 +125,7 @@ public class BLSession implements Serializable{
     }
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-        ficherosDescargados = new ArrayList<>();
+        ficherosDescargados = new ArrayList<Fichero>();
         for(Disciplina d:usuario.getDisciplinas()){
             for(Grado g:d.getGrados()){
                 for(Recurso r:g.getRecursos()){

@@ -2,7 +2,7 @@ package bris.es.budolearning.domain;
 
 import java.io.Serializable;
 
-public class GenericObject implements Serializable{
+public class GenericObject implements Serializable {
 
     int id;
 

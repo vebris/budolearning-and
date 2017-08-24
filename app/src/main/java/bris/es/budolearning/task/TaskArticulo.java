@@ -31,10 +31,10 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
-import bris.es.budolearning.Activity_Pdf_View;
+import bris.es.budolearning.Activity_View_Pdf;
 import bris.es.budolearning.R;
 import bris.es.budolearning.domain.Articulo;
-import bris.es.budolearning.domain.ArticuloAdapter;
+import bris.es.budolearning.domain.adapter.ArticuloAdapter;
 import bris.es.budolearning.domain.Fichero;
 import bris.es.budolearning.domain.Usuario;
 import bris.es.budolearning.fragments.FDialog;
@@ -140,7 +140,6 @@ public class TaskArticulo extends TaskAbstract{
                     activity);
             ((ListView) view).setAdapter(adapter);
         }
-        updateSubtitle(fecha);
     }
 
     @Override
@@ -164,7 +163,6 @@ public class TaskArticulo extends TaskAbstract{
                             .commit();
 
                     onResponseFinished();
-                    updateSubtitle(new Date());
                 }
                 @Override
                 protected void finalize() throws Throwable {
@@ -202,7 +200,7 @@ public class TaskArticulo extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }
@@ -247,7 +245,7 @@ public class TaskArticulo extends TaskAbstract{
                     try {
                         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                         cache.remove("1:" + url + LIST);
-                        UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                        UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                     } catch (JSONException je) {
                         Log.e("Error Response: ", je.toString(), je);
                     }
@@ -376,7 +374,7 @@ public class TaskArticulo extends TaskAbstract{
     }
 
     private void verDocumento(){
-        Intent i = new Intent(activity, Activity_Pdf_View.class);
+        Intent i = new Intent(activity, Activity_View_Pdf.class);
         fragment.getActivity().startActivity(i);
 
     }

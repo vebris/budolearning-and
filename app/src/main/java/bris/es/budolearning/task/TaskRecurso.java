@@ -1,29 +1,28 @@
 package bris.es.budolearning.task;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-
 import com.android.volley.Cache;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 import bris.es.budolearning.R;
+import bris.es.budolearning.domain.Disciplina;
 import bris.es.budolearning.domain.Grado;
 import bris.es.budolearning.domain.Recurso;
-import bris.es.budolearning.domain.RecursoAdapter;
 import bris.es.budolearning.domain.Usuario;
+import bris.es.budolearning.domain.adapter.CustomRecyclerAdapter;
+import bris.es.budolearning.domain.adapter.RecursoAdapter;
 import bris.es.budolearning.fragments.FragmentAbstract;
 import bris.es.budolearning.fragments.FragmentRecursoDetalle;
 import bris.es.budolearning.fragments.FragmentRecursos;
@@ -47,7 +46,7 @@ public class TaskRecurso extends TaskAbstract{
         fragment = fragmento;
     }
 
-    public void list(Usuario usuario, Object disciplina, Object grado, final Object view) {
+    public void list(Usuario usuario, Disciplina disciplina, Grado grado, final View view) {
         JsonPeticion peticion = new JsonPeticion();
         peticion.setUser(new Usuario(usuario));
         peticion.setDisciplina(disciplina);
@@ -57,17 +56,27 @@ public class TaskRecurso extends TaskAbstract{
 
     @Override
     public void list(Usuario usuario, Object filtro, final Object view) {
+        list(usuario, filtro, (View) view, null);
+    }
+
+    public void list(Usuario usuario, Object filtro, final View view, final CustomRecyclerAdapter.OnItemClickListener listener) {
         Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get("1:" + url + LIST);
         if(entry != null && !entry.isExpired()){
             try {
                 String data = new String(entry.data, "UTF-8");
-                mostrarList(new JSONObject(data), view);
+                mostrarList(new JSONObject(data), view, listener);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }else {
-            JsonPeticion peticion = (JsonPeticion) filtro;
+            JsonPeticion peticion;
+            if(filtro instanceof JsonPeticion) {
+                peticion = (JsonPeticion) filtro;
+            } else {
+                peticion = new JsonPeticion();
+                peticion.setGrado(filtro);
+            }
             peticion.setUser(new Usuario(usuario));
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                     url + LIST,
@@ -77,7 +86,7 @@ public class TaskRecurso extends TaskAbstract{
                         public void onResponse(JSONObject jsonObject) {
                             updateGeneric(jsonObject);
 
-                            mostrarList(jsonObject, view);
+                            mostrarList(jsonObject, view, listener);
 
                             onResponseFinished();
                         }
@@ -104,7 +113,7 @@ public class TaskRecurso extends TaskAbstract{
         }
     }
 
-    private void mostrarList(JSONObject jsonObject, Object view) {
+    private void mostrarList(JSONObject jsonObject, Object view, final CustomRecyclerAdapter.OnItemClickListener listener) {
         BLSession.getInstance().setRecursos(new ArrayList<Recurso>());
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -116,10 +125,17 @@ public class TaskRecurso extends TaskAbstract{
             Log.e("Error Response: ", je.toString(), je);
         }
 
-        RecursoAdapter adapter = new RecursoAdapter(
-                BLSession.getInstance().getRecursos(),
-                activity);
-        ((ListView)view).setAdapter(adapter);
+        if(view instanceof ListView) {
+            RecursoAdapter adapter = new RecursoAdapter(
+                    BLSession.getInstance().getRecursos(),
+                    activity);
+            ((ListView) view).setAdapter(adapter);
+        }
+
+        if (view instanceof RecyclerView){
+            CustomRecyclerAdapter adapter = new CustomRecyclerAdapter(BLSession.getInstance().getRecursos(), activity, null, listener);
+            ((RecyclerView)view).setAdapter(adapter);
+        }
     }
 
     @Override
@@ -147,7 +163,6 @@ public class TaskRecurso extends TaskAbstract{
                                 .addToBackStack(FragmentRecursos.class.getName()).commit();
 
                         onResponseFinished();
-                        updateSubtitle(new Date());
                     }
                     @Override
                     protected void finalize() throws Throwable {
@@ -188,7 +203,7 @@ public class TaskRecurso extends TaskAbstract{
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
@@ -233,7 +248,7 @@ public class TaskRecurso extends TaskAbstract{
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
@@ -276,7 +291,7 @@ public class TaskRecurso extends TaskAbstract{
                         try {
                             Cache cache = VolleyControler.getInstance().getRequestQueue().getCache();
                             cache.remove("1:" + url + LIST);
-                            UtilesDialog.createAlertMessage(activity, "OK", jsonObject.getString("msg")).show();
+                            UtilesDialog.createInfoMessage(activity, "OK", jsonObject.getString("msg")).show();
                         } catch (JSONException je) {
                             Log.e("Error Response: ", je.toString(), je);
                         }
@@ -303,10 +318,12 @@ public class TaskRecurso extends TaskAbstract{
     }
 
     public void downloadFile(Usuario usuario, Object elemento, View view){
-        String urlDownloadFile = url + DOWNLOAD_FILE + "/"+usuario.getId()+"/"+((Grado)elemento).getId();
-        ((NetworkImageView) view).setImageUrl(urlDownloadFile, VolleyControler.getInstance().getImageLoader());
-        ((NetworkImageView) view).setDefaultImageResId(R.anim.loading_animation);
-        ((NetworkImageView) view).setErrorImageResId(R.drawable.no_image);
+        if(((Recurso)elemento).getArma() != null) {
+            String urlDownloadFile = url + DOWNLOAD_FILE + "/" + usuario.getId() + "/" + ((Recurso) elemento).getArma().getId();
+            ((NetworkImageView) view).setImageUrl(urlDownloadFile, VolleyControler.getInstance().getImageLoader());
+            ((NetworkImageView) view).setDefaultImageResId(android.R.anim.cycle_interpolator);
+            ((NetworkImageView) view).setErrorImageResId(R.drawable.no_image);
+        }
     }
 
 }
